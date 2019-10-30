@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog.Context;
 
 namespace plataformaOriginacion
 {
@@ -52,6 +53,13 @@ namespace plataformaOriginacion
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.Use(async (ctx, next) => {
+                using (LogContext.PushProperty("Address", ctx.Connection.RemoteIpAddress))
+                {
+                    await next();
+                }
+            });
 
             app.UseMvc(routes =>
             {

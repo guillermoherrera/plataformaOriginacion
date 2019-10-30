@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace plataformaOriginacion
 {
@@ -19,6 +20,9 @@ namespace plataformaOriginacion
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseSetting("https_port","8087")
+                .UseKestrel()
+                .UseSerilog()
                 .UseStartup<Startup>();
     }
 }
