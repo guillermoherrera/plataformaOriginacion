@@ -2,7 +2,55 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@model LoginViewModel
+
+<body>
+    <center>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card text-center" style="background-color: rgba(255,255,255,0.6);border-radius: 25px;">
+                        <div class="card-body">
+                            <div class="card-header"><h4>Iniciar Sesi&oacute;n @ViewBag.name</h4></div>
+                            <section>
+                                <form asp-controller="Home" asp-action="Login" method="post" id="form_login">
+                                    <div asp-validation-summary="All" class="text-danger"></div>
+                                    <div class="input-field col s12">
+                                        <label asp-for="input.User">Usuario:</label>
+                                        <input asp-for="input.User" class="form-control" />
+                                        <span asp-validation-for="input.User" class="text-danger"></span>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <label asp-for="input.Password">Password:</label>
+                                        <input asp-for="input.Password" class="form-control" />
+                                        <span asp-validation-for="input.Password" class="text-danger"></span>
+                                    </div>
+                                    <center>
+                                        <br />
+                                        <button type="submit" id="btnLogin" class="btn btn-primary">Iniciar Sesi&oacute;n</button>
+                                    </center>
+                                </form>
+                            </section>
+                            <br />
+                            <label id="indexMessage" class="error">@Html.DisplayFor(m => m.ErrorMenssage)</label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </center>
+</body>
+@section Scripts{
+    @await Html.PartialAsync("_VAlidationScriptsPartial")
+}
+
+<script>
+    $(document).ready(function () {
+        $("#form_login").submit(function (e) {
+            //e.preventDefault();
+            if ($("#input_Password").val().length > 2) { $("#btnLogin").attr("disabled", true); }
+            return true;
+        });
+    });
+</script>

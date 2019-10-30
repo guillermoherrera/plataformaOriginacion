@@ -1,0 +1,289 @@
+[14:02:03 INF] User profile is available. Using 'C:\Users\gherr\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest. [IP ] <1> 
+[14:02:04 WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead. [IP ] <1> 
+[14:02:17 INF] Request starting HTTP/1.1 GET https://localhost:8087/   [IP ] <8> 
+[14:02:17 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <8> 
+[14:02:17 INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <8> 
+[14:02:17 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <8> 
+[14:02:17 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 64.7773ms. [IP ::1] <8> 
+[14:02:17 INF] Executing ViewResult, running view Index. [IP ::1] <8> 
+[14:02:17 INF] Executed ViewResult - view Index executed in 235.5431ms. [IP ::1] <8> 
+[14:02:17 INF] Executed action plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) in 322.9775ms [IP ::1] <8> 
+[14:02:17 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <8> 
+[14:02:17 INF] Request finished in 398.9829ms 200 text/html; charset=utf-8 [IP ] <8> 
+[14:02:17 INF] Request starting HTTP/1.1 GET https://localhost:8087/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js   [IP ] <7> 
+[14:02:17 INF] Request starting HTTP/1.1 GET https://localhost:8087/lib/jquery-validation/dist/jquery.validate.js   [IP ] <8> 
+[14:02:17 INF] Request starting HTTP/1.1 GET https://localhost:8087/css/site.css   [IP ] <15> 
+[14:02:17 INF] The file /lib/jquery-validation/dist/jquery.validate.js was not modified [IP ] <8> 
+[14:02:17 INF] The file /lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js was not modified [IP ] <7> 
+[14:02:17 INF] The file /css/site.css was not modified [IP ] <15> 
+[14:02:17 INF] Request finished in 8.3225ms 304 application/javascript [IP ] <8> 
+[14:02:17 INF] Request finished in 8.3225ms 304 text/css [IP ] <15> 
+[14:02:17 INF] Request finished in 31.7751ms 304 application/javascript [IP ] <7> 
+[14:02:18 INF] Request starting HTTP/1.1 GET https://localhost:8087/favicon.ico   [IP ] <7> 
+[14:02:18 INF] Sending file. Request path: '/favicon.ico'. Physical path: 'C:\Users\gherr\Documents\Proyectos\plataformaOriginacion\plataformaOriginacion\wwwroot\favicon.ico' [IP ] <8> 
+[14:02:18 INF] Request finished in 16.3107ms 200 image/x-icon [IP ] <8> 
+[14:02:44 INF] User profile is available. Using 'C:\Users\gherr\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest. [IP ] <1> 
+[14:02:45 WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead. [IP ] <1> 
+[14:03:53 INF] User profile is available. Using 'C:\Users\gherr\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest. [IP ] <1> 
+[14:03:53 WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead. [IP ] <1> 
+[14:03:57 INF] Request starting HTTP/1.1 GET https://localhost:8087/   [IP ] <12> 
+[14:03:57 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <12> 
+[14:03:57 INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <12> 
+[14:03:57 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <12> 
+[14:03:57 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 61.471900000000005ms. [IP ::1] <12> 
+[14:03:57 INF] Executing ViewResult, running view Index. [IP ::1] <12> 
+[14:03:57 INF] Executed ViewResult - view Index executed in 238.46480000000003ms. [IP ::1] <12> 
+[14:03:57 INF] Executed action plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) in 319.01210000000003ms [IP ::1] <12> 
+[14:03:57 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <12> 
+[14:03:57 INF] Request finished in 401.6261ms 200 text/html; charset=utf-8 [IP ] <12> 
+[14:03:58 INF] Request starting HTTP/1.1 GET https://localhost:8087/favicon.ico   [IP ] <7> 
+[14:03:58 INF] Sending file. Request path: '/favicon.ico'. Physical path: 'C:\Users\gherr\Documents\Proyectos\plataformaOriginacion\plataformaOriginacion\wwwroot\favicon.ico' [IP ] <7> 
+[14:03:58 INF] Request finished in 11.8706ms 200 image/x-icon [IP ] <7> 
+[14:10:08 INF] User profile is available. Using 'C:\Users\gherr\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest. [IP ] <1> 
+[14:10:08 WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead. [IP ] <1> 
+[14:10:22 INF] Request starting HTTP/1.1 GET https://localhost:8087/   [IP ] <9> 
+[14:10:22 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <9> 
+[14:10:22 INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <9> 
+[14:10:22 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <9> 
+[14:10:22 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 54.2272ms. [IP ::1] <9> 
+[14:10:22 INF] Executing ViewResult, running view Index. [IP ::1] <9> 
+[14:10:23 INF] Executed ViewResult - view Index executed in 219.0071ms. [IP ::1] <9> 
+[14:10:23 INF] Executed action plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) in 290.9426ms [IP ::1] <9> 
+[14:10:23 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <9> 
+[14:10:23 INF] Request finished in 346.3136ms 200 text/html; charset=utf-8 [IP ] <9> 
+[14:10:23 INF] Request starting HTTP/1.1 GET https://localhost:8087/favicon.ico   [IP ] <12> 
+[14:10:23 INF] Sending file. Request path: '/favicon.ico'. Physical path: 'C:\Users\gherr\Documents\Proyectos\plataformaOriginacion\plataformaOriginacion\wwwroot\favicon.ico' [IP ] <9> 
+[14:10:23 INF] Request finished in 15.9167ms 200 image/x-icon [IP ] <9> 
+[14:15:44 INF] Request starting HTTP/1.1 POST https://localhost:8087/ application/x-www-form-urlencoded 221 [IP ] <31> 
+[14:15:44 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <31> 
+[14:15:44 INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <31> 
+[14:15:44 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <31> 
+[14:15:44 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.11330000000000001ms. [IP ::1] <31> 
+[14:15:44 INF] Executing ViewResult, running view Index. [IP ::1] <31> 
+[14:15:44 INF] Executed ViewResult - view Index executed in 4.5853ms. [IP ::1] <31> 
+[14:15:44 INF] Executed action plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) in 5.3035000000000005ms [IP ::1] <31> 
+[14:15:44 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <31> 
+[14:15:44 INF] Request finished in 6.5803ms 200 text/html; charset=utf-8 [IP ] <31> 
+[14:15:44 INF] Connection id "0HLQTEKOVK1FL", Request id "0HLQTEKOVK1FL:00000001": the application completed without reading the entire request body. [IP ] <31> 
+[14:15:44 INF] Request starting HTTP/1.1 GET https://localhost:8087/css/site.css   [IP ] <24> 
+[14:15:44 INF] Request starting HTTP/1.1 GET https://localhost:8087/lib/jquery-validation/dist/jquery.validate.js   [IP ] <31> 
+[14:15:44 INF] Request starting HTTP/1.1 GET https://localhost:8087/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js   [IP ] <29> 
+[14:15:44 INF] The file /lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js was not modified [IP ] <29> 
+[14:15:44 INF] The file /css/site.css was not modified [IP ] <24> 
+[14:15:44 INF] The file /lib/jquery-validation/dist/jquery.validate.js was not modified [IP ] <31> 
+[14:15:44 INF] Request finished in 8.1191ms 304 application/javascript [IP ] <31> 
+[14:15:44 INF] Request finished in 5.9575ms 304 application/javascript [IP ] <29> 
+[14:15:44 INF] Request finished in 11.4862ms 304 text/css [IP ] <24> 
+[14:15:55 INF] Request starting HTTP/1.1 POST https://localhost:8087/ application/x-www-form-urlencoded 221 [IP ] <30> 
+[14:15:55 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <30> 
+[14:15:55 INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <30> 
+[14:15:55 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <30> 
+[14:15:55 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.015700000000000002ms. [IP ::1] <30> 
+[14:15:55 INF] Executing ViewResult, running view Index. [IP ::1] <30> 
+[14:15:55 INF] Executed ViewResult - view Index executed in 1.169ms. [IP ::1] <30> 
+[14:15:55 INF] Executed action plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) in 1.3313000000000001ms [IP ::1] <30> 
+[14:15:55 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <30> 
+[14:15:55 INF] Request finished in 1.8145ms 200 text/html; charset=utf-8 [IP ] <30> 
+[14:15:55 INF] Connection id "0HLQTEKOVK1FL", Request id "0HLQTEKOVK1FL:00000003": the application completed without reading the entire request body. [IP ] <30> 
+[14:15:55 INF] Request starting HTTP/1.1 GET https://localhost:8087/favicon.ico   [IP ] <33> 
+[14:15:55 INF] Sending file. Request path: '/favicon.ico'. Physical path: 'C:\Users\gherr\Documents\Proyectos\plataformaOriginacion\plataformaOriginacion\wwwroot\favicon.ico' [IP ] <33> 
+[14:15:55 INF] Request finished in 0.8753ms 200 image/x-icon [IP ] <33> 
+[14:16:38 INF] Request starting HTTP/1.1 GET https://localhost:8087/Privacy   [IP ] <31> 
+[14:16:38 INF] Request finished in 1.8541ms 404  [IP ] <31> 
+[14:16:45 INF] Request starting HTTP/1.1 GET https://localhost:8087/   [IP ] <35> 
+[14:16:45 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <35> 
+[14:16:45 INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <35> 
+[14:16:45 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <35> 
+[14:16:45 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.037000000000000005ms. [IP ::1] <35> 
+[14:16:45 INF] Executing ViewResult, running view Index. [IP ::1] <35> 
+[14:16:45 INF] Executed ViewResult - view Index executed in 2.2261ms. [IP ::1] <35> 
+[14:16:45 INF] Executed action plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) in 2.4811ms [IP ::1] <35> 
+[14:16:45 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <35> 
+[14:16:45 INF] Request finished in 3.2901ms 200 text/html; charset=utf-8 [IP ] <35> 
+[14:17:20 INF] User profile is available. Using 'C:\Users\gherr\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest. [IP ] <1> 
+[14:17:20 WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead. [IP ] <1> 
+[14:30:42 INF] User profile is available. Using 'C:\Users\gherr\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest. [IP ] <1> 
+[14:30:43 WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead. [IP ] <1> 
+[14:30:46 INF] Request starting HTTP/1.1 GET https://localhost:8087/   [IP ] <8> 
+[14:30:46 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <8> 
+[14:30:46 INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <8> 
+[14:30:46 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <8> 
+[14:30:46 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 49.2789ms. [IP ::1] <8> 
+[14:30:46 INF] Executing ViewResult, running view Index. [IP ::1] <8> 
+[14:30:46 INF] Executed ViewResult - view Index executed in 170.87810000000002ms. [IP ::1] <8> 
+[14:30:46 INF] Executed action plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) in 239.495ms [IP ::1] <8> 
+[14:30:46 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <8> 
+[14:30:46 INF] Request finished in 301.6051ms 200 text/html; charset=utf-8 [IP ] <8> 
+[14:30:46 INF] Request starting HTTP/1.1 GET https://localhost:8087/lib/jquery-validation/dist/jquery.validate.js   [IP ] <8> 
+[14:30:46 INF] Request starting HTTP/1.1 GET https://localhost:8087/css/site.css   [IP ] <11> 
+[14:30:46 INF] Request starting HTTP/1.1 GET https://localhost:8087/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js   [IP ] <7> 
+[14:30:46 INF] The file /lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js was not modified [IP ] <7> 
+[14:30:46 INF] The file /css/site.css was not modified [IP ] <11> 
+[14:30:46 INF] The file /lib/jquery-validation/dist/jquery.validate.js was not modified [IP ] <8> 
+[14:30:46 INF] Request finished in 20.5101ms 304 text/css [IP ] <11> 
+[14:30:46 INF] Request finished in 18.1387ms 304 application/javascript [IP ] <7> 
+[14:30:46 INF] Request finished in 20.7075ms 304 application/javascript [IP ] <8> 
+[14:30:47 INF] Request starting HTTP/1.1 GET https://localhost:8087/favicon.ico   [IP ] <9> 
+[14:30:47 INF] Sending file. Request path: '/favicon.ico'. Physical path: 'C:\Users\gherr\Documents\Proyectos\plataformaOriginacion\plataformaOriginacion\wwwroot\favicon.ico' [IP ] <15> 
+[14:30:47 INF] Request finished in 14.9815ms 200 image/x-icon [IP ] <15> 
+[14:30:52 INF] Request starting HTTP/1.1 POST https://localhost:8087/Home/Login application/x-www-form-urlencoded 218 [IP ] <16> 
+[14:30:52 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Login (plataformaOriginacion)' [IP ::1] <16> 
+[14:30:52 INF] Route matched with {action = "Login", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(plataformaOriginacion.Models.LoginViewModel) on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <16> 
+[14:30:52 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Login (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <16> 
+[14:30:52 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Login (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 4.0243ms. [IP ::1] <16> 
+[14:30:52 INF] Executing ViewResult, running view Login. [IP ::1] <16> 
+[14:30:52 ERR] The view 'Login' was not found. Searched locations: ["/Views/Home/Login.cshtml","/Views/Shared/Login.cshtml","/Pages/Shared/Login.cshtml"] [IP ::1] <16> 
+[14:30:52 INF] Executed action plataformaOriginacion.Controllers.HomeController.Login (plataformaOriginacion) in 60.7592ms [IP ::1] <16> 
+[14:30:52 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Login (plataformaOriginacion)' [IP ::1] <16> 
+[14:30:52 ERR] An unhandled exception has occurred while executing the request. [IP ] <16> 
+System.InvalidOperationException: The view 'Login' was not found. The following locations were searched:
+/Views/Home/Login.cshtml
+/Views/Shared/Login.cshtml
+/Pages/Shared/Login.cshtml
+   at Microsoft.AspNetCore.Mvc.ViewEngines.ViewEngineResult.EnsureSuccessful(IEnumerable`1 originalLocations)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultAsync(IActionResult result)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResultFilterAsync[TFilter,TFilterAsync]()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResultExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeResultFilters()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at plataformaOriginacion.Startup.<>c.<<Configure>b__5_0>d.MoveNext() in C:\Users\gherr\Documents\Proyectos\plataformaOriginacion\plataformaOriginacion\Startup.cs:line 66
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+[14:30:52 INF] Request finished in 190.9494ms 500 text/html; charset=utf-8 [IP ] <16> 
+[14:31:15 INF] User profile is available. Using 'C:\Users\gherr\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest. [IP ] <1> 
+[14:31:15 WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead. [IP ] <1> 
+[14:31:25 INF] Request starting HTTP/1.1 GET https://localhost:8087/   [IP ] <10> 
+[14:31:25 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <10> 
+[14:31:25 INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <10> 
+[14:31:25 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <10> 
+[14:31:25 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 45.712500000000006ms. [IP ::1] <10> 
+[14:31:25 INF] Executing ViewResult, running view Index. [IP ::1] <10> 
+[14:31:25 INF] Executed ViewResult - view Index executed in 172.97840000000002ms. [IP ::1] <10> 
+[14:31:25 INF] Executed action plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) in 242.2937ms [IP ::1] <10> 
+[14:31:25 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <10> 
+[14:31:25 INF] Request finished in 312.2054ms 200 text/html; charset=utf-8 [IP ] <10> 
+[14:31:28 INF] Request starting HTTP/1.1 POST https://localhost:8087/ application/x-www-form-urlencoded 221 [IP ] <11> 
+[14:31:28 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <11> 
+[14:31:29 INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(plataformaOriginacion.Models.LoginViewModel) on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <11> 
+[14:31:29 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <11> 
+[14:31:29 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 4.8694000000000006ms. [IP ::1] <11> 
+[14:31:29 INF] Executing ViewResult, running view Index. [IP ::1] <11> 
+[14:31:29 INF] Executed ViewResult - view Index executed in 9.8115ms. [IP ::1] <11> 
+[14:31:29 INF] Executed action plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) in 57.2289ms [IP ::1] <11> 
+[14:31:29 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <11> 
+[14:31:29 INF] Request finished in 75.0885ms 200 text/html; charset=utf-8 [IP ] <11> 
+[14:31:49 INF] Request starting HTTP/1.1 GET https://localhost:8087/   [IP ] <18> 
+[14:31:49 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <18> 
+[14:31:49 INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <18> 
+[14:31:49 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <18> 
+[14:31:49 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.0497ms. [IP ::1] <18> 
+[14:31:49 INF] Executing ViewResult, running view Index. [IP ::1] <18> 
+[14:31:49 INF] Executed ViewResult - view Index executed in 1.7859ms. [IP ::1] <18> 
+[14:31:49 INF] Executed action plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) in 2.1047000000000002ms [IP ::1] <18> 
+[14:31:49 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <18> 
+[14:31:49 INF] Request finished in 2.9468ms 200 text/html; charset=utf-8 [IP ] <18> 
+[14:31:52 INF] Request starting HTTP/1.1 POST https://localhost:8087/ application/x-www-form-urlencoded 218 [IP ] <21> 
+[14:31:52 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <21> 
+[14:31:52 INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(plataformaOriginacion.Models.LoginViewModel) on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <21> 
+[14:31:52 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <21> 
+[14:31:52 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.066ms. [IP ::1] <21> 
+[14:31:52 INF] Executing ViewResult, running view Index. [IP ::1] <21> 
+[14:31:52 INF] Executed ViewResult - view Index executed in 2.1366ms. [IP ::1] <21> 
+[14:31:52 INF] Executed action plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) in 3.2179ms [IP ::1] <21> 
+[14:31:52 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <21> 
+[14:31:52 INF] Request finished in 3.7681ms 200 text/html; charset=utf-8 [IP ] <21> 
+[14:31:59 INF] Request starting HTTP/1.1 POST https://localhost:8087/ application/x-www-form-urlencoded 218 [IP ] <21> 
+[14:31:59 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <21> 
+[14:31:59 INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(plataformaOriginacion.Models.LoginViewModel) on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <21> 
+[14:31:59 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <21> 
+[14:31:59 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.0378ms. [IP ::1] <21> 
+[14:31:59 INF] Executing ViewResult, running view Index. [IP ::1] <21> 
+[14:31:59 INF] Executed ViewResult - view Index executed in 6.0167ms. [IP ::1] <21> 
+[14:31:59 INF] Executed action plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) in 6.6000000000000005ms [IP ::1] <21> 
+[14:31:59 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <21> 
+[14:31:59 INF] Request finished in 7.2058ms 200 text/html; charset=utf-8 [IP ] <21> 
+[14:32:28 INF] User profile is available. Using 'C:\Users\gherr\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest. [IP ] <1> 
+[14:32:28 WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead. [IP ] <1> 
+[14:32:34 INF] Request starting HTTP/1.1 GET https://localhost:8087/   [IP ] <7> 
+[14:32:34 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <7> 
+[14:32:34 INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <7> 
+[14:32:34 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <7> 
+[14:32:34 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 56.040600000000005ms. [IP ::1] <7> 
+[14:32:34 INF] Executing ViewResult, running view Index. [IP ::1] <7> 
+[14:32:34 INF] Executed ViewResult - view Index executed in 201.8912ms. [IP ::1] <7> 
+[14:32:34 INF] Executed action plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) in 277.04970000000003ms [IP ::1] <7> 
+[14:32:34 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <7> 
+[14:32:34 INF] Request finished in 373.5487ms 200 text/html; charset=utf-8 [IP ] <7> 
+[14:32:40 INF] Request starting HTTP/1.1 POST https://localhost:8087/ application/x-www-form-urlencoded 218 [IP ] <14> 
+[14:32:40 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <14> 
+[14:32:40 INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(plataformaOriginacion.Models.LoginViewModel) on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <14> 
+[14:32:40 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <14> 
+[14:32:40 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 6.5925ms. [IP ::1] <14> 
+[14:32:40 INF] Executing ViewResult, running view Index. [IP ::1] <14> 
+[14:32:40 INF] Executed ViewResult - view Index executed in 5.019ms. [IP ::1] <14> 
+[14:32:40 INF] Executed action plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) in 62.7498ms [IP ::1] <14> 
+[14:32:40 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <14> 
+[14:32:40 INF] Request finished in 82.0454ms 200 text/html; charset=utf-8 [IP ] <14> 
+[14:32:56 INF] Request starting HTTP/1.1 POST https://localhost:8087/ application/x-www-form-urlencoded 217 [IP ] <12> 
+[14:32:56 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <12> 
+[14:32:56 INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(plataformaOriginacion.Models.LoginViewModel) on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <12> 
+[14:32:56 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <12> 
+[14:33:57 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 60969.8321ms. [IP ::1] <12> 
+[14:33:57 INF] Executing ViewResult, running view Index. [IP ::1] <12> 
+[14:33:57 INF] Executed ViewResult - view Index executed in 9.5683ms. [IP ::1] <12> 
+[14:33:57 INF] Executed action plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) in 60992.9026ms [IP ::1] <12> 
+[14:33:57 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <12> 
+[14:33:57 INF] Request finished in 61001.4952ms 200 text/html; charset=utf-8 [IP ] <12> 
+[14:35:12 INF] User profile is available. Using 'C:\Users\gherr\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest. [IP ] <1> 
+[14:35:12 WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead. [IP ] <1> 
+[14:35:18 INF] Request starting HTTP/1.1 GET https://localhost:8087/   [IP ] <8> 
+[14:35:18 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <8> 
+[14:35:18 INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <8> 
+[14:35:18 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <8> 
+[14:35:18 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 40.3876ms. [IP ::1] <8> 
+[14:35:18 INF] Executing ViewResult, running view Index. [IP ::1] <8> 
+[14:35:18 INF] Executed ViewResult - view Index executed in 161.1878ms. [IP ::1] <8> 
+[14:35:18 INF] Executed action plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) in 219.2392ms [IP ::1] <8> 
+[14:35:18 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <8> 
+[14:35:18 INF] Request finished in 272.7435ms 200 text/html; charset=utf-8 [IP ] <8> 
+[14:35:21 INF] Request starting HTTP/1.1 POST https://localhost:8087/ application/x-www-form-urlencoded 220 [IP ] <10> 
+[14:35:21 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <10> 
+[14:35:21 INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(plataformaOriginacion.Models.LoginViewModel) on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <10> 
+[14:35:22 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <10> 
+[14:35:22 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 4.2090000000000005ms. [IP ::1] <10> 
+[14:35:22 INF] Executing ViewResult, running view Index. [IP ::1] <10> 
+[14:35:22 INF] Executed ViewResult - view Index executed in 7.9436ms. [IP ::1] <10> 
+[14:35:22 INF] Executed action plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) in 62.8444ms [IP ::1] <10> 
+[14:35:22 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <10> 
+[14:35:22 INF] Request finished in 83.5313ms 200 text/html; charset=utf-8 [IP ] <10> 
+[14:35:38 INF] Request starting HTTP/1.1 POST https://localhost:8087/ application/x-www-form-urlencoded 217 [IP ] <7> 
+[14:35:38 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <7> 
+[14:35:38 INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(plataformaOriginacion.Models.LoginViewModel) on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <7> 
+[14:35:38 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <7> 
+[14:35:38 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.RedirectToActionResult in 0.3637ms. [IP ::1] <7> 
+[14:35:38 INF] Executing RedirectResult, redirecting to /Home/Privacy. [IP ::1] <7> 
+[14:35:38 INF] Executed action plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) in 23.2927ms [IP ::1] <7> 
+[14:35:38 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <7> 
+[14:35:38 INF] Request finished in 25.5427ms 302  [IP ] <7> 
+[14:35:38 INF] Request starting HTTP/1.1 GET https://localhost:8087/Home/Privacy   [IP ] <9> 
+[14:35:38 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Privacy (plataformaOriginacion)' [IP ::1] <9> 
+[14:35:38 INF] Route matched with {action = "Privacy", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Privacy() on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <9> 
+[14:35:38 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Privacy (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <9> 
+[14:35:38 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Privacy (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.1004ms. [IP ::1] <9> 
+[14:35:38 INF] Executing ViewResult, running view Privacy. [IP ::1] <9> 
+[14:35:38 INF] Executed ViewResult - view Privacy executed in 5.501ms. [IP ::1] <9> 
+[14:35:38 INF] Executed action plataformaOriginacion.Controllers.HomeController.Privacy (plataformaOriginacion) in 5.7867000000000006ms [IP ::1] <9> 
+[14:35:38 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Privacy (plataformaOriginacion)' [IP ::1] <9> 
+[14:35:38 INF] Request finished in 14.5482ms 200 text/html; charset=utf-8 [IP ] <9> 

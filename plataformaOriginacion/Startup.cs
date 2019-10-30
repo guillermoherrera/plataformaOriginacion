@@ -34,6 +34,10 @@ namespace plataformaOriginacion
 
 
             services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver()).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(180);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +57,8 @@ namespace plataformaOriginacion
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseSession();
 
             app.Use(async (ctx, next) => {
                 using (LogContext.PushProperty("Address", ctx.Connection.RemoteIpAddress))
