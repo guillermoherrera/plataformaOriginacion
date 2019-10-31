@@ -59,3 +59,4 @@ C:\Users\gherr\Documents\Proyectos\plataformaOriginacion\plataformaOriginacion\o
 C:\Users\gherr\Documents\Proyectos\plataformaOriginacion\plataformaOriginacion\obj\Debug\netcoreapp2.2\plataformaOriginacion.pdb
 C:\Users\gherr\Documents\Proyectos\plataformaOriginacion\plataformaOriginacion\obj\Debug\netcoreapp2.2\plataformaOriginacion.csproj.CopyComplete
 C:\Users\gherr\Documents\Proyectos\plataformaOriginacion\plataformaOriginacion\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_DevExtremeLayout.g.cshtml.cs
+C:\Users\gherr\Documents\Proyectos\plataformaOriginacion\plataformaOriginacion\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_LoginPartial.g.cshtml.cs

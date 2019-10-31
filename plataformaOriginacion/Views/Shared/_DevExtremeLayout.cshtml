@@ -42,17 +42,22 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-dark bg-dark  navbar-expand-md">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" href="/">plataformaOriginacion</a>
-
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="color:#ffffff"><strong>plataformaOriginacion</strong></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
-                <div id="navbar" class="collapse navbar-collapse">
-                    <ul class="navbar-nav mr-auto">
-                        
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial" />
+                    <ul class="navbar-nav flex-grow-1">
+                        <!--<li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </li>-->
                     </ul>
                 </div>
             </div>

@@ -50,7 +50,8 @@ namespace plataformaOriginacion.Controllers
                     //if (SolicitudesController.LoginApp(datos, ref resultado, usuario))
                     if(datos.username == "user")
                     {
-                        /*res_code = HttpStatusCode.Created;
+                        /*
+                         * 3res_code = HttpStatusCode.Created;
                         if (string.IsNullOrEmpty(HttpContext.Session.GetString(SessionKeyNombre)))
                         {
                             HttpContext.Session.SetString(SessionKeyNombre, usuario.nombre);
@@ -66,6 +67,7 @@ namespace plataformaOriginacion.Controllers
                             ModelState.AddModelError("Error", "Ha ocurrido un error al iniciar sesión, vuelva a intentarlo porfavor.");
                             return View(model);
                         }*/
+                        HttpContext.Session.SetString(SessionKeyNombre, datos.username); //QUITAR
                         return RedirectToAction("Privacy"); //QUITAR
                     }
                     else
@@ -88,8 +90,15 @@ namespace plataformaOriginacion.Controllers
             }
         }
 
+        public IActionResult cerrarSesion()
+        {
+            HttpContext.Session.Remove(SessionKeyNombre);
+            return RedirectToAction("Index");
+        }
+
         public IActionResult Privacy()
         {
+            ViewBag.usuario = HttpContext.Session.GetString(SessionKeyNombre);
             return View();
         }
 
