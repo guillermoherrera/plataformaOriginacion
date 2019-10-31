@@ -48,10 +48,10 @@ namespace plataformaOriginacion.Controllers
                     LoginRequestApp datos = new LoginRequestApp(model.input.User, model.input.Password);
                     Usuario usuario = new Usuario();
                     //if (SolicitudesController.LoginApp(datos, ref resultado, usuario))
-                    if(datos.username == "user")
+                    if(Session.LoginApp(datos, ref resultado, usuario))
                     {
-                        /*
-                         * 3res_code = HttpStatusCode.Created;
+                        
+                        res_code = HttpStatusCode.Created;
                         if (string.IsNullOrEmpty(HttpContext.Session.GetString(SessionKeyNombre)))
                         {
                             HttpContext.Session.SetString(SessionKeyNombre, usuario.nombre);
@@ -59,16 +59,14 @@ namespace plataformaOriginacion.Controllers
 
                             Log.Information("usuario logueado: {0}", usuario.nombre);
 
-                            return RedirectToAction("Control");
+                            return RedirectToAction("Index", "Bandeja");
                         }
                         else
                         {
                             HttpContext.Session.Remove(SessionKeyNombre);
                             ModelState.AddModelError("Error", "Ha ocurrido un error al iniciar sesión, vuelva a intentarlo porfavor.");
                             return View(model);
-                        }*/
-                        HttpContext.Session.SetString(SessionKeyNombre, datos.username); //QUITAR
-                        return RedirectToAction("Privacy"); //QUITAR
+                        }
                     }
                     else
                     {

@@ -21,6 +21,7 @@ namespace plataformaOriginacion
 
         public static void Main(string[] args)
         {
+            Models.Session.Configuration = configuration;
             Log.Logger = new LoggerConfiguration()
             .ReadFrom.Configuration(configuration)
             .Enrich.FromLogContext()
@@ -34,6 +35,8 @@ namespace plataformaOriginacion
                 .UseSetting("https_port","8087")
                 .UseKestrel()
                 .UseSerilog()
+                .UseConfiguration(configuration)
+                .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>();
     }
 }
