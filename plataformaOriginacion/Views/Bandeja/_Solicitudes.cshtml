@@ -1,0 +1,33 @@
+﻿@(Html.DevExtreme().DataGrid<Solicitud>()
+        .ShowBorders(true)
+        .DataSource(d => d.Mvc().Controller("Bandeja").LoadAction("Get").Key("solicitudID").LoadParams(new { opc = ViewBag.opc }))
+        .Selection(s => s.Mode(SelectionMode.Single))
+        .ColumnAutoWidth(true)
+        .Columns(columns =>
+        {
+            columns.AddFor(m => m.solicitudID).Visible(false).HidingPriority(0);
+            columns.AddFor(m => m.status).CellTemplate(new JS("dataGrid_change_cellTemplate2")).Alignment(HorizontalAlignment.Left).HidingPriority(6);
+            columns.AddFor(m => m.fechaCaputra).Caption("Fecha Registro").SortOrder(SortOrder.Desc).CellTemplate(new JS("dataGrid_change_cellTemplate3")).HidingPriority(8);
+            columns.AddFor(m => m.tipoContrato).CellTemplate(new JS("dataGrid_change_cellTemplate5")).Alignment(HorizontalAlignment.Left).HidingPriority(3);
+            columns.AddFor(m => m.persona).Caption("Nombre").CellTemplate(new JS("dataGrid_change_cellTemplate6")).HidingPriority(1);
+            columns.AddFor(m => m.importe).CellTemplate(new JS("dataGrid_change_cellTemplate4")).Alignment(HorizontalAlignment.Right).HidingPriority(5);
+            columns.AddFor(m => m.solicitudID).Caption("Detalle").CellTemplate(new JS("dataGrid_change_cellTemplate")).HidingPriority(7);
+        })
+        .Paging(p => p.PageSize(10))
+        .FilterRow(f => f.Visible(true))
+        .HeaderFilter(f => f.Visible(true))
+        .GroupPanel(p => p.Visible(true))
+        .Grouping(g => g.AutoExpandAll(false))
+        .RemoteOperations(true)
+        .Summary(s => s
+            .TotalItems(totalItems =>
+            {
+                totalItems.AddFor(m => m.importe).SummaryType(SummaryType.Count);
+            })
+            .GroupItems(groupItems =>
+            {
+                groupItems.Add().SummaryType(SummaryType.Count);
+            })
+        )
+//.OnSelectionChanged("selection_changed")
+)

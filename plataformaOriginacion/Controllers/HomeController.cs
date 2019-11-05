@@ -23,7 +23,7 @@ namespace plataformaOriginacion.Controllers
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString(SessionKeyNombre)))
             {
 
-                return RedirectToAction("Privacy");
+                return RedirectToAction("Index", "Bandeja");
             }
             else {
                 ViewBag.usuario = HttpContext.Session.GetString(SessionKeyNombre);
