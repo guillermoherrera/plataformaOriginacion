@@ -9,7 +9,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card text-center" style="background-color: rgba(255,255,255,0.6);border-radius: 25px;">
+                    <div class="card text-center" style="padding:1em;background-color:white;border-radius: 25px;opacity: .9;">
                         <div class="card-body">
                             <div class="card-header"><h4>Iniciar Sesi&oacute;n @ViewBag.name</h4></div>
                             <section>
@@ -17,7 +17,7 @@
                                     <div asp-validation-summary="All" class="text-danger"></div>
                                     <div class="input-field col s12">
                                         <label asp-for="input.User">Usuario:</label>
-                                        <input asp-for="input.User" class="form-control" />
+                                        <input asp-for="input.User" class="form-control" autofocus/>
                                         <span asp-validation-for="input.User" class="text-danger"></span>
                                     </div>
                                     <div class="input-field col s12">

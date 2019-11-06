@@ -2,7 +2,7 @@
     ViewData["Title"] = "Bandeja";
 }
 <div class="container " style="margin:1em;">
-    <div class="col-md-12 row" style="background-color: #e5e5e5;padding:1em;border-radius: 25px;">
+    <div class="col-md-12 row" style="background-color: #e5e5e5;padding:1em;border-radius: 25px;opacity: .9;">
         <div class="col-md-4 col-md-offset-5"></div>
         <h1><label><strong style="font-size: smaller;">Bandeja de Solicitudes</strong></label></h1>
     </div>
@@ -10,7 +10,7 @@
 
 @if (ViewBag.errores == null)
 {
-    <div style="padding:1em;background-color:white;border-radius: 25px;">
+    <div style="padding:1em;background-color:white;border-radius: 25px;opacity: .9;">
         <div id="div_grid">
             <partial name="_Solicitudes" />
         </div>
@@ -34,8 +34,8 @@ else
 <script>
     function dataGrid_change_cellTemplate(element, info) {
         var data = info.data;
-        var ext = data.tipoContrato == 1 ? "?solicitudID=" + data.solicitudID : "?grupoID=" + data.grupoID;
-        element.html("<center><a href='/Bandeja/Detalle/" + ext + "' target='_blank'>VER</a></center>");
+        var ext = data.tipoContrato == 1 ? "Detalle/?_ID=" + data.solicitudID : "DetalleGrupo/?_ID=" + data.grupoID;
+        element.html("<center><a href='/Bandeja/" + ext + "' target='_blank'>VER</a></center>");
     }
     function dataGrid_change_cellTemplate2(element, info) {
         var data = info.data;

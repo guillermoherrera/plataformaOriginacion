@@ -20,7 +20,7 @@ namespace plataformaOriginacion.Controllers
     {
         public const string SessionKeyNombre = "_Nombre";
         List<Solicitud> solicitudes = new List<Solicitud>();
-        // GET: Bandeja
+        
         public ActionResult Index()
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(SessionKeyNombre)))
@@ -29,7 +29,6 @@ namespace plataformaOriginacion.Controllers
             }
             else
             {
-                //GetFromFireStore();
                 ViewBag.usuario = HttpContext.Session.GetString(SessionKeyNombre);
                 return View();
             }
@@ -39,51 +38,8 @@ namespace plataformaOriginacion.Controllers
         public async Task<object> Get(DataSourceLoadOptions loadOptions)
         {
             solicitudes.Clear();
-            await GetFromFireStore();
+            solicitudes = await FireStore.GetSolicitudesFromFireStore();
             return DataSourceLoader.Load(solicitudes, loadOptions);
-        }
-
-        public async Task GetFromFireStore(){
-            try
-            {
-                List<Solicitud> solicitudesAll = new List<Solicitud>();
-                var credential = GoogleCredential.FromFile("C:\\Users\\gherr\\Downloads\\SGCC-d42386a165af.json"); ;
-                Channel channel = new Channel(FirestoreClient.DefaultEndpoint.Host, FirestoreClient.DefaultEndpoint.Port, credential.ToChannelCredentials());
-                FirestoreClient client = FirestoreClient.Create(channel);
-
-                FirestoreDb db = FirestoreDb.Create("sgcc-57fde", client);
-                CollectionReference collection = db.Collection("Solicitudes");
-                
-                QuerySnapshot allSolicitudes = await collection.GetSnapshotAsync();
-                
-                foreach (DocumentSnapshot document in allSolicitudes.Documents) {
-                    Solicitud solicitud = document.ConvertTo<Solicitud>();
-                    solicitud.solicitudID = document.Id;
-                    solicitud.fechaCaputra = solicitud.fechaCaputra;//.AddHours(-6);
-                    solicitud.persona.fechaNacimiento = solicitud.persona.fechaNacimiento;//.AddHours(-6);
-                    solicitudesAll.Add(solicitud);
-                }
-
-                foreach (Solicitud solicitud in solicitudesAll) {
-                    if (solicitud.grupoID == null) {
-                        solicitudes.Add(solicitud);
-                    }
-                    else {
-                        var res = solicitudes.Find(s => s.grupoID == solicitud.grupoID);
-                        if (res == null){
-                            solicitudes.Add(solicitud);
-                        }
-                        else {
-                            double importe = solicitudes.Find(s => s.grupoID == solicitud.grupoID).importe;
-                            solicitudes.Find(s => s.grupoID == solicitud.grupoID).importe = importe + solicitud.importe;
-                        }
-                    }
-                }
-            }
-            catch (Exception e) {
-                Log.Information("**Error Exception {0}", e.Message);
-                ViewBag.errores = "Error en conexión a FSBD";
-            }
         }
 
         public ActionResult PartialViews()
@@ -95,6 +51,62 @@ namespace plataformaOriginacion.Controllers
             else
             {
                 return PartialView("_Solicitudes");
+            }
+        }
+
+        public async Task<IActionResult> Detalle(String _ID) {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(SessionKeyNombre)))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                string resultado = "";
+                bool editable = false;
+                Solicitud solicitud = new Solicitud();
+                List<catDocumento> catDocumentos = new List<catDocumento>();
+                ViewBag.usuario = HttpContext.Session.GetString(SessionKeyNombre);
+                try{
+                    solicitud = await FireStore.GetSolicitudFromFireStore(_ID);
+                    catDocumentos = await FireStore.GetCatDocumentosFromFirestore();
+                    if (solicitud.solicitudID != null){
+                        ViewBag.solicitud = solicitud;
+                        ViewBag.catDocumentos = catDocumentos;
+                    }
+                    else {
+                        ViewBag.error = solicitud.grupoNombre;//Auxiliar para mostrar un mensaje de error
+                    }
+                }
+                catch (Exception ex) {
+                    ViewBag.error = ex.ToString();
+                    Log.Information("*****Error Exception Detalle: {0}", ex.Message);
+                }
+                return View();
+            }
+        }
+
+        public IActionResult DetalleGrupo(String _ID) {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(SessionKeyNombre)))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public IActionResult Documento(string documentoUrlBase64) {
+            ViewBag.noNadvar = true;
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(SessionKeyNombre)))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                var base64EncodedBytes = System.Convert.FromBase64String(documentoUrlBase64);
+                ViewBag.imagen = System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+                return View();
             }
         }
 
