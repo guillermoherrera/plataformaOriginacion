@@ -108,15 +108,17 @@
                 <label><strong>IMPORTE:</strong></label>
                 <label class="badge badge-success" style="font-size:1em"><strong>@string.Format("{0:#,0.00}", ViewBag.solicitud.importe)</strong></label>
                 <div class="" style="margin-top: 6em;">
-                    <center id="botonera">
+                    @if (@ViewBag.solicitud.grupoID == null){
+                        <center id="botonera">
 
-                        <a href="#" class="btn btn-info btn_auditar">REVISIÓN DE BURÓ</a>
+                            <a href="#" class="btn btn-info btn_auditar">REVISIÓN DE BURÓ</a>
 
-                        <a href="#" id="btnAprobar" class="btn btn-success btn_aprobar" onClick="return false;" data-toggle="modal" data-target="#myModal3">APROBAR</a>
+                            <a href="#" id="btnAprobar" class="btn btn-success btn_aprobar" onClick="return false;" data-toggle="modal" data-target="#myModal3">APROBAR</a>
 
-                        <a href="#" class="btn btn-danger btn_auditar">DENEGAR</a>
+                            <a href="#" class="btn btn-danger btn_auditar">DENEGAR</a>
 
-                    </center>
+                        </center>
+                    }
                 </div>
             </div>
         </div>

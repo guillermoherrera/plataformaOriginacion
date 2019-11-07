@@ -61,8 +61,6 @@ namespace plataformaOriginacion.Controllers
             }
             else
             {
-                string resultado = "";
-                bool editable = false;
                 Solicitud solicitud = new Solicitud();
                 List<catDocumento> catDocumentos = new List<catDocumento>();
                 ViewBag.usuario = HttpContext.Session.GetString(SessionKeyNombre);
@@ -85,13 +83,25 @@ namespace plataformaOriginacion.Controllers
             }
         }
 
-        public IActionResult DetalleGrupo(String _ID) {
+        public async Task<IActionResult> DetalleGrupo(String _ID) {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(SessionKeyNombre)))
             {
                 return RedirectToAction("Index", "Home");
             }
             else
             {
+                List<Solicitud> solicitudes = new List<Solicitud>();
+                try{
+                    solicitudes = await FireStore.GetGrupoFromFireStore(_ID);
+                    if (solicitudes.Count > 0){
+                        ViewBag.solicitudes = solicitudes;
+                    }else{
+                        ViewBag.error = "Grupo sin Integrantes X_X";
+                    }
+                }catch(Exception ex){
+                    ViewBag.error = ex.ToString();
+                    Log.Information("*****Error Exception DetalleGrupo: {0}", ex.Message);
+                }
                 return View();
             }
         }
