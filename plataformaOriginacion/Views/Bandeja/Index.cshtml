@@ -39,8 +39,58 @@ else
     }
     function dataGrid_change_cellTemplate2(element, info) {
         var data = info.data;
-        var clase = data.status == 2 ? 'success' : data.status == 3 ? 'danger' : data.status == 6 || data.status == 6 ? 'warning' : 'primary';
-        var label = data.status == 2 ? 'APROBADO' : data.status == 3 ? 'DENEGADO' : data.status == 6 || data.status == 6 ? 'REVISION' : 'EN ESPERA';
+        switch (data.status) {
+            case 2:
+                clase = 'success';
+                label = 'APROBADO';
+                break;
+            case 3:
+                clase = 'danger';
+                label = 'DENEGADO';
+                break;
+            case 6:
+                clase = 'warning';
+                label = 'REVISIÓN';
+                break;
+            case 7:
+                clase = 'secondary';
+                label = 'EN ESPERA C. DE BURÓ';
+                break;
+            case 8:
+                clase = 'secondary';
+                label = 'EN PROCESO C. DE BURÓ';
+                break;
+            case 9:
+                clase = 'primary';
+                label = 'POR DICTAMINAR';
+                break;
+            case 10:
+                clase = 'danger';
+                label = 'ERROR EN C. DE BURÓ';
+                break;
+            case 98:
+                clase = 'secondary';
+                label = 'GRUPO EN ESPERA';
+                break;
+            case 99:
+                clase = 'primary';
+                label = 'GRUPO POR DICTAMINAR';
+                break;
+            case 100:
+                clase = 'danger';
+                label = 'GRUPO DENEGADO';
+                break;
+            case 101:
+                clase = 'success';
+                label = 'GRUPO APROBADO';
+                break;
+            default:
+                clase = 'info';
+                label = 'POR AUTORIZAR C. DE BURÓ';
+                break;
+        }
+        //var clase = data.status == 2 ? 'success' : data.status == 3 ? 'danger' : data.status == 6 || data.status == 6 ? 'warning' : 'primary';
+        //var label = data.status == 2 ? 'APROBADO' : data.status == 3 ? 'DENEGADO' : data.status == 6 || data.status == 6 ? 'REVISION' : 'POR AUTORIZAR';
         element.html("<span class='badge badge-" + clase + "'>" + label + "</span>");
         if (data.cambios > 0) {
             element.append(" <span class='badge badge-warning' title='Solicitudes de cambio de Documentos Pendientes.'>" + data.cambios + "</span>");

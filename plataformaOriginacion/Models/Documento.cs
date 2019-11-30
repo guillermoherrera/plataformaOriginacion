@@ -13,5 +13,7 @@ namespace plataformaOriginacion.Models
         public int tipo { get; set; }
         [FirestoreProperty]
         public string documento { get; set; }
+        [FirestoreProperty]
+        public int version { get; set; }
     }
 }

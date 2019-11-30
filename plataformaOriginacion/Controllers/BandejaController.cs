@@ -54,7 +54,7 @@ namespace plataformaOriginacion.Controllers
             }
         }
 
-        public async Task<IActionResult> Detalle(String _ID) {
+        public async Task<IActionResult> Detalle(String _ID, bool result, String mensaje) {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(SessionKeyNombre)))
             {
                 return RedirectToAction("Index", "Home");
@@ -70,6 +70,9 @@ namespace plataformaOriginacion.Controllers
                     if (solicitud.solicitudID != null){
                         ViewBag.solicitud = solicitud;
                         ViewBag.catDocumentos = catDocumentos;
+                        //mensaje notice
+                        ViewBag.result = result;
+                        ViewBag.mensaje = mensaje;
                     }
                     else {
                         ViewBag.error = solicitud.grupoNombre;//Auxiliar para mostrar un mensaje de error
@@ -95,7 +98,17 @@ namespace plataformaOriginacion.Controllers
                     solicitudes = await FireStore.GetGrupoFromFireStore(_ID);
                     if (solicitudes.Count > 0){
                         ViewBag.solicitudes = solicitudes;
-                    }else{
+                        ViewBag.importeTotal = solicitudes.Sum(item => item.importe);
+                        ViewBag.dictaminable = true;
+                        ViewBag.dictamen = solicitudes[0].dictamen;
+                        foreach (Solicitud solicitud in solicitudes)
+                        {
+                            if (solicitud.status != 2 && solicitud.status != 3){
+                                ViewBag.dictaminable = false;
+                            }
+                        }
+                    }
+                    else{
                         ViewBag.error = "Grupo sin Integrantes X_X";
                     }
                 }catch(Exception ex){
@@ -118,6 +131,44 @@ namespace plataformaOriginacion.Controllers
                 ViewBag.imagen = System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
                 return View();
             }
+        }
+
+        public async Task<IActionResult> cambioEstado(String _ID, int status, String grupo) {
+            bool result = await FireStore.CambioEstado(_ID, status, grupo);
+            String mensaje;
+            mensaje = result ? "" : "NO ";
+            switch (status) {
+                case 7:
+                    mensaje += "SE HA AUTORIZADO LA CONSULTA DE BURÓ PARA ESTA SOLICITUD.";
+                    break;
+                case 3:
+                    mensaje += "SE HA DENEGADO LA SOLICITUD.";
+                    break;
+                default:
+                    mensaje += "SE REALIZO ALGUNA ACCIÓN.";
+                    break;
+            }
+            return RedirectToAction("Detalle", new { _ID = _ID, result = result, mensaje = mensaje });
+        }
+
+        public async Task<IActionResult> grupoDictamen(string _ID, int aut) {
+            bool result = await FireStore.DictamenGrupo(_ID, aut);
+            String mensaje;
+            mensaje = result ? "" : "NO ";
+            switch (aut)
+            {
+                case 0:
+                    mensaje += "SE HA DENEGADO EL GRUPO.";
+                    break;
+                case 1:
+                    mensaje += "SE HA AUTORIZADO EL GRUPO.";
+                    break;
+                default:
+                    mensaje += "SE REALIZO ALGUNA ACCIÓN.";
+                    break;
+            }
+            Log.Information("*****INFORMATION grupoDictamen: {0}", mensaje);
+            return RedirectToAction("DetalleGrupo", new {_ID = _ID});
         }
 
         /* GET: Bandeja/Details/5

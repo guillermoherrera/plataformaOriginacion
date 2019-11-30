@@ -44,21 +44,36 @@ namespace plataformaOriginacion.Models
 
                 foreach (Solicitud solicitud in solicitudesAll)
                 {
-                    if (solicitud.grupoID == null)
+                    if (solicitud.grupoID == null)//INDIVIDUAL
                     {
                         solicitudes.Add(solicitud);
                     }
-                    else
+                    else//GRUPAL
                     {
                         var res = solicitudes.Find(s => s.grupoID == solicitud.grupoID);
                         if (res == null)
                         {
+                            solicitud.status = solicitud.status == 2 || solicitud.status == 3 ? 99 : 98;
+                            if (solicitud.dictamen != null) {
+                                solicitud.status = solicitud.dictamen == true ? 101 : 100; 
+                            }
                             solicitudes.Add(solicitud);
+                            
                         }
                         else
                         {
                             double importe = solicitudes.Find(s => s.grupoID == solicitud.grupoID).importe;
                             solicitudes.Find(s => s.grupoID == solicitud.grupoID).importe = importe + solicitud.importe;
+
+                            int estadoGrupo = solicitudes.Find(s => s.grupoID == solicitud.grupoID).status;
+                            if (estadoGrupo == 99 && solicitud.status != 2 && solicitud.status != 3)
+                            {
+                                solicitudes.Find(s => s.grupoID == solicitud.grupoID).status = 98;
+                            }
+                            if (solicitud.dictamen != null)
+                            {
+                                solicitudes.Find(s => s.grupoID == solicitud.grupoID).status = solicitud.dictamen == true ? 101 : 100;
+                            }
                         }
                     }
                 }
@@ -127,6 +142,74 @@ namespace plataformaOriginacion.Models
                 Log.Information("*****Error Exception GetCatDocumentosFromFirestore: {0}", ex.Message);
             }
             return catDocumentos;
+        }
+
+        public static async Task<bool> CambioEstado(string _ID, int status, string grupo) {
+            bool result = false;
+            try
+            {
+                FirestoreDb db = conexionDB();
+                DocumentReference solicitud = db.Collection("Solicitudes").Document(_ID);
+                await db.RunTransactionAsync(async transaction => {
+                    DocumentSnapshot snapshot = await transaction.GetSnapshotAsync(solicitud);
+                    int newStatus = status;
+                    bool dictamen = false;
+                    if (status == 2) { dictamen = true; } else { dictamen = false; }
+                    Dictionary<string, object> updates = new Dictionary<string, object> {
+                        {"status", newStatus },
+                        //{"dictamen", dictamen }
+                    };
+                    if ((status == 2 || status == 3) && grupo == null){ updates.Add("dictamen", dictamen); }//agregar si es o no individual
+                    transaction.Update(solicitud, updates);
+                });
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                Log.Information("*****Error Exception CambioEstado: {0}", ex.Message);
+                result = false;
+            }
+            return result;
+        }
+
+        public static async Task<bool> DictamenGrupo(string _ID, int aut) {
+            bool result = false;
+            try
+            {
+                FirestoreDb db = conexionDB();
+                DocumentReference grupo = db.Collection("Grupos").Document(_ID);
+                await db.RunTransactionAsync(async transaction => {
+                    DocumentSnapshot snapshot = await transaction.GetSnapshotAsync(grupo);
+                    int newStatus = 3;
+                    bool dictamen = aut == 0 ? false : true;
+                    Dictionary<string, object> updates = new Dictionary<string, object> {
+                        {"status", newStatus },
+                        {"dictamen", dictamen }
+                    };
+                    transaction.Update(grupo, updates);
+                });
+
+                List<Solicitud> solicitudes = await GetGrupoFromFireStore(_ID);
+                foreach (Solicitud solicitud in solicitudes)
+                {
+                    DocumentReference solicitudAux = db.Collection("Solicitudes").Document(solicitud.solicitudID);
+                    await db.RunTransactionAsync(async transaction => {
+                        DocumentSnapshot snapshot = await transaction.GetSnapshotAsync(solicitudAux);
+                        bool dictamen = aut == 0 ? false : true;
+                        Dictionary<string, object> updates = new Dictionary<string, object> {
+                            {"dictamen", dictamen }
+                        };
+                        transaction.Update(solicitudAux, updates);
+                    });
+                }
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                Log.Information("*****Error Exception CambioEstado: {0}", ex.Message);
+                result = false;
+            }
+            return result;
         }
     }
 }

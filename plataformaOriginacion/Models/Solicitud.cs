@@ -11,6 +11,8 @@ namespace plataformaOriginacion.Models
     {
         public string solicitudID { get; set; }
         [FirestoreProperty]
+        public bool? dictamen { get; set; }
+        [FirestoreProperty]
         public DateTime fechaCaputra { get; set; }
         [FirestoreProperty]
         public string grupoID { get; set; }
@@ -28,5 +30,7 @@ namespace plataformaOriginacion.Models
         public Persona persona { get; set; }
         [FirestoreProperty]
         public List<Documento> documentos { get; set; }
+        [FirestoreProperty]
+        public Direccion direccion { get; set; }
     }
 }
