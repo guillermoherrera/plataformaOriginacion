@@ -37,9 +37,9 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>@ViewBag.solicitudes[0].grupoNombre</td>
-                            <td align="center">@ViewBag.solicitudes.Count</td>
-                            <td align="right">@string.Format("{0:#,0.00}", ViewBag.importeTotal)</td>
+                            <td><span class="badge badge-dark" style="font-size:1.2em;">@ViewBag.solicitudes[0].grupoNombre</span></td>
+                            <td align="center"><span class="badge badge-dark" style="font-size:1.2em;">@ViewBag.solicitudes.Count</span></td>
+                            <td align="center"><span class="badge badge-dark" style="font-size:1.2em;">@string.Format("{0:#,0.00}", ViewBag.importeTotal)</span></td>
                         </tr>
                     </tbody>
                 </table>

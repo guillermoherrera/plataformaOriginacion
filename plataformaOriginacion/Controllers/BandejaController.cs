@@ -67,6 +67,11 @@ namespace plataformaOriginacion.Controllers
                 try{
                     solicitud = await FireStore.GetSolicitudFromFireStore(_ID);
                     catDocumentos = await FireStore.GetCatDocumentosFromFirestore();
+                    if (solicitud.documentos.Find(x => x.solicitudCambio == true) != null && solicitud.status != 6)
+                    {
+                        await FireStore.CambioEstado(_ID, 6, null);
+                        return RedirectToAction("Detalle", new { _ID = _ID });
+                    }
                     if (solicitud.solicitudID != null){
                         ViewBag.solicitud = solicitud;
                         ViewBag.catDocumentos = catDocumentos;
@@ -144,6 +149,9 @@ namespace plataformaOriginacion.Controllers
                 case 3:
                     mensaje += "SE HA DENEGADO LA SOLICITUD.";
                     break;
+                case 2:
+                    mensaje += "SE HA APROBADO LA SOLICITUD.";
+                    break;
                 default:
                     mensaje += "SE REALIZO ALGUNA ACCIÓN.";
                     break;
@@ -169,6 +177,21 @@ namespace plataformaOriginacion.Controllers
             }
             Log.Information("*****INFORMATION grupoDictamen: {0}", mensaje);
             return RedirectToAction("DetalleGrupo", new {_ID = _ID});
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> CambioDocumento(CambioDoc cambioDoc)
+        {
+            string resultado = "";
+            if (await FireStore.solicitarCambioDoc(cambioDoc))
+            {
+                return Json(new { Success = true });
+            }
+            else
+            {
+                return Json(new { Success = false });
+            }
+
         }
 
         /* GET: Bandeja/Details/5

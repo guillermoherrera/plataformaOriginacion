@@ -5,6 +5,7 @@ using Grpc.Auth;
 using Grpc.Core;
 using Serilog;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -98,8 +99,27 @@ namespace plataformaOriginacion.Models
                 if (document.Exists) {
                     solicitud = document.ConvertTo<Solicitud>();
                     solicitud.solicitudID = _ID;
+
+                    List<Documento> documentosAux = new List<Documento>();
+                    foreach (Documento doc in solicitud.documentos)
+                    {
+                        var aux_doc = documentosAux.Find(x => x.tipo == doc.tipo);
+                        if (aux_doc == null)
+                        {
+                            documentosAux.Add(doc);
+                        }
+                        else
+                        {
+                            if (aux_doc.version < doc.version)
+                            {
+                                documentosAux.Remove(aux_doc);
+                                documentosAux.Add(doc);
+                            }
+                        }
+                    }
+                    solicitud.documentos = documentosAux;
                 } else {
-                    solicitud.grupoNombre = "La solicitud con el id " + _ID + " no existe en la FSBD.\r\nVuelva a cargar la página desde la bandeja, si no se muestra información es probable que el asesor haya cancelado su sincronización";//Auxiliar para mostrar un mensaje de error
+                    solicitud.grupoNombre = "La solicitud con el id " + _ID + " no existe en la FSDB.\r\nVuelva a cargar la página desde la bandeja, si no se muestra información de la solicitud vuelva a cargar los datos de la bandeja";//Auxiliar para mostrar un mensaje de error
                 }
             } catch (Exception ex) {
                 solicitud.grupoNombre = ex.Message;//Auxiliar para mostrar un mensaje de error
@@ -208,6 +228,70 @@ namespace plataformaOriginacion.Models
             {
                 Log.Information("*****Error Exception CambioEstado: {0}", ex.Message);
                 result = false;
+            }
+            return result;
+        }
+
+        public static async Task<bool> solicitarCambioDoc(CambioDoc cambioDoc) {
+            bool result = false;
+            Solicitud solicitud = new Solicitud();
+            try
+            {
+
+                FirestoreDb db = conexionDB();
+                CollectionReference collection = db.Collection("Solicitudes");
+                DocumentReference docRef = collection.Document(cambioDoc.idDocumento);
+                DocumentSnapshot document = await docRef.GetSnapshotAsync();
+                if (document.Exists)
+                {
+                    solicitud = document.ConvertTo<Solicitud>();
+                    solicitud.solicitudID = cambioDoc.idDocumento;
+                    var docEditar = solicitud.documentos.Where(doc => doc.tipo == int.Parse(cambioDoc.tipo) && doc.version == int.Parse(cambioDoc.version)).FirstOrDefault();
+                    if (docEditar != null)
+                    {
+                        docEditar.observacion = cambioDoc.observacion;
+                        docEditar.solicitudCambio = true;
+                        Dictionary<string, object> updates = new Dictionary<string, object>();
+                        ArrayList arregloDocumentos = new ArrayList();
+                        foreach (Documento doc in solicitud.documentos)
+                        {
+                            Dictionary<string, object> objetoDocumento = new Dictionary<string, object>
+                            {
+                                { "documento", doc.documento },
+                                { "tipo", doc.tipo },
+                                { "version", doc.version },
+                            };
+                            if (doc.solicitudCambio)
+                            {
+                                objetoDocumento.Add("solicitudCambio", doc.solicitudCambio);
+                                objetoDocumento.Add("observacion", doc.observacion);
+                            }
+                            arregloDocumentos.Add(objetoDocumento);
+                        }
+                        updates.Add("documentos", arregloDocumentos);
+                        updates.Add("status", 6);
+
+                        await db.RunTransactionAsync(async transaction => {
+                            DocumentSnapshot snapshot = await transaction.GetSnapshotAsync(docRef);
+                            
+                            transaction.Update(docRef, updates);
+                        });
+
+                        result = true;
+                    }
+                    else
+                    {
+                        throw new Exception("Ha ocurrido un error al encontrar el documento con el tipo " + cambioDoc.tipo + " y la versión "+ cambioDoc.version+" de la solicitud con el ID " + cambioDoc.idDocumento);
+                    }
+                }
+                else
+                {
+                    throw new Exception("Solicitud con el ID "+ cambioDoc.idDocumento + " No Encotrada");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Information("*****Error Exception GetSolicitudFromFireStore: {0}", ex.Message);
             }
             return result;
         }

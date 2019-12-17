@@ -13,6 +13,10 @@
         <div style="background-color: lightcoral;color:white; padding:1em;border-radius: 25px;" align="center"><strong>Error: @ViewBag.mensaje</strong></div>
     }
 }
+@if (ViewBag.solicitud.status == 6)
+{
+    <div style="background-color: #ffc107; padding:1em;border-radius: 25px;" align="center"><strong>ATENCIÓN: Se han solicitado cambios a uno o más documentos de esta solicitud, es necesario esperar a que se realicen  dichos cambios por parte del asesor para poder continuar con el proceso de dictamen.</strong></div>
+}
 @if (ViewBag.error == null)
 {
     <div class="container" style="margin:1em;">
@@ -166,7 +170,7 @@
                                     {
                                         if (doc.tipo == dist.tipo)
                                         {
-                                            @dist.descDocumento
+                                            <label id="tipoDoc_@doc.tipo">@dist.descDocumento</label>
                                         }
                                     }
                                 </td>
@@ -175,6 +179,19 @@
                                 </td>
                                 <td>
                                     <a href="#" class="popup" onClick="return false;" oid="@doc.documento">VER</a>
+                                    |
+                                    @if (doc.solicitudCambio == true)
+                                    {
+                                        <a href="#" id="@doc.documento.Substring(doc.documento.Length - 36)" class="form_cambio" onClick="return false;" tipo="@doc.tipo" version="@doc.version" text="@doc.observacion" data-toggle="modal" data-target="#ModalCambioDoc" style="font-weight:bold;">PENDIENTE</a>
+                                    }
+                                    else if (@ViewBag.solicitud.status == 1 || @ViewBag.solicitud.status == 6)
+                                    {
+                                        <a href="#" id="@doc.documento.Substring(doc.documento.Length - 36)" class="form_cambio" onClick="return false;" tipo="@doc.tipo" version="@doc.version" data-toggle="modal" data-target="#ModalCambioDoc">CAMBIAR</a>
+                                    }
+                                    else
+                                    {
+                                        <lable><strong>✓</strong></lable>
+                                    }
                                 </td>
                             </tr>
                         }
@@ -200,6 +217,36 @@
                     </center>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal2 CAMBIO DE DOCUMENTO-->
+    <div class="modal fade" id="ModalCambioDoc" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <label style="margin-left: auto;"><Strong>SOLICITAR CAMBIO DE DOCUMENTO</Strong></label>
+                    <button type="button" class="close accionModal" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close cargandoModal">-</button>
+                </div>
+                <div id="form_cambio" class="modal-body">
+                    <label id="label_doc"></label>
+                    <div class="form-group">
+                        <label>Observación:</label>
+                        <br />
+                        <textarea id="text_cambio" placeholder="Escribe aquí de forma breve el motivo del cambio." style="width:100%" rows="3" maxlength="99" onkeyup="this.value = this.value.toUpperCase();"></textarea>
+                    </div>
+                    <div class="form-group" align="center">
+                        <button id="enviar_cambio" type="button" class="btn btn-success accionModal">Enviar</button>
+                        <label class="cargandoModal"><strong>SOLICITANDO CAMBIOS ...</strong></label>
+                    </div>
+                </div>
+                <!--<div class="modal-footer">
+                </div>-->
+            </div>
+
         </div>
     </div>
 }
@@ -242,4 +289,75 @@ else
         return res;
     });
 
+    $(".form_cambio").click(function () {
+        $("#label_doc").html("<strong>" + $("#tipoDoc_" + $(this).attr('tipo')).text() + "</strong >");
+        $("#enviar_cambio").attr("oid", $(this).attr("id"));
+        $("#enviar_cambio").attr("tipo", $(this).attr("tipo"));
+        $("#enviar_cambio").attr("version", $(this).attr("version"));
+        //console.log($(this).attr("id"))
+        $("#text_cambio").attr("disabled", false);
+        $("#enviar_cambio").show();
+        $(".accionModal").show();
+        $(".cargandoModal").hide();
+        $("#text_cambio").val("");
+        if ($(this).text() == "PENDIENTE") {
+            $("#text_cambio").val($(this).attr("text"));
+            $("#text_cambio").attr("disabled", true);
+            $("#enviar_cambio").hide();
+        }
+    });
+
+    $("#enviar_cambio").click(function (e) {
+        $("#enviar_cambio").attr("disabled", true);
+        var observ = $("#text_cambio").val();
+        var idElem = $(this).attr("oid");
+        var idDoc = "@ViewBag.solicitud.solicitudID";
+        var tipo = $(this).attr("tipo");
+        var version = $(this).attr("version");
+        if (observ.length > 0) {
+            console.log('#'+idDoc);
+            if (confirm("Esta a punto de solicitar una Cambio para este Documento, no podrá autorizar hasta que se haga el cambio.\n\n\n¿Desea continuar?")) {
+                var cambio = {
+                    idDocumento: idDoc,
+                    observacion: observ,
+                    tipo: tipo,
+                    version: version
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "/Bandeja/CambioDocumento",
+                    content: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: cambio,
+                    beforeSend: function (xhr) {
+                        $(".accionModal").hide();
+                        $(".cargandoModal").show();
+                    },
+                    success: function (d) {
+                        if (d.Success) {
+                            $("#text_cambio").val("");
+                            $('#ModalCambioDoc').modal('toggle');
+                            $('.btn_ACB').remove();
+                            $('#' + idElem).text("PENDIENTE");
+                            //$('#' + idElem).addClass("btn-warning");
+                            $('#' + idElem).css('font-weight', 'bold');
+                            $('#' + idElem).attr('text', observ);
+                        } else {
+                            alert("Error");
+                        }
+                        $("#enviar_cambio").attr("disabled", false);
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        alert('Error!!');
+                        $("#enviar_cambio").attr("disabled", false);
+                    }
+                });
+            } else {
+                $("#enviar_cambio").attr("disabled", false);
+            }
+        } else {
+            alert("Es necesario escribir el motivo del cambio.\nMaximo en 100 caracteres.");
+            $("#enviar_cambio").attr("disabled", false);
+        }
+    });
 </script>

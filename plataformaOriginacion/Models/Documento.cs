@@ -15,5 +15,9 @@ namespace plataformaOriginacion.Models
         public string documento { get; set; }
         [FirestoreProperty]
         public int version { get; set; }
+        [FirestoreProperty]
+        public bool solicitudCambio { get; set; }
+        [FirestoreProperty]
+        public string observacion { get; set; }
     }
 }
