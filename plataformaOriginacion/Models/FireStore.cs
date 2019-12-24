@@ -128,10 +128,22 @@ namespace plataformaOriginacion.Models
             return solicitud;
         }
 
-        public static async Task<List<Solicitud>> GetGrupoFromFireStore(string grupoID){
+        //public static async Task<List<Solicitud>> GetGrupoFromFireStore(string grupoID){
+        public static async Task<GrupoDetalle> GetGrupoFromFireStore(string grupoID)
+        {
+            GrupoDetalle grupoDetalle = new GrupoDetalle();
             List<Solicitud> solicitudes = new List<Solicitud>();
             try{
                 FirestoreDb db = conexionDB();
+
+                CollectionReference collection = db.Collection("Grupos");
+                DocumentReference docRef = collection.Document(grupoID);
+                DocumentSnapshot documentGpo = await docRef.GetSnapshotAsync();
+                if (documentGpo.Exists)
+                {
+                    grupoDetalle.grupo = documentGpo.ConvertTo<Grupo>();
+                }
+
                 Query capitalQuery = db.Collection("Solicitudes").WhereEqualTo("grupoID", grupoID);
                 QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
                 foreach (DocumentSnapshot document in capitalQuerySnapshot.Documents){
@@ -143,7 +155,8 @@ namespace plataformaOriginacion.Models
             catch(Exception ex){
                 Log.Information("*****Error Exception GetGrupoFromFireStore: {0}", ex.Message);
             }
-            return solicitudes;
+            grupoDetalle.solicitudes = solicitudes;
+            return grupoDetalle;
         }
 
         public static async Task<List<catDocumento>> GetCatDocumentosFromFirestore() {
@@ -209,8 +222,9 @@ namespace plataformaOriginacion.Models
                     transaction.Update(grupo, updates);
                 });
 
-                List<Solicitud> solicitudes = await GetGrupoFromFireStore(_ID);
-                foreach (Solicitud solicitud in solicitudes)
+                //List<Solicitud> solicitudes = await GetGrupoFromFireStore(_ID);
+                GrupoDetalle grupoDetalle = await GetGrupoFromFireStore(_ID);
+                foreach (Solicitud solicitud in grupoDetalle.solicitudes)
                 {
                     DocumentReference solicitudAux = db.Collection("Solicitudes").Document(solicitud.solicitudID);
                     await db.RunTransactionAsync(async transaction => {

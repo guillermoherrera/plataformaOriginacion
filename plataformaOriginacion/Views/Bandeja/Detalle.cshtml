@@ -15,7 +15,7 @@
 }
 @if (ViewBag.solicitud.status == 6)
 {
-    <div style="background-color: #ffc107; padding:1em;border-radius: 25px;" align="center"><strong>ATENCIÓN: Se han solicitado cambios a uno o más documentos de esta solicitud, es necesario esperar a que se realicen  dichos cambios por parte del asesor para poder continuar con el proceso de dictamen.</strong></div>
+    <div style="background-color: indianred;color: white; padding:1em;border-radius: 25px;" align="center"><strong>ATENCIÓN: Se han solicitado cambios a uno o más documentos de esta solicitud, es necesario esperar a que se realicen  dichos cambios por parte del asesor para poder continuar con el proceso de dictamen.</strong></div>
 }
 @if (ViewBag.error == null)
 {
@@ -53,7 +53,7 @@
             }
             else
             {
-                <label class="badge badge-info" style="height: 21px;">POR AUTORIZAR CONSULTA DE BURÓ</label>
+                <label id="_label" class="badge badge-info" style="height: 21px;">POR AUTORIZAR CONSULTA DE BURÓ</label>
             }
         </div>
     </div>
@@ -65,17 +65,17 @@
                     <col width="60%">
                     <tbody>
                         <tr>
-                            <td><strong>NOMBRE:</strong></td>
+                            <td><span class="flaticon-man-user" style="position: relative;margin-left: -20px;color: lightgray;"></span><strong> NOMBRE:</strong></td>
                             <td>
                                 @(ViewBag.solicitud.persona.nombre + " " + ViewBag.solicitud.persona.nombreSegundo + " " + ViewBag.solicitud.persona.apellido + " " + ViewBag.solicitud.persona.apellidoSegundo)
                             </td>
                         </tr>
                         <tr>
-                            <td><strong>CURP:</strong></td>
+                            <td><span class="flaticon-name-1" style="position: relative;margin-left: -20px;color: lightgray;"></span><strong> CURP:</strong></td>
                             <td>@ViewBag.solicitud.persona.curp</td>
                         </tr>
                         <tr>
-                            <td><strong>RFC:</strong></td>
+                            <td><span class="flaticon-id-card" style="position: relative;margin-left: -20px;color: lightgray;"></span><strong> RFC:</strong></td>
                             <td>@ViewBag.solicitud.persona.rfc</td>
                         </tr>
                     </tbody>
@@ -86,17 +86,17 @@
                     <col width="60%">
                     <tbody>
                         <tr>
-                            <td><strong>DIRECCIÓN (CALLE Y NUMERO):</strong></td>
+                            <td><span class="flaticon-address" style="position: relative;margin-left: -20px;color: lightgray;"></span> <strong>DIRECCIÓN (CALLE Y<br>&nbsp&nbsp&nbsp&nbsp&nbspNUMERO):</strong></td>
                             <td>
                                 @ViewBag.solicitud.direccion.direccion1
                             </td>
                         </tr>
                         <tr>
-                            <td><strong>DELEGACIÓN/MUNICIPIO:</strong></td>
+                            <td><span class="flaticon-hotel" style="position: relative;margin-left: -20px;color: lightgray;"></span> <strong>DELEGACIÓN/<br>&nbsp&nbsp&nbsp&nbsp&nbspMUNICIPIO:</strong></td>
                             <td>@ViewBag.solicitud.direccion.delegacionMunicipio</td>
                         </tr>
                         <tr>
-                            <td><strong>ESTADO:</strong></td>
+                            <td><span class="flaticon-museum" style="position: relative;margin-left: -20px;color: lightgray;"></span> <strong>ESTADO:</strong></td>
                             <td>@ViewBag.solicitud.direccion.estado</td>
                         </tr>
                     </tbody>
@@ -108,14 +108,14 @@
                     <col width="60%">
                     <tbody>
                         <tr>
-                            <td><strong>FECHA DE NACIMIENTO:</strong></td>
+                            <td><span class="flaticon-calendar" style="position: relative;margin-left: -20px;color: lightgray;"></span> <strong>FECHA DE<br>&nbsp&nbsp&nbsp&nbsp&nbspNACIMIENTO:</strong></td>
                             <td>
                                 @ViewBag.solicitud.persona.fechaNacimiento.ToString("dd/MM/yyyy")<br>
                                 <label style="font-size: .75em;color:grey;">dia / mes / año</label>
                             </td>
                         </tr>
                         <tr>
-                            <td><strong>TELEFONO:</strong></td>
+                            <td><span class="flaticon-call-answer" style="position: relative;margin-left: -20px;color: lightgray;"></span> <strong>TELEFONO:</strong></td>
                             <td>@ViewBag.solicitud.persona.telefono</td>
                         </tr>
                     </tbody>
@@ -126,21 +126,21 @@
                     <col width="60%">
                     <tbody>
                         <tr>
-                            <td><strong>COLONIA/<br>POBLACION:</strong></td>
+                            <td><span class="flaticon-village" style="position: relative;margin-left: -20px;color: lightgray;"></span> <strong>COLONIA/<br>&nbsp&nbsp&nbsp&nbsp&nbspPOBLACION:</strong></td>
                             <td>
                                 @ViewBag.solicitud.direccion.coloniaPoblacion
                             </td>
                         </tr>
                         <tr>
-                            <td><strong>CIUDAD:</strong></td>
+                            <td><span class="flaticon-city" style="position: relative;margin-left: -20px;color: lightgray;"></span> <strong>CIUDAD:</strong></td>
                             <td>@ViewBag.solicitud.direccion.ciudad</td>
                         </tr>
                         <tr>
-                            <td><strong>C.P.:</strong></td>
+                            <td><span class="flaticon-mailbox" style="position: relative;margin-left: -20px;color: lightgray;"></span> <strong>C.P.:</strong></td>
                             <td>@ViewBag.solicitud.direccion.cp</td>
                         </tr>
                         <tr>
-                            <td><strong>PAIS:</strong></td>
+                            <td><span class="flaticon-flag" style="position: relative;margin-left: -20px;color: lightgray;"></span> <strong>PAIS:</strong></td>
                             <td>@ViewBag.solicitud.direccion.pais</td>
                         </tr>
                     </tbody>
@@ -152,7 +152,7 @@
     <div class="container" style="margin-bottom:.5em;" align="center">
         <div class="col-md-12 row" style="background-color: #f5f5f5;padding:1em;border-radius: 25px;opacity:.9;">
             <div class="col-md-6">
-                <label><strong>DOCUMENTOS:</strong></label>
+                <label><span class="flaticon-portfolio" style="position: relative;margin-left: -20px;color: lightgray;"></span> <strong>DOCUMENTOS:</strong></label>
                 <table class="table table-striped table-sm">
                     <thead>
                         <tr>
@@ -190,7 +190,8 @@
                                     }
                                     else
                                     {
-                                        <lable><strong>✓</strong></lable>
+                                        <!--<lable><strong>✓</strong></lable>-->
+                                        <span class="flaticon-correct-symbol" style="position: relative;margin-left: -20px;color: green;"></span>
                                     }
                                 </td>
                             </tr>
@@ -199,7 +200,7 @@
                 </table>
             </div>
             <div class="col-md-6">
-                <label><strong>IMPORTE:</strong></label>
+                <label><span class="flaticon-dollar-symbol" style="position: relative;margin-left: -20px;color: lightgray;"></span><strong>IMPORTE:</strong></label>
                 <label class="badge badge-success" style="font-size:1em"><strong>@string.Format("{0:#,0.00}", ViewBag.solicitud.importe)</strong></label>
                 <div class="" style="margin-top: 6em;">
                     <center id="botonera">
@@ -222,24 +223,32 @@
 
     <!-- Modal2 CAMBIO DE DOCUMENTO-->
     <div class="modal fade" id="ModalCambioDoc" role="dialog" data-keyboard="false" data-backdrop="static">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg" style="border-radius: 25px;opacity:.9;">
 
             <!-- Modal content-->
             <div class="modal-content">
-                <div class="modal-header">
-                    <label style="margin-left: auto;"><Strong>SOLICITAR CAMBIO DE DOCUMENTO</Strong></label>
-                    <button type="button" class="close accionModal" data-dismiss="modal">&times;</button>
+                <div class="modal-header" style="background-color: steelblue;">
+                    <label style="margin-left: auto; color:white;"><Strong>SOLICITAR CAMBIO DE DOCUMENTO</Strong></label>
+                    <button type="button" class="close accionModal" data-dismiss="modal"><span class="flaticon-x-mark" style="position: relative;margin-left: -20px;color:white;"></span></button>
                     <button type="button" class="close cargandoModal">-</button>
                 </div>
                 <div id="form_cambio" class="modal-body">
-                    <label id="label_doc"></label>
-                    <div class="form-group">
-                        <label>Observación:</label>
+                    <div>
+                        <label><strong>Documento:</strong></label>
                         <br />
-                        <textarea id="text_cambio" placeholder="Escribe aquí de forma breve el motivo del cambio." style="width:100%" rows="3" maxlength="99" onkeyup="this.value = this.value.toUpperCase();"></textarea>
+                        <div style="padding-left:2em;padding-right:2em;">
+                            <label id="label_doc"></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label><strong>Observación:</strong></label>
+                        <br />
+                        <div style="padding-left:2em;padding-right:2em;">
+                            <textarea id="text_cambio" placeholder="Escribe aquí de forma breve y clara el motivo del cambio." style="width:100%" rows="3" maxlength="99" onkeyup="this.value = this.value.toUpperCase();"></textarea>
+                        </div>
                     </div>
                     <div class="form-group" align="center">
-                        <button id="enviar_cambio" type="button" class="btn btn-success accionModal">Enviar</button>
+                        <button id="enviar_cambio" type="button" class="btn btn-success accionModal"><span class="flaticon-paper-plane" style="position: relative;margin-left: -20px;"></span> ENVIAR</button>
                         <label class="cargandoModal"><strong>SOLICITANDO CAMBIOS ...</strong></label>
                     </div>
                 </div>
@@ -290,7 +299,7 @@ else
     });
 
     $(".form_cambio").click(function () {
-        $("#label_doc").html("<strong>" + $("#tipoDoc_" + $(this).attr('tipo')).text() + "</strong >");
+        $("#label_doc").html("<i>" + $("#tipoDoc_" + $(this).attr('tipo')).text() + "</i >");
         $("#enviar_cambio").attr("oid", $(this).attr("id"));
         $("#enviar_cambio").attr("tipo", $(this).attr("tipo"));
         $("#enviar_cambio").attr("version", $(this).attr("version"));
@@ -309,6 +318,7 @@ else
 
     $("#enviar_cambio").click(function (e) {
         $("#enviar_cambio").attr("disabled", true);
+        var docText = $("#label_doc i").text();
         var observ = $("#text_cambio").val();
         var idElem = $(this).attr("oid");
         var idDoc = "@ViewBag.solicitud.solicitudID";
@@ -316,7 +326,7 @@ else
         var version = $(this).attr("version");
         if (observ.length > 0) {
             console.log('#'+idDoc);
-            if (confirm("Esta a punto de solicitar una Cambio para este Documento, no podrá autorizar hasta que se haga el cambio.\n\n\n¿Desea continuar?")) {
+            if (confirm("Esta a punto de solicitar el CAMBIO del Documento: " + docText+", no podrá autorizar hasta que se haga dicho cambio.\n\n\n¿Desea continuar?")) {
                 var cambio = {
                     idDocumento: idDoc,
                     observacion: observ,
@@ -339,6 +349,9 @@ else
                             $('#ModalCambioDoc').modal('toggle');
                             $('.btn_ACB').remove();
                             $('#' + idElem).text("PENDIENTE");
+                            $("#_label").removeClass("badge-info");
+                            $("#_label").addClass("badge-warning");
+                            $("#_label").text("EN REVISIÓN");
                             //$('#' + idElem).addClass("btn-warning");
                             $('#' + idElem).css('font-weight', 'bold');
                             $('#' + idElem).attr('text', observ);
@@ -356,7 +369,7 @@ else
                 $("#enviar_cambio").attr("disabled", false);
             }
         } else {
-            alert("Es necesario escribir el motivo del cambio.\nMaximo en 100 caracteres.");
+            alert("Es necesario escribir el motivo del cambio, por favor se breve y claro.");
             $("#enviar_cambio").attr("disabled", false);
         }
     });

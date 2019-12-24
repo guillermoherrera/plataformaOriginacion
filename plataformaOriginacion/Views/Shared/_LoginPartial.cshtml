@@ -3,16 +3,16 @@
     @if (ViewBag.usuario == null)
         {
             <li class="nav-item">
-                <a class="nav-link text-dark" asp-controller="Home" asp-action="Index" ><strong><span style="color:white;">Iniciar Sesi&oacute;n</span></strong></a>
+                <a class="nav-link text-dark" asp-controller="Home" asp-action="Index" ><strong><span class="flaticon-login" style="position: relative;margin-left: -20px;color: lightgreen;"></span><span style="color:white;"> Iniciar Sesi&oacute;n</span></strong></a>
             </li>
         }
         else
         {
             <li class="nav-item">
-                <a class="nav-link text-dark"><strong>Usuario:</strong> <span style="color:#ffffff">@ViewBag.usuario</span></a>
+                <a class="nav-link text-dark"><span style="color:#ffffff" class="flaticon-male-telemarketer"> @ViewBag.usuario</span></a>
             </li> 
             <li class="nav-item">
-                <a class="nav-link text-dark" asp-controller="Home" asp-action="cerrarSesion"><strong>| <span style="color:white;">Cerrar Sesi&oacute;n</span> |</strong></a>
+                <a class="nav-link text-dark" asp-controller="Home" asp-action="cerrarSesion"><strong>| <span class="flaticon-logout-1" style="position: relative;margin-left: -20px;color: red;"></span> <span style="color:white;"> Cerrar Sesi&oacute;n</span> |</strong></a>
             </li>
         }
 </ul>

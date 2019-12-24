@@ -98,15 +98,19 @@ namespace plataformaOriginacion.Controllers
             }
             else
             {
-                List<Solicitud> solicitudes = new List<Solicitud>();
-                try{
-                    solicitudes = await FireStore.GetGrupoFromFireStore(_ID);
-                    if (solicitudes.Count > 0){
-                        ViewBag.solicitudes = solicitudes;
-                        ViewBag.importeTotal = solicitudes.Sum(item => item.importe);
+                GrupoDetalle grupoDetalle = new GrupoDetalle();
+                //List<Solicitud> solicitudes = new List<Solicitud>();
+                ViewBag.usuario = HttpContext.Session.GetString(SessionKeyNombre);
+                try
+                {
+                    grupoDetalle = await FireStore.GetGrupoFromFireStore(_ID);
+                    if (grupoDetalle.solicitudes.Count > 0){
+                        ViewBag.grupo = grupoDetalle.grupo;
+                        ViewBag.solicitudes = grupoDetalle.solicitudes;
+                        ViewBag.importeTotal = grupoDetalle.solicitudes.Sum(item => item.importe);
                         ViewBag.dictaminable = true;
-                        ViewBag.dictamen = solicitudes[0].dictamen;
-                        foreach (Solicitud solicitud in solicitudes)
+                        ViewBag.dictamen = grupoDetalle.solicitudes[0].dictamen;
+                        foreach (Solicitud solicitud in grupoDetalle.solicitudes)
                         {
                             if (solicitud.status != 2 && solicitud.status != 3){
                                 ViewBag.dictaminable = false;
@@ -121,6 +125,47 @@ namespace plataformaOriginacion.Controllers
                     Log.Information("*****Error Exception DetalleGrupo: {0}", ex.Message);
                 }
                 return View();
+            }
+        }
+
+        public async Task<IActionResult> Integrantes(String _ID) {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(SessionKeyNombre)))
+            {
+                return PartialView("_Mensaje");
+            }
+            else
+            {
+                GrupoDetalle grupoDetalle = new GrupoDetalle();
+                //List<Solicitud> solicitudes = new List<Solicitud>();
+                try
+                {
+                    grupoDetalle = await FireStore.GetGrupoFromFireStore(_ID);
+                    if (grupoDetalle.solicitudes.Count > 0)
+                    {
+                        ViewBag.grupo = grupoDetalle.grupo;
+                        ViewBag.solicitudes = grupoDetalle.solicitudes;
+                        ViewBag.importeTotal = grupoDetalle.solicitudes.Sum(item => item.importe);
+                        ViewBag.dictaminable = true;
+                        ViewBag.dictamen = grupoDetalle.solicitudes[0].dictamen;
+                        foreach (Solicitud solicitud in grupoDetalle.solicitudes)
+                        {
+                            if (solicitud.status != 2 && solicitud.status != 3)
+                            {
+                                ViewBag.dictaminable = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.error = "Grupo sin Integrantes X_X";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.error = ex.ToString();
+                    Log.Information("*****Error Exception DetalleGrupo: {0}", ex.Message);
+                }
+                return PartialView("_Integrantes");
             }
         }
 

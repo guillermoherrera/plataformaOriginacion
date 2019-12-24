@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = "DetalleGrupo";
 }
-
 @if (ViewBag.error == null){
     <div class="container" style="margin:1em;">
         <div class="col-md-12 row" style="background-color: #e5e5e5;padding:1em;border-radius: 25px;border-radius: 25px;opacity:.9;">
@@ -27,91 +26,32 @@
             <div class="col-md-1"></div>
             <div class="col-md-10">
                 <label><strong>INFORMACIÓN:</strong></label><br />
-                <table class="table table-striped table-sm">
-                    <thead>
-                        <tr>
-                            <th width="50%">Nombre de Grupo</th>
-                            <th width="30%" align="center">No. de Integrantes</th>
-                            <th width="20%">Importe Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><span class="badge badge-dark" style="font-size:1.2em;">@ViewBag.solicitudes[0].grupoNombre</span></td>
-                            <td align="center"><span class="badge badge-dark" style="font-size:1.2em;">@ViewBag.solicitudes.Count</span></td>
-                            <td align="center"><span class="badge badge-dark" style="font-size:1.2em;">@string.Format("{0:#,0.00}", ViewBag.importeTotal)</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <label><strong>INTEGRANTES:</strong></label>
-                <table class="table table-striped table-sm">
-                    <thead>
-                        <tr>
-                            <th width="15%">Status</th>
-                            <th width="50%">Nombre</th>
-                            <th width="15%">Importe</th>
-                            <th width="10%">Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (Solicitud solicitud in ViewBag.solicitudes)
-                        {
+                <div style="overflow:auto;">
+                    <table class="table table-striped table-sm">
+                        <thead>
                             <tr>
-                                <td>
-                                    @switch (solicitud.status)
-                                    {
-                                        case 2:
-                                            <span class='badge badge-success'>APROBADO</span>
-                                            break;
-                                        case 3:
-                                            <span class='badge badge-danger'>DENEGADO</span>
-                                            break;
-                                        case 6:
-                                            <span class='badge badge-warning'>REVISIÓN</span>
-                                            break;
-                                        case 7:
-                                            <span class='badge badge-secondary'>EN ESPERA DE C. DE BURO</span>
-                                            break;
-                                        case 8:
-                                            <span class='badge badge-secondary'>EN PROCESO DE C. DE BURO</span>
-                                            break;
-                                        case 9:
-                                            <span class='badge badge-primary'>POR DICTAMINAR</span>
-                                            break;
-                                        case 10:
-                                            <span class='badge badge-danger'>ERROR EN C. DE BURO</span>
-                                            break;
-                                        default:
-                                            <span class='badge badge-info'>POR AUTORIZAR C. DE BURÓ</span>
-                                            break;
-                                    }
-                                </td>
-                                <td>@(solicitud.persona.nombre + " " + solicitud.persona.nombreSegundo + " " + solicitud.persona.apellido + " " + solicitud.persona.apellidoSegundo)</td>
-                                <td align="right">@string.Format("{0:#,0.00}", solicitud.importe)</td>
-                                <td><center><a href='/Bandeja/Detalle/?_ID=@solicitud.solicitudID' target='_blank'>VER</a></center></td>
+                                <th width="50%">Nombre de Grupo</th>
+                                <th width="30%" align="center">No. de Integrantes</th>
+                                <th width="20%">Importe Total</th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
-                <br />
-                @if (ViewBag.dictaminable == true && ViewBag.dictamen == null)
-                {
-                <center id="botonera">
-
-                    <a href="/Bandeja/grupoDictamen/?_ID=@ViewBag.solicitudes[0].grupoID&aut=1" class="btn btn-success btn_APRGPO">APROBAR GRUPO</a>
-
-                    <a href="/Bandeja/grupoDictamen/?_ID=@ViewBag.solicitudes[0].grupoID&aut=0" class="btn btn-danger btn_DENGPO">DENEGAR GRUPO</a>
-
-                </center>
-                }
-                else if(ViewBag.dictamen != null)
-                {
-                    <label>*Grupo Dictaminado</label>
-                }
-                else
-                {
-                    <label>*Es necesario aprobar o denegar a cada intengrate para dictaminar el grupo</label>
-                }
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="badge badge-dark" style="font-size:1.2em;">@ViewBag.grupo.nombre</span></td>
+                                <td align="center"><span class="badge badge-dark" style="font-size:1.2em;">@ViewBag.grupo.integrantes</span></td>
+                                <td align="center"><span class="badge badge-dark" style="font-size:1.2em;">@string.Format("{0:#,0.00}", ViewBag.grupo.importe)</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <label><strong>INTEGRANTES:</strong></label>
+                <div id="div_grid" style="overflow:auto;">
+                    <partial name="_Integrantes" />
+                </div>
+                <div align="right">
+                    <span id="time" style="font-size: .7em;">10:00</span>
+                    <a href="#" onClick="return false;" id="btn_recargar" data-toggle="tooltip" title="RECARGAR DATOS"><span class="flaticon-update-arrow" style="position: relative;margin-left: -20px;"></span></a>
+                </div>
             </div>
             <div class="col-md-1"></div>
         </div>
@@ -139,4 +79,33 @@ else
         console.log(res);
         return res;
     })
+</script>
+
+<script>
+    $(document).ready(function () {
+        var timer = 60 * 10, minutes, seconds;
+        var display = document.querySelector('#time');
+        var rotate = function () {
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                timer = 60 * 10;
+                $("#div_grid").html("<label><strong>CARGANDO ...</strong></label>");
+                $("#div_grid").load('/Bandeja/Integrantes?_ID=@ViewBag.solicitudes[0].grupoID');
+            }
+        };
+        intervalID = setInterval(rotate, 1000);
+
+        $("#btn_recargar").click(function (e) {
+            e.preventDefault();
+            $("#div_grid").html("<label><strong>CARGANDO ...</strong></label>");
+            $("#div_grid").load('/Bandeja/Integrantes?_ID=@ViewBag.solicitudes[0].grupoID');
+        });
+    });
 </script>

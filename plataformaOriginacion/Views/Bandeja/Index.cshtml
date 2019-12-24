@@ -16,9 +16,9 @@
         </div>
         <div style="padding:1em;" align="right">
             <div>
-                Los datos de la bandeja se actualizarán en <span id="time">05:00</span> minutos (<a href="#" onClick="return false;" id="btn_restart">Detener</a>).
-                Para actualizar los datos manualmente da clic
-                <a href="#" onClick="return false;" id="btn_cargar">aquí</a>.
+                Los datos de la bandeja se actualizarán en <span id="time">10:00</span> minutos <a href="#" onClick="return false;" id="btn_restart" text="DETENER" data-toggle="tooltip" title="PAUSAR / REANUDAR"><span id="ctr_timer" class="flaticon-pause-symbol" style="position: relative;margin-left: -20px;"></span></a> .
+                Para actualizar los datos manualmente da clic aquí
+                <a href="#" onClick="return false;" id="btn_cargar" data-toggle="tooltip" title="RECARGAR DATOS"><span class="flaticon-update-arrow" style="position: relative;margin-left: -20px;"></span></a>.
             </div>
         </div>
     </div>
@@ -122,9 +122,10 @@ else
     function dataGrid_change_cellTemplate5(element, info) {
         var data = info.data;
 
-        var label = data.tipoContrato == 1 ? "INDIVIDUAL" : data.tipoContrato == 2 ? "GRUPAL" : "Sin Especificar";
+        //var label = data.tipoContrato == 1 ? "INDIVIDUAL" : data.tipoContrato == 2 ? "GRUPAL" : "Sin Especificar";
+        var label = data.tipoContrato == 1 ? "<span class='flaticon-man-user' style='position: relative; margin-left: -20px;color: black;'><i> INDIVIDUAL</i></span>" : data.tipoContrato == 2 ? "<span class='flaticon-users-group' style='position: relative; margin-left: -20px;color: black;'><i> GRUPAL</i></span>" : "<span class='flaticon-pause-symbol' style='position: relative; margin-left: -20px;color: green;'><i> Sin especificar</i></span>";
 
-        element.html("<span><i>" + label + "</i></span>");
+        element.html(label);
     }
     function dataGrid_change_cellTemplate6(element, info) {
         var data = info.data;
@@ -141,7 +142,7 @@ else
 
 <script>
     $(document).ready(function () {
-        var timer = 60 * 5, minutes, seconds;
+        var timer = 60 * 10, minutes, seconds;
         var display = document.querySelector('#time');
         var rotate = function () {
             minutes = parseInt(timer / 60, 10)
@@ -153,7 +154,7 @@ else
             display.textContent = minutes + ":" + seconds;
 
             if (--timer < 0) {
-                timer = 60 * 5;
+                timer = 60 * 10;
                 $("#div_grid").load('/Bandeja/PartialViews');
             }
         };
@@ -164,13 +165,18 @@ else
         });
 
         $("#btn_restart").click(function () {
-            console.log($(this).text())
-            if ($(this).text() == "Detener") {
+            console.log($(this).attr('text'));
+            var accion = $(this).attr('text');
+            if (accion == 'DETENER') {
                 clearInterval(intervalID);
-                $(this).text("Iniciar")
+                $(this).attr('text', 'INICIAR');
+                $("#ctr_timer").removeClass("flaticon-pause-symbol");
+                $("#ctr_timer").addClass("flaticon-play-button");
             } else {
                 intervalID = setInterval(rotate, 1000);
-                $(this).text("Detener")
+                $(this).attr('text', 'DETENER');
+                $("#ctr_timer").addClass("flaticon-pause-symbol");
+                $("#ctr_timer").removeClass("flaticon-play-button");
             }
         });
     });

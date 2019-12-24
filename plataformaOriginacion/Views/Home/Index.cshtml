@@ -11,23 +11,25 @@
                 <div class="col-md-12">
                     <div class="card text-center" style="padding:1em;background-color:white;border-radius: 25px;opacity: .9;">
                         <div class="card-body">
-                            <div class="card-header"><h4>Iniciar Sesi&oacute;n @ViewBag.name</h4></div>
+                            <div class="card-header"><h4>INICIAR SESI&Oacute;N @ViewBag.name</h4></div>
                             <section>
                                 <form asp-controller="Home" asp-action="Login" method="post" id="form_login">
                                     <div asp-validation-summary="All" class="text-danger"></div>
                                     <div class="input-field col s12">
+                                        <span class="flaticon-male-telemarketer" style="position: relative;margin-left: -20px;color: steelblue;"></span>
                                         <label asp-for="input.User">Usuario:</label>
-                                        <input asp-for="input.User" class="form-control" autofocus/>
+                                        <input asp-for="input.User" class="form-control" autofocus />
                                         <span asp-validation-for="input.User" class="text-danger"></span>
                                     </div>
                                     <div class="input-field col s12">
+                                        <span class="flaticon-lock" style="position: relative;margin-left: -20px;color: steelblue;"></span>
                                         <label asp-for="input.Password">Password:</label>
                                         <input asp-for="input.Password" class="form-control" />
                                         <span asp-validation-for="input.Password" class="text-danger"></span>
                                     </div>
                                     <center>
                                         <br />
-                                        <button type="submit" id="btnLogin" class="btn btn-primary">Iniciar Sesi&oacute;n</button>
+                                        <button type="submit" id="btnLogin" class="btn btn-primary"><span class="flaticon-login" style="position: relative;margin-left: -20px;color: white;"></span> INICIAR SESI&Oacute;N</button>
                                     </center>
                                 </form>
                             </section>
