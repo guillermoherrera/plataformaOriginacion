@@ -47,6 +47,7 @@ namespace plataformaOriginacion.Models
                 {
                     if (solicitud.grupoID == null)//INDIVIDUAL
                     {
+                        solicitud.grupoNombre = solicitud.persona.nombre + " " + solicitud.persona.nombreSegundo + " " + solicitud.persona.apellido + " " + solicitud.persona.apellidoSegundo;
                         solicitudes.Add(solicitud);
                     }
                     else//GRUPAL
@@ -175,6 +176,69 @@ namespace plataformaOriginacion.Models
                 Log.Information("*****Error Exception GetCatDocumentosFromFirestore: {0}", ex.Message);
             }
             return catDocumentos;
+        }
+
+        public static async Task<bool> ActualizaIdentificacion(ActualizaInformacion actualizaInformacion) {
+            bool result = false;
+            try
+            {
+                FirestoreDb db = conexionDB();
+                DocumentReference solicitud = db.Collection("Solicitudes").Document(actualizaInformacion.idDocumento);
+                await db.RunTransactionAsync(async transaction => {
+                    DocumentSnapshot snapshot = await transaction.GetSnapshotAsync(solicitud);
+                    Dictionary<string, object> updates = new Dictionary<string, object>();
+                    Dictionary<string, object> datos = new Dictionary<string, object> {
+                        {"nombre", actualizaInformacion.pNombre },
+                        {"nombreSegundo", actualizaInformacion.sNombre },
+                        {"apellido", actualizaInformacion.pApellido },
+                        {"apellidoSegundo", actualizaInformacion.sApellido },
+                        {"curp", actualizaInformacion.curp },
+                        {"rfc", actualizaInformacion.rfc },
+                        {"fechaNacimiento", DateTime.SpecifyKind(actualizaInformacion.fNacimiento, DateTimeKind.Utc) },
+                        {"telefono", actualizaInformacion.telefono }
+                    };
+                    updates.Add("persona", datos);
+                    transaction.Update(solicitud, updates);
+                });
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                Log.Information("*****Error Exception ActualizaIdentificacion: {0}", ex.Message);
+                result = false;
+            }
+            return result;
+        }
+
+        public static async Task<bool> ActualizaUbicacion(ActualizaUbicacion actualizaUbicacion) {
+            bool result = false;
+            try
+            {
+                FirestoreDb db = conexionDB();
+                DocumentReference solicitud = db.Collection("Solicitudes").Document(actualizaUbicacion.idDocumento);
+                await db.RunTransactionAsync(async transaction =>{
+                    DocumentSnapshot snapshot = await transaction.GetSnapshotAsync(solicitud);
+                    Dictionary<string, object> updates = new Dictionary<string, object>();
+                    Dictionary<string, object> datos = new Dictionary<string, object>{
+                        {"direccion1", actualizaUbicacion.calle},
+                        {"coloniaPoblacion", actualizaUbicacion.colonia},
+                        {"delegacionMunicipio", actualizaUbicacion.municipio},
+                        {"ciudad", actualizaUbicacion.ciudad},
+                        {"estado", actualizaUbicacion.estado},
+                        {"cp", int.Parse(actualizaUbicacion.cp)},
+                        {"pais", actualizaUbicacion.pais}
+                    };
+                    updates.Add("direccion", datos);
+                    transaction.Update(solicitud, updates);
+                });
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                Log.Information("*****Error Exception ActualizaUbicacion: {0}", ex.Message);
+                result = false;
+            }
+            return result;
         }
 
         public static async Task<bool> CambioEstado(string _ID, int status, string grupo) {

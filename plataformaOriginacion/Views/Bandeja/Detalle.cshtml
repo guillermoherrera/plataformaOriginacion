@@ -17,6 +17,10 @@
 {
     <div style="background-color: indianred;color: white; padding:1em;border-radius: 25px;" align="center"><strong>ATENCIÓN: Se han solicitado cambios a uno o más documentos de esta solicitud, es necesario esperar a que se realicen  dichos cambios por parte del asesor para poder continuar con el proceso de dictamen.</strong></div>
 }
+else if (ViewBag.solicitud.status == 10)
+{
+    <div style="background-color: indianred;color: white; padding:1em;border-radius: 25px;" align="center"><strong>ATENCIÓN: A ocurrido un error al realizar la consulta de buró, por favor revisa detalladamente toda la información de esta solicitud para identificar que pudo podrucir dicho error y actualiza.</strong></div>
+}
 @if (ViewBag.error == null)
 {
     <div class="container" style="margin:1em;">
@@ -66,21 +70,21 @@
                     <tbody>
                         <tr>
                             <td><span class="flaticon-man-user" style="position: relative;margin-left: -20px;color: lightgray;"></span><strong> NOMBRE:</strong></td>
-                            <td>
+                            <td id="tdNombre">
                                 @(ViewBag.solicitud.persona.nombre + " " + ViewBag.solicitud.persona.nombreSegundo + " " + ViewBag.solicitud.persona.apellido + " " + ViewBag.solicitud.persona.apellidoSegundo)
                             </td>
                         </tr>
                         <tr>
                             <td><span class="flaticon-name-1" style="position: relative;margin-left: -20px;color: lightgray;"></span><strong> CURP:</strong></td>
-                            <td>@ViewBag.solicitud.persona.curp</td>
+                            <td id="tdCurp">@ViewBag.solicitud.persona.curp</td>
                         </tr>
                         <tr>
                             <td><span class="flaticon-id-card" style="position: relative;margin-left: -20px;color: lightgray;"></span><strong> RFC:</strong></td>
-                            <td>@ViewBag.solicitud.persona.rfc</td>
+                            <td id="tdRfc">@ViewBag.solicitud.persona.rfc</td>
                         </tr>
                     </tbody>
                 </table>
-                <br />
+                <!--<br />
                 <table class="table table-sm">
                     <col width="40%">
                     <col width="60%">
@@ -100,7 +104,7 @@
                             <td>@ViewBag.solicitud.direccion.estado</td>
                         </tr>
                     </tbody>
-                </table>
+                </table>-->
             </div>
             <div class="col-md-6">
                 <table class="table table-sm">
@@ -110,17 +114,23 @@
                         <tr>
                             <td><span class="flaticon-calendar" style="position: relative;margin-left: -20px;color: lightgray;"></span> <strong>FECHA DE<br>&nbsp&nbsp&nbsp&nbsp&nbspNACIMIENTO:</strong></td>
                             <td>
-                                @ViewBag.solicitud.persona.fechaNacimiento.ToString("dd/MM/yyyy")<br>
+                                <text id="tdFechaNac">@ViewBag.solicitud.persona.fechaNacimiento.ToString("dd/MM/yyyy")</text><br>
                                 <label style="font-size: .75em;color:grey;">dia / mes / año</label>
+                            </td>
+                            <td>
+                                @if (@ViewBag.solicitud.status == 1 || @ViewBag.solicitud.status == 10)
+                                {
+                                    <a href="#"><span class="flaticon-pencil-edit-button" style="position: relative;margin-left: -20px;" id="btn_editar1" onClick="return false;" data-toggle="modal" data-target="#ModalEditar1"></span></a>
+                                }
                             </td>
                         </tr>
                         <tr>
                             <td><span class="flaticon-call-answer" style="position: relative;margin-left: -20px;color: lightgray;"></span> <strong>TELEFONO:</strong></td>
-                            <td>@ViewBag.solicitud.persona.telefono</td>
+                            <td id="tdTelefono">@ViewBag.solicitud.persona.telefono</td>
                         </tr>
                     </tbody>
                 </table>
-                <br />
+                <!--<br />
                 <table class="table table-sm">
                     <col width="40%">
                     <col width="60%">
@@ -129,6 +139,9 @@
                             <td><span class="flaticon-village" style="position: relative;margin-left: -20px;color: lightgray;"></span> <strong>COLONIA/<br>&nbsp&nbsp&nbsp&nbsp&nbspPOBLACION:</strong></td>
                             <td>
                                 @ViewBag.solicitud.direccion.coloniaPoblacion
+                            </td>
+                            <td>
+                                <a href="#"><span class="flaticon-pencil-edit-button" style="position: relative;margin-left: -20px;" id="btn_editar2" onClick="return false;" data-toggle="modal" data-target="#ModalEditar2"></span></a>
                             </td>
                         </tr>
                         <tr>
@@ -142,6 +155,60 @@
                         <tr>
                             <td><span class="flaticon-flag" style="position: relative;margin-left: -20px;color: lightgray;"></span> <strong>PAIS:</strong></td>
                             <td>@ViewBag.solicitud.direccion.pais</td>
+                        </tr>
+                    </tbody>
+                </table>-->
+            </div>
+            <div class="col-md-6">
+                <table class="table table-sm">
+                    <col width="40%">
+                    <col width="60%">
+                    <tbody>
+                        <tr>
+                            <td><span class="flaticon-address" style="position: relative;margin-left: -20px;color: lightgray;"></span> <strong>DIRECCIÓN (CALLE Y<br>&nbsp&nbsp&nbsp&nbsp&nbspNUMERO):</strong></td>
+                            <td id="tdCalle">
+                                @ViewBag.solicitud.direccion.direccion1
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="flaticon-hotel" style="position: relative;margin-left: -20px;color: lightgray;"></span> <strong>DELEGACIÓN/<br>&nbsp&nbsp&nbsp&nbsp&nbspMUNICIPIO:</strong></td>
+                            <td id="tdMunicipio">@ViewBag.solicitud.direccion.delegacionMunicipio</td>
+                        </tr>
+                        <tr>
+                            <td><span class="flaticon-museum" style="position: relative;margin-left: -20px;color: lightgray;"></span> <strong>ESTADO:</strong></td>
+                            <td id="tdEstado">@ViewBag.estado</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <table class="table table-sm">
+                    <col width="40%">
+                    <col width="60%">
+                    <tbody>
+                        <tr>
+                            <td><span class="flaticon-village" style="position: relative;margin-left: -20px;color: lightgray;"></span> <strong>COLONIA/<br>&nbsp&nbsp&nbsp&nbsp&nbspPOBLACION:</strong></td>
+                            <td id="tdColonia">
+                                @ViewBag.solicitud.direccion.coloniaPoblacion
+                            </td>
+                            <td>
+                                @if (@ViewBag.solicitud.status == 1 || @ViewBag.solicitud.status == 10)
+                                {
+                                    <a href="#"><span class="flaticon-pencil-edit-button" style="position: relative;margin-left: -20px;" id="btn_editar2" onClick="return false;" data-toggle="modal" data-target="#ModalEditar2"></span></a>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="flaticon-city" style="position: relative;margin-left: -20px;color: lightgray;"></span> <strong>CIUDAD:</strong></td>
+                            <td id="tdCiudad">@ViewBag.solicitud.direccion.ciudad</td>
+                        </tr>
+                        <tr>
+                            <td><span class="flaticon-mailbox" style="position: relative;margin-left: -20px;color: lightgray;"></span> <strong>C.P.:</strong></td>
+                            <td id="tdCP">@ViewBag.solicitud.direccion.cp</td>
+                        </tr>
+                        <tr>
+                            <td><span class="flaticon-flag" style="position: relative;margin-left: -20px;color: lightgray;"></span> <strong>PAIS:</strong></td>
+                            <td id="tdPais">@ViewBag.solicitud.direccion.pais</td>
                         </tr>
                     </tbody>
                 </table>
@@ -204,16 +271,16 @@
                 <label class="badge badge-success" style="font-size:1em"><strong>@string.Format("{0:#,0.00}", ViewBag.solicitud.importe)</strong></label>
                 <div class="" style="margin-top: 6em;">
                     <center id="botonera">
-                        @if (@ViewBag.solicitud.status == 1)
+                        @if (@ViewBag.solicitud.status == 1 || @ViewBag.solicitud.status == 10)
                         {
 
-                            <a href="/Bandeja/cambioEstado/?_ID=@ViewBag.solicitud.solicitudID&status=7" class="btn btn-info btn_ACB">AUTORIZAR CONSULTA DE BURÓ</a>
+                            <a href="/Bandeja/cambioEstado/?_ID=@ViewBag.solicitud.solicitudID&status=7" class="btn btn-info btn_ACB"><span class="flaticon-thumbs-up" style="position: relative;margin-left: -20px;"></span> AUTORIZAR CONSULTA DE BURÓ</a>
 
                         }
                         else if (@ViewBag.solicitud.status == 9)
                         {
-                            <a href="/Bandeja/cambioEstado/?_ID=@ViewBag.solicitud.solicitudID&status=2&grupo=@ViewBag.solicitud.grupoID" class="btn btn-success btn_APR">APROBAR</a>
-                            <a href="/Bandeja/cambioEstado/?_ID=@ViewBag.solicitud.solicitudID&status=3&grupo=@ViewBag.solicitud.grupoID" class="btn btn-danger btn_DEN">DENEGAR</a>
+                            <a href="/Bandeja/cambioEstado/?_ID=@ViewBag.solicitud.solicitudID&status=2&grupo=@ViewBag.solicitud.grupoID" class="btn btn-success btn_APR"><span class="flaticon-correct-symbol" style="position: relative;margin-left: -20px;"></span> APROBAR</a>
+                            <a href="/Bandeja/cambioEstado/?_ID=@ViewBag.solicitud.solicitudID&status=3&grupo=@ViewBag.solicitud.grupoID" class="btn btn-danger btn_DEN"><span class="flaticon-x-mark" style="position: relative;margin-left: -20px;"></span> DENEGAR</a>
                         }
                     </center>
                 </div>
@@ -221,7 +288,7 @@
         </div>
     </div>
 
-    <!-- Modal2 CAMBIO DE DOCUMENTO-->
+    <!-- Modal CAMBIO DE DOCUMENTO-->
     <div class="modal fade" id="ModalCambioDoc" role="dialog" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-lg" style="border-radius: 25px;opacity:.9;">
 
@@ -244,16 +311,246 @@
                         <label><strong>Observación:</strong></label>
                         <br />
                         <div style="padding-left:2em;padding-right:2em;">
-                            <textarea id="text_cambio" placeholder="Escribe aquí de forma breve y clara el motivo del cambio." style="width:100%" rows="3" maxlength="99" onkeyup="this.value = this.value.toUpperCase();"></textarea>
+                            <textarea id="text_cambio" placeholder="Escribe aquí de forma breve y clara el motivo del cambio." style="width:100%;text-transform:uppercase" rows="3" maxlength="99"></textarea>
                         </div>
                     </div>
                     <div class="form-group" align="center">
                         <button id="enviar_cambio" type="button" class="btn btn-success accionModal"><span class="flaticon-paper-plane" style="position: relative;margin-left: -20px;"></span> ENVIAR</button>
-                        <label class="cargandoModal"><strong>SOLICITANDO CAMBIOS ...</strong></label>
+                        <label class="cargandoModal"><strong>SOLICITANDO CAMBIOS, POR FAVOR ESPERE ...</strong></label>
                     </div>
                 </div>
-                <!--<div class="modal-footer">
-                </div>-->
+                <div class="modal-footer" style="background-color: steelblue;">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal EDITAR IDENTIFICACION-->
+    <div class="modal fade" id="ModalEditar1" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-lg" style="border-radius: 25px;opacity:.9;">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: steelblue;">
+                    <label style="margin-left: auto; color:white;"><Strong>EDITAR INFORMACIÓN DE IDENTIFICACIÓN</Strong></label>
+                    <button type="button" class="close accionModal" data-dismiss="modal"><span class="flaticon-x-mark" style="position: relative;margin-left: -20px;color:white;"></span></button>
+                    <button type="button" class="close cargandoModal">-</button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12 row">
+                        <div class="col-md-6">
+                            <label><span style="color: red;">*</span><strong>Primer Nombre:</strong></label>
+                            <br />
+                            <div style="padding-left:2em;padding-right:2em;">
+                                <input id="formPrimerNombre" type="text" class="form-control" maxlength="50" value="@ViewBag.solicitud.persona.nombre" style="text-transform:uppercase" />
+                                <div align="right">
+                                    <i id="countPNombre" align="right" style="font-size: .7em;margin-bottom: 0px">@ViewBag.solicitud.persona.nombre.Length/50</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label><strong>Segundo Nombre:</strong></label>
+                            <br />
+                            <div style="padding-left:2em;padding-right:2em;">
+                                <input id="formSegundoNombre" type="text" class="form-control" maxlength="50" value="@ViewBag.solicitud.persona.nombreSegundo" style="text-transform:uppercase" />
+                                <div align="right">
+                                    <i id="countSNombre" align="right" style="font-size: .7em;margin-bottom: 0px">@ViewBag.solicitud.persona.nombreSegundo.Length/50</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label><span style="color: red;">*</span><strong>Primer Apellido:</strong></label>
+                            <br />
+                            <div style="padding-left:2em;padding-right:2em;">
+                                <input id="formPrimerApellido" type="text" class="form-control" maxlength="50" value="@ViewBag.solicitud.persona.apellido" style="text-transform:uppercase" />
+                                <div align="right">
+                                    <i id="countPApellido" align="right" style="font-size: .7em;margin-bottom: 0px">@ViewBag.solicitud.persona.apellido.Length/50</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label><strong>Segundo Apellido:</strong></label>
+                            <br />
+                            <div style="padding-left:2em;padding-right:2em;">
+                                <input id="formSegundoApellido" type="text" class="form-control" maxlength="50" value="@ViewBag.solicitud.persona.apellidoSegundo" style="text-transform:uppercase" />
+                                <div align="right">
+                                    <i id="countSApellido" align="right" style="font-size: .7em;margin-bottom: 0px">@ViewBag.solicitud.persona.apellidoSegundo.Length/50</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label><span style="color: red;">*</span><strong>Curp:</strong></label>
+                            <br />
+                            <div style="padding-left:2em;padding-right:2em;">
+                                <input id="formCurp" type="text" class="form-control" maxlength="18" value="@ViewBag.solicitud.persona.curp" style="text-transform:uppercase" />
+                                <div align="right">
+                                    <i id="countCurp" align="right" style="font-size: .7em;margin-bottom: 0px">@ViewBag.solicitud.persona.curp.Length/18</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label><span style="color: red;">*</span><strong>RFC:</strong></label>
+                            <br />
+                            <div style="padding-left:2em;padding-right:2em;">
+                                <input id="formRfc" type="text" class="form-control" maxlength="13" value="@ViewBag.solicitud.persona.rfc" style="text-transform:uppercase" />
+                                <div align="right">
+                                    <i id="countRfc" align="right" style="font-size: .7em;margin-bottom: 0px">(puede omitirse la homoclave)@ViewBag.solicitud.persona.rfc.Length/13</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label><span style="color: red;">*</span><strong>Fecha de Nacimiento:</strong></label>
+                            <br />
+                            <div style="padding-left:2em;padding-right:2em;">
+                                <input id="formFechaNac" type="date" class="form-control" value="@ViewBag.solicitud.persona.fechaNacimiento.ToString("yyyy-MM-dd")" />
+                                <div align="left">
+                                    <i style="font-size: .7em;margin-bottom: 0px;margin-left:1em;">día / mes / año</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label><span style="color: red;">*</span><strong>Teléfono:</strong></label>
+                            <br />
+                            <div style="padding-left:2em;padding-right:2em;">
+                                <input id="formTelefono" type="text" class="form-control" maxlength="10" onkeypress='validate(event)' value="@ViewBag.solicitud.persona.telefono" />
+                                <div align="right">
+                                    <i id="countTelefono" align="right" style="font-size: .7em;margin-bottom: 0px">@ViewBag.solicitud.persona.telefono.Length/10</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <center>
+                                <div style="padding-left:2em;padding-right:2em;">
+                                    <br />
+                                    <button id="formActualiza1" type="button" class="btn btn-success accionModal"><span class="flaticon-pencil-edit-button" style="position: relative;margin-left: -20px;"></span> ACTUALIZAR</button>
+                                    <label class="cargandoModal"><strong>ACTUALIZANDO INFORMACIÓN DE IDENTIFICACIÓN, POR FAVOR ESPERE ...</strong></label>
+                                </div>
+                            </center>
+                            <div align="right">
+                                <span style="color: red;">*</span><label style="font-size: .7em">Campos Obligatorios</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="background-color: steelblue;">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal EDITAR UBICACIÓN-->
+    <div class="modal fade" id="ModalEditar2" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-lg" style="border-radius: 25px;opacity:.9;">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: steelblue;">
+                    <label style="margin-left: auto; color:white;"><Strong>EDITAR INFORMACIÓN DE UBICACIÓN</Strong></label>
+                    <button type="button" class="close accionModal" data-dismiss="modal"><span class="flaticon-x-mark" style="position: relative;margin-left: -20px;color:white;"></span></button>
+                    <button type="button" class="close cargandoModal">-</button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12 row">
+                        <div class="col-md-12">
+                            <label><span style="color: red;">*</span><strong>Calle y Numero:</strong></label>
+                            <br />
+                            <div style="padding-left:2em;padding-right:2em;">
+                                <input id="formCalle" type="text" class="form-control" maxlength="40" value="@ViewBag.solicitud.direccion.direccion1" style="text-transform:uppercase" />
+                                <div align="right">
+                                    <i id="countCalle" align="right" style="font-size: .7em;margin-bottom: 0px">@ViewBag.solicitud.direccion.direccion1.Length/40</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label><span style="color: red;">*</span><strong>Colonia/Población:</strong></label>
+                            <br />
+                            <div style="padding-left:2em;padding-right:2em;">
+                                <input id="formColonia" type="text" class="form-control" maxlength="40" value="@ViewBag.solicitud.direccion.coloniaPoblacion" style="text-transform:uppercase" />
+                                <div align="right">
+                                    <i id="countColonia" align="right" style="font-size: .7em;margin-bottom: 0px">@ViewBag.solicitud.direccion.coloniaPoblacion.Length/40</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label><span style="color: yellow;">*</span><strong>Delegación/Municipio:</strong></label>
+                            <br />
+                            <div style="padding-left:2em;padding-right:2em;">
+                                <input id="formMunicipio" type="text" class="form-control" maxlength="40" value="@ViewBag.solicitud.direccion.delegacionMunicipio" style="text-transform:uppercase" />
+                                <div align="right">
+                                    <i id="countMunicipio" align="right" style="font-size: .7em;margin-bottom: 0px">@ViewBag.solicitud.direccion.delegacionMunicipio.Length/40</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label><span style="color: yellow;">*</span><strong>Ciudad:</strong></label>
+                            <br />
+                            <div style="padding-left:2em;padding-right:2em;">
+                                <input id="formCiudad" type="text" class="form-control" maxlength="40" style="text-transform:uppercase" value="@ViewBag.solicitud.direccion.ciudad" style="text-transform:uppercase" />
+                                <div align="right">
+                                    <i id="countCiudad" align="right" style="font-size: .7em;margin-bottom: 0px">@(ViewBag.solicitud.direccion.ciudad == null ? 0 : ViewBag.solicitud.direccion.ciudad.Length)/40</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label><span style="color: red;">*</span><strong>Estado:</strong></label>
+                            <br />
+                            <div style="padding-left:2em;padding-right:2em;">
+                                <!--<input type="text" class="form-control" maxlength="40" value="@ViewBag.estado" />-->
+                                <select id="formEstado" class="form-control">
+                                    @foreach (var dist in (IEnumerable<CatEstado>)ViewBag.catEstados)
+                                    {
+                                        @if (dist.clave == @ViewBag.solicitud.direccion.estado)
+                                        {
+                                            <option value="@dist.clave" selected> @dist.estado </option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@dist.clave"> @dist.estado </option>
+                                        }
+
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label><span style="color: red;">*</span><strong>Código Postal:</strong></label>
+                            <br />
+                            <div style="padding-left:2em;padding-right:2em;">
+                                <input id="formCP" type="text" class="form-control" maxlength="5" onkeypress='validate(event)' value="@ViewBag.solicitud.direccion.cp" />
+                                <div align="right">
+                                    <i id="countCP" align="right" style="font-size: .7em;margin-bottom: 0px">@ViewBag.solicitud.direccion.cp.ToString().Length/5</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label><span style="color: red;">*</span><strong>País:</strong></label>
+                            <br />
+                            <div style="padding-left:2em;padding-right:2em;">
+                                <input id="formPais" type="text" class="form-control" maxlength="2" value="@ViewBag.solicitud.direccion.pais" disabled />
+                                <div align="right">
+                                    <i id="countPais" align="right" style="font-size: .7em;margin-bottom: 0px">@ViewBag.solicitud.direccion.pais.Length/2</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <center>
+                                <div style="padding-left:2em;padding-right:2em;">
+                                    <br />
+                                    <button id="formActualiza2" type="button" class="btn btn-success accionModal"><span class="flaticon-pencil-edit-button" style="position: relative;margin-left: -20px;"></span> ACTUALIZAR</button>
+                                    <label class="cargandoModal"><strong>ACTUALIZANDO INFORMACIÓN DE UBICACIÓN, POR FAVOR ESPERE ...</strong></label>
+                                </div>
+                            </center>
+                            <div align="right">
+                                <span style="color: red;">*</span><label style="font-size: .7em;margin-bottom: 0px;">Campos Obligatorios</label><br />
+                                <span style="color: yellow;">*</span><label style="font-size: .7em">Campo Obligatorio solo si el otro No es capturado</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="background-color: steelblue;">
+                </div>
             </div>
 
         </div>
@@ -272,9 +569,9 @@ else
     });
 
     $(".btn_ACB").click(function (e) {
-        var res = confirm("Antes de AUTORIZAR LA CONSULTA DE BURÓ confirme que ha validado todos datos y documentos de esta solicitud.\n\n\nPara Confirmar de clic en 'ACEPTAR'");
+        var res = confirm("Antes de AUTORIZAR LA CONSULTA DE BURÓ confirme que ha validado todos los datos y documentos de esta solicitud.\n\n\nPara Confirmar de clic en 'ACEPTAR'");
         if (res) {
-            $("#botonera").html("<strong>CARGANDO ...</strong>");
+            $("#botonera").html("<strong>AUTORIZANDO CONSULTA DE BURÓ, POR FAVOR ESPERE ...</strong>");
         }
         console.log(res);
         return res;
@@ -283,7 +580,7 @@ else
     $(".btn_DEN").click(function (e) {
         var res = confirm("Esta a punto de DENEGAR la solicitud.\n\n\nPara Confirmar de clic en 'ACEPTAR'");
         if (res) {
-            $("#botonera").html("<strong>CARGANDO ...</strong>");
+            $("#botonera").html("<strong>DENEGANDO SOLICITUD, POR FAVOR ESPERE ...</strong>");
         }
         console.log(res);
         return res;
@@ -292,7 +589,7 @@ else
     $(".btn_APR").click(function (e) {
         var res = confirm("Esta a punto de APROBAR la solicitud.\n\n\nPara Confirmar de clic en 'ACEPTAR'");
         if (res) {
-            $("#botonera").html("<strong>CARGANDO ...</strong>");
+            $("#botonera").html("<strong>APROBANDO SOLICITUD, POR FAVOR ESPERE ...</strong>");
         }
         console.log(res);
         return res;
@@ -316,6 +613,264 @@ else
         }
     });
 
+    $("#btn_editar1").click(function () {
+        $(".accionModal").show();
+        $(".cargandoModal").hide();
+    });
+
+    $("#btn_editar2").click(function () {
+        $(".accionModal").show();
+        $(".cargandoModal").hide();
+    });
+
+    $("#formCP").on("change paste keyup", function () {
+        if ($(this).val().length < 5) {
+            $("#countCP").css("color", "red");
+        } else {
+            $("#countCP").css("color", "black");
+        }
+        $("#countCP").html($(this).val().length + "/5");
+    });
+
+    $("#formCalle").on("change paste keyup", function () {
+        if ($(this).val().length == 0) {
+            $("#countCalle").css("color", "red");
+        } else {
+            $("#countCalle").css("color", "black");
+        }
+        $("#countCalle").html($(this).val().length + "/40");
+    });
+
+    $("#formColonia").on("change paste keyup", function () {
+        if ($(this).val().length == 0) {
+            $("#countColonia").css("color", "red");
+        } else {
+            $("#countColonia").css("color", "black");
+        }
+        $("#countColonia").html($(this).val().length + "/40");
+    });
+
+    $("#formMunicipio").on("change paste keyup", function () {
+        if ($(this).val().length == 0 && $("#formCiudad").val().length == 0) {
+            $("#countMunicipio").css("color", "red");
+            $("#countCiudad").css("color", "red");
+        } else {
+            $("#countCiudad").css("color", "black");
+            $("#countMunicipio").css("color", "black");
+        }
+        $("#countMunicipio").html($(this).val().length + "/40");
+    });
+
+    $("#formCiudad").on("change paste keyup", function () {
+        if ($(this).val().length == 0 && $("#formMunicipio").val().length == 0) {
+            $("#countCiudad").css("color", "red");
+            $("#countMunicipio").css("color", "red");
+        } else {
+            $("#countCiudad").css("color", "black");
+            $("#countMunicipio").css("color", "black");
+        }
+        $("#countCiudad").html($(this).val().length + "/40");
+    });
+
+    $("#formActualiza2").click(function (e) {
+        $("#formActualiza2").attr("disabled", true);
+        var calle = $("#formCalle").val();
+        var colonia = $("#formColonia").val();
+        var municipio = $("#formMunicipio").val();
+        var ciudad = $("#formCiudad").val();
+        var estado = $("#formEstado").val();
+        var estadoText = $("#formEstado option:selected").text();
+        var cp = $("#formCP").val();
+        var pais = $("#formPais").val();
+        var idDoc = "@ViewBag.solicitud.solicitudID";
+
+        var valCiuMun = ciudad.length == 0 && municipio.length == 0 ? 0 : 1;
+        var valCP = cp.length == 5 ? 1 : 0;
+
+        if ((calle.length * colonia.length * valCiuMun * estado.length * cp.length * pais.length * valCP) > 0) {
+            if (confirm("Esta a punto de actualizar la Información de Ubicación de esta solicitud.\n\n\n¿Desea continuar?")) {
+
+                $(".accionModal").hide();
+                $(".cargandoModal").show();
+                var actUbi = {
+                    idDocumento: idDoc,
+                    calle: calle.toUpperCase(),
+                    colonia: colonia.toUpperCase(),
+                    municipio: municipio.toUpperCase(),
+                    ciudad: ciudad.toUpperCase(),
+                    estado: estado.toUpperCase(),
+                    cp: cp.toUpperCase(),
+                    pais: pais.toUpperCase()
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Bandeja/ActualizaUbicacion",
+                    content: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: actUbi,
+                    beforeSend: function (xhr) {
+                    },
+                    success: function (d) {
+                        if (d.Success) {
+                            $('#ModalEditar2').modal('toggle');
+                            $("#tdCalle").html(calle.toUpperCase());
+                            $("#tdColonia").html(colonia.toUpperCase());
+                            $("#tdMunicipio").html(municipio.toUpperCase());
+                            $("#tdCiudad").html(ciudad.toUpperCase());
+                            $("#tdEstado").html(estadoText.toUpperCase());
+                            $("#tdCP").html(cp);
+                            $("#tdPais").html(pais.toUpperCase());
+                        } else {
+                            alert("Error!!");
+                        }
+                        $("#formActualiza2").attr("disabled", false);
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        alert('Error!!');
+                        $("#formActualiza2").attr("disabled", false);
+                    }
+                });
+            } else {
+                $("#formActualiza2").attr("disabled", false);
+            }
+        } else {
+            alert("ATENCIÓN: No se han llenado los campos obligatorios o no se llenaron correctamente.\n\nPor favor revisa el formulario y completa la información.");
+            $("#formActualiza2").attr("disabled", false);
+        }
+    });
+
+    $("#formPrimerNombre").on("change paste keyup", function () {
+        if ($(this).val().length == 0) {
+            $("#countPNombre").css("color", "red");
+        } else {
+            $("#countPNombre").css("color", "black");
+        }
+        $("#countPNombre").html($(this).val().length + "/50");
+    });
+
+    $("#formSegundoNombre").on("change paste keyup", function () {
+        if ($(this).val().length == 0) {
+            $("#countSNombre").css("color", "red");
+        } else {
+            $("#countSNombre").css("color", "black");
+        }
+        $("#countSNombre").html($(this).val().length + "/50");
+    });
+
+    $("#formPrimerApellido").on("change paste keyup", function () {
+        if ($(this).val().length == 0) {
+            $("#countPApellido").css("color", "red");
+        } else {
+            $("#countPApellido").css("color", "black");
+        }
+        $("#countPApellido").html($(this).val().length + "/50");
+    });
+
+    $("#formSegundoApellido").on("change paste keyup", function () {
+        if ($(this).val().length == 0) {
+            $("#countSApellido").css("color", "red");
+        } else {
+            $("#countSApellido").css("color", "black");
+        }
+        $("#countSApellido").html($(this).val().length + "/50");
+    });
+
+    $("#formCurp").on("change paste keyup", function () {
+        if ($(this).val().length < 18) {
+            $("#countCurp").css("color", "red");
+        } else {
+            $("#countCurp").css("color", "black");
+        }
+        $("#countCurp").html($(this).val().length + "/18");
+    });
+
+    $("#formTelefono").on("change paste keyup", function () {
+        if ($(this).val().length < 10) {
+            $("#countTelefono").css("color", "red");
+        } else {
+            $("#countTelefono").css("color", "black");
+        }
+        $("#countTelefono").html($(this).val().length + "/10");
+    });
+
+    $("#formRfc").on("change paste keyup", function () {
+        if ($(this).val().length < 10) {
+            $("#countRfc").css("color", "red");
+        } else {
+            $("#countRfc").css("color", "black");
+        }
+        $("#countRfc").html("(puede omitirse la homoclave)"+$(this).val().length + "/13");
+    });
+
+    $("#formActualiza1").click(function (e) {
+        $("#formActualiza1").attr("disabled", true);
+        var pNombre = $("#formPrimerNombre").val();
+        var sNombre = $("#formSegundoNombre").val();
+        var pApellido = $("#formPrimerApellido").val();
+        var sApellido = $("#formSegundoApellido").val();
+        var curp = $("#formCurp").val();
+        var rfc = $("#formRfc").val();
+        var fNacimiento = $("#formFechaNac").val();
+        var telefono = $("#formTelefono").val();
+        var idDoc = "@ViewBag.solicitud.solicitudID";
+
+        var valCurp = curp.length == 18 ? 1 : 0;
+        var valRfc = rfc.length < 10 ? 0 : 1;
+        var valTel = telefono.length == 10 ? 1 : 0;
+
+        if ((pNombre.length * pApellido.length * curp.length * rfc.length * fNacimiento.length * telefono.length * valCurp * valRfc * valTel) > 0) {
+            if(confirm("Esta a punto de actualizar la Información de Identidficación de esta solicitud.\n\n\n¿Desea continuar?")) {
+
+                $(".accionModal").hide();
+                $(".cargandoModal").show();
+                var actInfo = {
+                    idDocumento: idDoc,
+                    pNombre: pNombre.toUpperCase(),
+                    sNombre: sNombre.toUpperCase(),
+                    pApellido: pApellido.toUpperCase(),
+                    sApellido: sApellido.toUpperCase(),
+                    curp: curp.toUpperCase(),
+                    rfc: rfc.toUpperCase(),
+                    fNacimiento: fNacimiento,
+                    telefono: telefono,
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Bandeja/ActualizaInformacion",
+                    content: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: actInfo,
+                    beforeSend: function (xhr) {
+                    },
+                    success: function (d) {
+                        if (d.Success) {
+                            $('#ModalEditar1').modal('toggle');
+                            $("#tdNombre").html(pNombre.toUpperCase() + " " + sNombre.toUpperCase() + " " + pApellido.toUpperCase() + " " + sApellido.toUpperCase())
+                            $("#tdCurp").html(curp.toUpperCase());
+                            $("#tdRfc").html(rfc.toUpperCase());
+                            $("#tdFechaNac").html(fNacimiento.substring(8, 10) + "/" + fNacimiento.substring(5, 7) + "/" + fNacimiento.substring(0, 4));
+                            $("#tdTelefono").html(telefono);
+                        } else {
+                            alert("Error!!");
+                        }
+                        $("#formActualiza1").attr("disabled", false);
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        alert('Error!!');
+                        $("#formActualiza1").attr("disabled", false);
+                    }
+                });
+            } else {
+                $("#formActualiza1").attr("disabled", false);
+            }
+        } else {
+            alert("ATENCIÓN: No se han llenado los campos obligatorios o no se llenaron correctamente.\n\nPor favor revisa el formulario y completa la información.");
+            $("#formActualiza1").attr("disabled", false);
+        }
+    });
+
     $("#enviar_cambio").click(function (e) {
         $("#enviar_cambio").attr("disabled", true);
         var docText = $("#label_doc i").text();
@@ -329,7 +884,7 @@ else
             if (confirm("Esta a punto de solicitar el CAMBIO del Documento: " + docText+", no podrá autorizar hasta que se haga dicho cambio.\n\n\n¿Desea continuar?")) {
                 var cambio = {
                     idDocumento: idDoc,
-                    observacion: observ,
+                    observacion: observ.toUpperCase(),
                     tipo: tipo,
                     version: version
                 };
@@ -373,4 +928,22 @@ else
             $("#enviar_cambio").attr("disabled", false);
         }
     });
+
+    function validate(evt) {
+        var theEvent = evt || window.event;
+
+        // Handle paste
+        if (theEvent.type === 'paste') {
+            key = event.clipboardData.getData('text/plain');
+        } else {
+            // Handle key press
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key);
+        }
+        var regex = /[0-9]|\./;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
 </script>

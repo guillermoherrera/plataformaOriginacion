@@ -63,6 +63,8 @@ namespace plataformaOriginacion.Controllers
             {
                 Solicitud solicitud = new Solicitud();
                 List<catDocumento> catDocumentos = new List<catDocumento>();
+                List<CatEstado> catEstados = new List<CatEstado>();
+                catEstados = CatEstado.fillEstados();
                 ViewBag.usuario = HttpContext.Session.GetString(SessionKeyNombre);
                 try{
                     solicitud = await FireStore.GetSolicitudFromFireStore(_ID);
@@ -75,6 +77,8 @@ namespace plataformaOriginacion.Controllers
                     if (solicitud.solicitudID != null){
                         ViewBag.solicitud = solicitud;
                         ViewBag.catDocumentos = catDocumentos;
+                        ViewBag.catEstados = catEstados;
+                        ViewBag.estado = catEstados.Find(x => x.clave == solicitud.direccion.estado).estado;
                         //mensaje notice
                         ViewBag.result = result;
                         ViewBag.mensaje = mensaje;
@@ -237,6 +241,31 @@ namespace plataformaOriginacion.Controllers
                 return Json(new { Success = false });
             }
 
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> ActualizaInformacion(ActualizaInformacion actualizaInformacion)
+        {
+            if (await FireStore.ActualizaIdentificacion(actualizaInformacion))
+            {
+                return Json(new { Success = true });
+            }
+            else {
+                return Json(new { Success = false });
+            }
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> ActualizaUbicacion(ActualizaUbicacion actualizaUbicacion)
+        {
+            if (await FireStore.ActualizaUbicacion(actualizaUbicacion))
+            {
+                return Json(new { Success = true });
+            }
+            else
+            {
+                return Json(new { Success = false });
+            }
         }
 
         /* GET: Bandeja/Details/5

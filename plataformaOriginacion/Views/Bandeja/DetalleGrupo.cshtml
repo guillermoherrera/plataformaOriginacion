@@ -66,7 +66,7 @@ else
     $(".btn_DENGPO").click(function (e) {
         var res = confirm("Esta a punto de DENEGAR el grupo.\n\n\nPara Confirmar de clic en 'ACEPTAR'");
         if (res) {
-            $("#botonera").html("<strong>CARGANDO ...</strong>");
+            $("#botonera").html("<strong>DENEGANDO GRUPO, POR FAVOR ESPERE ...</strong>");
         }
         console.log(res);
         return res;
@@ -74,7 +74,7 @@ else
     $(".btn_APRGPO").click(function (e) {
         var res = confirm("Esta a punto de APROBAR el grupo.\n\n\nPara Confirmar de clic en 'ACEPTAR'");
         if (res) {
-            $("#botonera").html("<strong>CARGANDO ...</strong>");
+            $("#botonera").html("<strong>APROBANDO GRUPO, POR FAVOR ESPERE ...</strong>");
         }
         console.log(res);
         return res;
@@ -96,7 +96,7 @@ else
 
             if (--timer < 0) {
                 timer = 60 * 10;
-                $("#div_grid").html("<label><strong>CARGANDO ...</strong></label>");
+                $("#div_grid").html("<label><strong>CARGANDO INTEGRANTES Y SU INFORMACIÓN, POR FAVOR ESPERE ...</strong></label>");
                 $("#div_grid").load('/Bandeja/Integrantes?_ID=@ViewBag.solicitudes[0].grupoID');
             }
         };
@@ -104,7 +104,7 @@ else
 
         $("#btn_recargar").click(function (e) {
             e.preventDefault();
-            $("#div_grid").html("<label><strong>CARGANDO ...</strong></label>");
+            $("#div_grid").html("<label><strong>CARGANDO INTEGRANTES Y SU INFORMACIÓN, POR FAVOR ESPERE ...</strong></label>");
             $("#div_grid").load('/Bandeja/Integrantes?_ID=@ViewBag.solicitudes[0].grupoID');
         });
     });
