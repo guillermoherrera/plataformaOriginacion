@@ -42,11 +42,11 @@ else
         switch (data.status) {
             case 2:
                 clase = 'success';
-                label = 'APROBADO';
+                label = 'DICTAMINADO';
                 break;
             case 3:
                 clase = 'danger';
-                label = 'DENEGADO';
+                label = 'RECHAZADO';
                 break;
             case 6:
                 clase = 'warning';
@@ -78,7 +78,7 @@ else
                 break;
             case 100:
                 clase = 'danger';
-                label = 'GRUPO DENEGADO';
+                label = 'GRUPO RECHAZADO';
                 break;
             case 101:
                 clase = 'success';
@@ -99,7 +99,7 @@ else
     function dataGrid_change_cellTemplate3(element, info) {
         var data = info.data;
 
-        var clase = data.status == "APROBADO" ? 'success' : data.status == "DENEGADO" ? 'danger' : data.status == "REVISION" || data.status == "REVISIÓN" ? 'warning' : 'primary';
+        var clase = data.status == "DICTAMINADO" ? 'success' : data.status == "RECHAZADO" ? 'danger' : data.status == "REVISION" || data.status == "REVISIÓN" ? 'warning' : 'primary';
 
         var options = { weekday: 'short', year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
         var fecha = new Date(data.fechaCaputra).toLocaleDateString("es-MX", options);

@@ -71,7 +71,7 @@ namespace plataformaOriginacion.Controllers
                     catDocumentos = await FireStore.GetCatDocumentosFromFirestore();
                     if (solicitud.documentos.Find(x => x.solicitudCambio == true) != null && solicitud.status != 6)
                     {
-                        await FireStore.CambioEstado(_ID, 6, null);
+                        await FireStore.CambioEstado(_ID, 6, null, 0, null);
                         return RedirectToAction("Detalle", new { _ID = _ID });
                     }
                     if (solicitud.solicitudID != null){
@@ -88,7 +88,7 @@ namespace plataformaOriginacion.Controllers
                     }
                 }
                 catch (Exception ex) {
-                    ViewBag.error = ex.ToString();
+                    ViewBag.error = "Error al obtener datos\n"+ex.ToString();
                     Log.Information("*****Error Exception Detalle: {0}", ex.Message);
                 }
                 return View();
@@ -188,7 +188,7 @@ namespace plataformaOriginacion.Controllers
         }
 
         public async Task<IActionResult> cambioEstado(String _ID, int status, String grupo) {
-            bool result = await FireStore.CambioEstado(_ID, status, grupo);
+            bool result = await FireStore.CambioEstado(_ID, status, grupo, 0, null);
             String mensaje;
             mensaje = result ? "" : "NO ";
             switch (status) {
@@ -196,10 +196,10 @@ namespace plataformaOriginacion.Controllers
                     mensaje += "SE HA AUTORIZADO LA CONSULTA DE BURÓ PARA ESTA SOLICITUD.";
                     break;
                 case 3:
-                    mensaje += "SE HA DENEGADO LA SOLICITUD.";
+                    mensaje += "SE HA RECHAZADO LA SOLICITUD.";
                     break;
                 case 2:
-                    mensaje += "SE HA APROBADO LA SOLICITUD.";
+                    mensaje += "SE HA DICTAMINADO LA SOLICITUD.";
                     break;
                 default:
                     mensaje += "SE REALIZO ALGUNA ACCIÓN.";
@@ -209,23 +209,60 @@ namespace plataformaOriginacion.Controllers
         }
 
         public async Task<IActionResult> grupoDictamen(string _ID, int aut) {
-            bool result = await FireStore.DictamenGrupo(_ID, aut);
-            String mensaje;
-            mensaje = result ? "" : "NO ";
-            switch (aut)
+            if (aut != 1)
             {
-                case 0:
-                    mensaje += "SE HA DENEGADO EL GRUPO.";
-                    break;
-                case 1:
-                    mensaje += "SE HA AUTORIZADO EL GRUPO.";
-                    break;
-                default:
-                    mensaje += "SE REALIZO ALGUNA ACCIÓN.";
-                    break;
+                //BAD REQUEST
+                return RedirectToAction("DetalleGrupo", new { _ID = _ID });
             }
-            Log.Information("*****INFORMATION grupoDictamen: {0}", mensaje);
-            return RedirectToAction("DetalleGrupo", new {_ID = _ID});
+            else
+            {
+                bool result = await FireStore.DictamenGrupo(_ID, aut, null);
+                String mensaje;
+                mensaje = result ? "" : "NO ";
+                switch (aut)
+                {
+                    case 0:
+                        mensaje += "SE HA DENEGADO EL GRUPO.";
+                        break;
+                    case 1:
+                        mensaje += "SE HA AUTORIZADO EL GRUPO.";
+                        break;
+                    default:
+                        mensaje += "SE REALIZO ALGUNA ACCIÓN.";
+                        break;
+                }
+                Log.Information("*****INFORMATION grupoDictamen: {0}", mensaje);
+                return RedirectToAction("DetalleGrupo", new { _ID = _ID });
+            }
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> RechazarGrupo(Dictamen dictamen){
+            bool result = await FireStore.DictamenGrupo(dictamen.grupoID, 0, dictamen.motivoRechazo);
+            if (result)
+            {
+                return Json(new { Success = true });
+            }
+            else
+            {
+                return Json(new { Success = false });
+            }
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> Dictaminar(Dictamen dictamen)
+        {
+            string resultado = "";
+            bool result = await FireStore.CambioEstado(dictamen.idDocumento, int.Parse(dictamen.status), dictamen.grupoID, double.Parse(dictamen.monto), dictamen.motivoRechazo);
+            if (result)
+            {
+                return Json(new { Success = true });
+            }
+            else
+            {
+                return Json(new { Success = false });
+            }
+            
         }
 
         [HttpPost]

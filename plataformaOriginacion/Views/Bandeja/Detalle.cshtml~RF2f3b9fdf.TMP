@@ -281,17 +281,12 @@
                         else if (@ViewBag.solicitud.status == 9)
                         {
                             <!--<a href="/Bandeja/cambioEstado/?_ID=@ViewBag.solicitud.solicitudID&status=2&grupo=@ViewBag.solicitud.grupoID" class="btn btn-success btn_APR"><span class="flaticon-correct-symbol" style="position: relative;margin-left: -20px;"></span> DICTAMINAR</a>-->
-                            <a href="#" id="montoDictamen" class="form_cambio btn btn-success" onClick="return false;" data-toggle="modal" data-target="#ModalDictamen" style="margin-top:1em;"><span class="flaticon-correct-symbol" style="position: relative;margin-left: -20px;"></span> DICTAMINAR</a>
-                            <!--<a href="/Bandeja/cambioEstado/?_ID=@ViewBag.solicitud.solicitudID&status=3&grupo=@ViewBag.solicitud.grupoID" class="btn btn-danger btn_DEN" style="margin-top:1em;"><span class="flaticon-x-mark" style="position: relative;margin-left: -20px;"></span> RECHAZAR</a>-->
-                            <a href="#" id="razonRechazo" class="form_cambio btn btn-danger" onClick="return false;" data-toggle="modal" data-target="#ModalRechazo" style="margin-top:1em;"><span class="flaticon-x-mark" style="position: relative;margin-left: -20px;"></span> RECHAZAR</a>
+                            <a href="#" id="montoDictamen" class="form_cambio btn btn-success" onClick="return false;" data-toggle="modal" data-target="#ModalDictamen"><span class="flaticon-correct-symbol" style="position: relative;margin-left: -20px;"></span> DICTAMINAR</a>
+                            <a href="/Bandeja/cambioEstado/?_ID=@ViewBag.solicitud.solicitudID&status=3&grupo=@ViewBag.solicitud.grupoID" class="btn btn-danger btn_DEN"><span class="flaticon-x-mark" style="position: relative;margin-left: -20px;"></span> RECHAZAR</a>
                         }
                         else if (@ViewBag.solicitud.status == 2)
                         {
-                            <label class="badge badge-success" style="font-size:1.1em"><span class="flaticon-correct-symbol" style="position: relative;margin-left: -20px;"></span> DICTAMINADO</label>
-                        }
-                        else if (ViewBag.solicitud.status == 3)
-                        {
-                            <label class="badge badge-danger" style="font-size:1.1em"><span class="flaticon-x-mark" style="position: relative;margin-left: -20px;"></span> RECHAZADO</label>
+                            <label class="badge badge-success" style="font-size:1.5em"><span class="flaticon-correct-symbol" style="position: relative;margin-left: -20px;"></span></label>
                         }
                     </center>
                     <center id="mensajeBotonera"></center>
@@ -302,7 +297,7 @@
 
     <!-- Modal DICTAMEN-->
     <div class="modal fade" id="ModalDictamen" role="dialog" data-keyboard="false" data-backdrop="static">
-        <div class="modal-dialog " style="border-radius: 25px;opacity:.9;">
+        <div class="modal-dialog modal-lg" style="border-radius: 25px;opacity:.9;">
 
             <!-- Modal content-->
             <div class="modal-content">
@@ -313,46 +308,15 @@
                 </div>
                 <div id="form_dictamen" class="modal-body">
                     <div class="form-group">
-                        <label><strong>Importe Dictaminado:</strong></label>
+                        <label><strong>Monto Dictaminado:</strong></label>
                         <br />
-                        <div style="padding-left:3em;padding-right:3em;">
-                            <input id="text_monto" type="text" class="form-control" maxlength="10" onkeypress='validate(event)' value="@ViewBag.solicitud.importe" style="text-align:center;" />
+                        <div style="padding-left:2em;padding-right:2em;">
+                            <input id="text_monto" type="text" class="form-control" maxlength="10" onkeypress='validate(event)' value="@ViewBag.solicitud.importe" style="text-align:center;"/>
                         </div>
                     </div>
                     <div class="form-group" align="center">
                         <button id="enviar_dictamen" type="button" class="btn btn-success accionModal"><span class="flaticon-correct-symbol" style="position: relative;margin-left: -20px;"></span> CONFIRMAR</button>
                         <label class="cargandoModal"><strong>DICTAMINANDO, POR FAVOR ESPERE ...</strong></label>
-                    </div>
-                </div>
-                <div class="modal-footer" style="background-color: steelblue;">
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Modal RECHAZO-->
-    <div class="modal fade" id="ModalRechazo" role="dialog" data-keyboard="false" data-backdrop="static">
-        <div class="modal-dialog modal-lg" style="border-radius: 25px;opacity:.9;">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header" style="background-color: steelblue;">
-                    <label style="margin-left: auto; color:white;"><Strong>RECHAZAR SOLICITUD</Strong></label>
-                    <button type="button" class="close accionModal" data-dismiss="modal"><span class="flaticon-x-mark" style="position: relative;margin-left: -20px;color:white;"></span></button>
-                    <button type="button" class="close cargandoModal">-</button>
-                </div>
-                <div id="form_dictamen" class="modal-body">
-                    <div class="form-group">
-                        <label><strong>Motivo:</strong></label>
-                        <br />
-                        <div style="padding-left:2em;padding-right:2em;">
-                            <textarea id="text_rechazo" placeholder="Escribe aquí de forma breve y clara el motivo del rechazo." style="width:100%;text-transform:uppercase" rows="3" maxlength="99"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group" align="center">
-                        <button id="enviar_rechazo" type="button" class="btn btn-success accionModal"><span class="flaticon-x-mark" style="position: relative;margin-left: -20px;"></span> RECHAZAR</button>
-                        <label class="cargandoModal"><strong>RECHAZANDO, POR FAVOR ESPERE ...</strong></label>
                     </div>
                 </div>
                 <div class="modal-footer" style="background-color: steelblue;">
@@ -940,11 +904,7 @@
             $("#formActualiza1").attr("disabled", false);
         }
     });
-
-    $('#ModalDictamen').on('shown.bs.modal', function (e) {
-        $("#text_monto").focus();
-    })
-
+  
     $("#enviar_dictamen").click(function (e){
         $("#enviar_dictamen").attr("disabled", true);
         var idDoc = "@ViewBag.solicitud.solicitudID";
@@ -954,7 +914,7 @@
         console.log(importe);
         console.log(monto);
         if (Number.isNaN(monto) || monto <= 0 || monto % 500 > 0 || monto > importe || typeof monto == "undefined") {
-            alert("El importe dictaminado debe ser:\n\n- mayor a 0 (cero)\n- menor o igual al monto inicial solicitado ($" + importe + " MXN)\n- multiplo de 500 (ej. 500, 1000, 1500, ..., etc.)");
+            alert("El importe debe ser:\n\n- mayor a 0 (cero)\n- menor al monto inicial solicitado ($" + importe + " MXN)\n- multiplo de 500 (ej. 500, 1000, 1500 ...)");
             $("#enviar_dictamen").attr("disabled", false);
         } else {
             if (confirm("Esta a punto de dictaminar esta solicitud con el importe de $"+monto+" MXN.\n\n\n¿Desea continuar?")) {
@@ -1004,65 +964,6 @@
             }
         }
     });
-
-    $("#enviar_rechazo").click(function (e){
-        $("#enviar_rechazo").attr("disabled", true);
-        var idDoc = "@ViewBag.solicitud.solicitudID";
-        var motivo = $("#text_rechazo").val();
-        var idGrupo = "@ViewBag.solicitud.grupoID";
-        var importe = @ViewBag.solicitud.importe;
-        if (motivo.length <= 0 || typeof motivo == "undefined") {
-            alert("Es necesario escribir el motivo del rechazo, por favor se breve y claro");
-            $("#enviar_rechazo").attr("disabled", false);
-        } else {
-            if (confirm("Esta a punto de rechazar esta solicitud.\n\n\n¿Desea continuar?")) {
-                var dictamen = {
-                    idDocumento: idDoc,
-                    monto: importe,
-                    motivoRechazo: motivo.toUpperCase(),
-                    status: 3,
-                    grupoID: idGrupo
-                };
-
-                $.ajax({
-                    type: "POST",
-                    url: "/Bandeja/Dictaminar",
-                    content: "application/json; charset=utf-8",
-                    dataType: "json",
-                    data: dictamen,
-                    beforeSend: function (xhr) {
-                        $("#botonera").hide();
-                        $(".accionModal").hide();
-                        $(".cargandoModal").show();
-                    },
-                    success: function (d) {
-                        if (d.Success) {
-                            $("#mensajeBotonera").html("RECHAZANDO SOLICITUD, POR FAVOR ESPERE ...")
-                            $('#ModalRechazo').modal('toggle');
-                            location.reload();
-                        } else {
-                            alert("Error en respuesta.");
-                            $("#botonera").show();
-                        }
-                        $("#enviar_rechazo").attr("disabled", false);
-                        $(".accionModal").show();
-                        $(".cargandoModal").hide();
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                        alert('Error al realizar la acción!!');
-                        $("#botonera").show();
-                        $("#enviar_rechazo").attr("disabled", false);
-                        $(".accionModal").show();
-                        $(".cargandoModal").hide();
-                    }
-                });
-
-            } else {
-                $("#enviar_rechazo").attr("disabled", false);
-            }
-        }
-    });
-
 
     $("#enviar_cambio").click(function (e) {
         $("#enviar_cambio").attr("disabled", true);

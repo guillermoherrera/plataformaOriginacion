@@ -2,7 +2,8 @@
 @{
     ViewData["Title"] = "DetalleGrupo";
 }
-@if (ViewBag.error == null){
+@if (ViewBag.error == null)
+{
     <div class="container" style="margin:1em;">
         <div class="col-md-12 row" style="background-color: #e5e5e5;padding:1em;border-radius: 25px;border-radius: 25px;opacity:.9;">
             <div class="col-md-5 col-md-offset-5"></div>
@@ -11,11 +12,11 @@
             {
                 @if (ViewBag.dictamen == true)
                 {
-                    <label class="badge badge-success" style="height: 21px;">APROBADO</label>
+                    <label class="badge badge-success" style="height: 21px;">GRUPO APROBADO</label>
                 }
                 else
                 {
-                    <label class="badge badge-danger" style="height: 21px;">DENEGADO</label>
+                    <label class="badge badge-danger" style="height: 21px;">GRUPO RECHAZADO</label>
                 }
             }
             <!---->
@@ -26,25 +27,7 @@
             <div class="col-md-1"></div>
             <div class="col-md-10">
                 <label><strong>INFORMACIÓN:</strong></label><br />
-                <div style="overflow:auto;">
-                    <table class="table table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <th width="50%">Nombre de Grupo</th>
-                                <th width="30%" align="center">No. de Integrantes</th>
-                                <th width="20%">Importe Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><span class="badge badge-dark" style="font-size:1.2em;">@ViewBag.grupo.nombre</span></td>
-                                <td align="center"><span class="badge badge-dark" style="font-size:1.2em;">@ViewBag.grupo.integrantes</span></td>
-                                <td align="center"><span class="badge badge-dark" style="font-size:1.2em;">@string.Format("{0:#,0.00}", ViewBag.grupo.importe)</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <label><strong>INTEGRANTES:</strong></label>
+
                 <div id="div_grid" style="overflow:auto;">
                     <partial name="_Integrantes" />
                 </div>
@@ -62,24 +45,36 @@ else
     <div style="background-color: lightcoral;color:white; padding:1em;" align="center"><strong>Error: @ViewBag.error</strong></div>
 }
 
-<script>
-    $(".btn_DENGPO").click(function (e) {
-        var res = confirm("Esta a punto de DENEGAR el grupo.\n\n\nPara Confirmar de clic en 'ACEPTAR'");
-        if (res) {
-            $("#botonera").html("<strong>DENEGANDO GRUPO, POR FAVOR ESPERE ...</strong>");
-        }
-        console.log(res);
-        return res;
-    });
-    $(".btn_APRGPO").click(function (e) {
-        var res = confirm("Esta a punto de APROBAR el grupo.\n\n\nPara Confirmar de clic en 'ACEPTAR'");
-        if (res) {
-            $("#botonera").html("<strong>APROBANDO GRUPO, POR FAVOR ESPERE ...</strong>");
-        }
-        console.log(res);
-        return res;
-    })
-</script>
+<!-- Modal RECHAZO-->
+<div class="modal fade" id="ModalRechazoGpo" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg" style="border-radius: 25px;opacity:.9;">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: steelblue;">
+                <label style="margin-left: auto; color:white;"><Strong>RECHAZAR SOLICITUD</Strong></label>
+                <button type="button" class="close accionModal" data-dismiss="modal"><span class="flaticon-x-mark" style="position: relative;margin-left: -20px;color:white;"></span></button>
+                <button type="button" class="close cargandoModal">-</button>
+            </div>
+            <div id="form_dictamen" class="modal-body">
+                <div class="form-group">
+                    <label><strong>Motivo:</strong></label>
+                    <br />
+                    <div style="padding-left:2em;padding-right:2em;">
+                        <textarea id="text_rechazo" placeholder="Escribe aquí de forma breve y clara el motivo del rechazo." style="width:100%;text-transform:uppercase" rows="3" maxlength="99"></textarea>
+                    </div>
+                </div>
+                <div class="form-group" align="center">
+                    <button id="enviar_rechazo" type="button" class="btn btn-success accionModal"><span class="flaticon-x-mark" style="position: relative;margin-left: -20px;"></span> RECHAZAR GRUPO</button>
+                    <label class="cargandoModal"><strong>RECHAZANDO, POR FAVOR ESPERE ...</strong></label>
+                </div>
+            </div>
+            <div class="modal-footer" style="background-color: steelblue;">
+            </div>
+        </div>
+
+    </div>
+</div>
 
 <script>
     $(document).ready(function () {
@@ -104,8 +99,66 @@ else
 
         $("#btn_recargar").click(function (e) {
             e.preventDefault();
-            $("#div_grid").html("<label><strong>CARGANDO INTEGRANTES Y SU INFORMACIÓN, POR FAVOR ESPERE ...</strong></label>");
+            $("#div_grid").html("<label><strong>CARGANDO LA INFORMACIÓN DEL GRUPO Y DE SUS INTEGRANTES, POR FAVOR ESPERE ...</strong></label>");
             $("#div_grid").load('/Bandeja/Integrantes?_ID=@ViewBag.solicitudes[0].grupoID');
         });
+    });
+
+    $("#enviar_rechazo").click(function (e){
+        $("#enviar_rechazo").attr("disabled", true);
+        var idDoc = null;
+        var motivo = $("#text_rechazo").val();
+        var idGrupo = "@ViewBag.solicitudes[0].grupoID";
+        var importe = 0;
+        if (motivo.length <= 0 || typeof motivo == "undefined") {
+            alert("Es necesario escribir el motivo del rechazo, por favor se breve y claro");
+            $("#enviar_rechazo").attr("disabled", false);
+        } else {
+            if (confirm("Esta a punto de rechazar este grupo.\n\n\n¿Desea continuar?")) {
+                var dictamen = {
+                    idDocumento: idDoc,
+                    monto: importe,
+                    motivoRechazo: motivo.toUpperCase(),
+                    status: 3,
+                    grupoID: idGrupo
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Bandeja/RechazarGrupo",
+                    content: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: dictamen,
+                    beforeSend: function (xhr) {
+                        $("#botonera").hide();
+                        $(".accionModal").hide();
+                        $(".cargandoModal").show();
+                    },
+                    success: function (d) {
+                        if (d.Success) {
+                            $("#botonera").html("<strong>RECHAZANDO GRUPO, POR FAVOR ESPERE ...</strong>");
+                            $('#ModalRechazoGpo').modal('toggle');
+                            location.reload();
+                        } else {
+                            alert("Error en respuesta.");
+                            $("#botonera").show();
+                        }
+                        $("#enviar_rechazo").attr("disabled", false);
+                        $(".accionModal").show();
+                        $(".cargandoModal").hide();
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        alert('Error al realizar la acción!!');
+                        $("#botonera").show();
+                        $("#enviar_rechazo").attr("disabled", false);
+                        $(".accionModal").show();
+                        $(".cargandoModal").hide();
+                    }
+                });
+
+            } else {
+                $("#enviar_rechazo").attr("disabled", false);
+            }
+        }
     });
 </script>

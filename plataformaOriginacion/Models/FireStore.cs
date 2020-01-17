@@ -241,14 +241,18 @@ namespace plataformaOriginacion.Models
             return result;
         }
 
-        public static async Task<bool> CambioEstado(string _ID, int status, string grupo) {
+        public static async Task<bool> CambioEstado(string _ID, int status, string grupo, double monto, string motivoRechazo) {
             bool result = false;
             try
             {
+                if (!(status == 7 || status == 2 || status == 3 || status == 6)) { throw new Exception("Status no válido"); }
                 FirestoreDb db = conexionDB();
                 DocumentReference solicitud = db.Collection("Solicitudes").Document(_ID);
+                DocumentReference grupoRef = grupo == null  ? null : db.Collection("Grupos").Document(grupo);
                 await db.RunTransactionAsync(async transaction => {
                     DocumentSnapshot snapshot = await transaction.GetSnapshotAsync(solicitud);
+                    DocumentSnapshot snapshotGpo = grupo == null ? null : await transaction.GetSnapshotAsync(grupoRef);
+
                     int newStatus = status;
                     bool dictamen = false;
                     if (status == 2) { dictamen = true; } else { dictamen = false; }
@@ -257,6 +261,24 @@ namespace plataformaOriginacion.Models
                         //{"dictamen", dictamen }
                     };
                     if ((status == 2 || status == 3) && grupo == null){ updates.Add("dictamen", dictamen); }//agregar si es o no individual
+                    if (status == 2 || status == 3){ updates.Add("importeSolicitado", snapshot.ConvertTo<Solicitud>().importe); }
+                    //if (status == 2) { updates.Add("importe", monto); }
+                    if (status == 3) { updates.Add("motivoRechazo", motivoRechazo); }
+
+                    if(status == 2 && snapshot.ConvertTo<Solicitud>().importe > monto)
+                    {
+                        updates.Add("importe", monto);
+                        if (snapshotGpo != null)
+                        {
+                            double diferencia = snapshot.ConvertTo<Solicitud>().importe - monto;
+                            double importeGpo = snapshotGpo.ConvertTo<Grupo>().importe - diferencia;
+                            Dictionary<string, object> updatesGpo = new Dictionary<string, object> {
+                                {"importe", importeGpo },
+                                //{"dictamen", dictamen }
+                            };
+                            transaction.Update(grupoRef, updatesGpo);
+                        }
+                    }
                     transaction.Update(solicitud, updates);
                 });
                 result = true;
@@ -269,7 +291,7 @@ namespace plataformaOriginacion.Models
             return result;
         }
 
-        public static async Task<bool> DictamenGrupo(string _ID, int aut) {
+        public static async Task<bool> DictamenGrupo(string _ID, int aut, string motivo) {
             bool result = false;
             try
             {
@@ -283,11 +305,25 @@ namespace plataformaOriginacion.Models
                         {"status", newStatus },
                         {"dictamen", dictamen }
                     };
+                    if (aut == 0) { updates.Add("motivoRechazo", motivo); }
                     transaction.Update(grupo, updates);
+
+                    Query capitalQuery = db.Collection("Solicitudes").WhereEqualTo("grupoID", _ID);
+                    QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
+                    foreach (DocumentSnapshot document in capitalQuerySnapshot.Documents)
+                    {
+                        //Solicitud solicitud = document.ConvertTo<Solicitud>();
+                        //solicitud.solicitudID = document.Id;
+                        DocumentReference solicitudAux = db.Collection("Solicitudes").Document(document.Id);
+                        Dictionary<string, object> updatesSol = new Dictionary<string, object> {
+                            {"dictamen", dictamen }
+                        };
+                        transaction.Update(solicitudAux, updatesSol);
+                    }
                 });
 
                 //List<Solicitud> solicitudes = await GetGrupoFromFireStore(_ID);
-                GrupoDetalle grupoDetalle = await GetGrupoFromFireStore(_ID);
+                /*GrupoDetalle grupoDetalle = await GetGrupoFromFireStore(_ID);
                 foreach (Solicitud solicitud in grupoDetalle.solicitudes)
                 {
                     DocumentReference solicitudAux = db.Collection("Solicitudes").Document(solicitud.solicitudID);
@@ -299,7 +335,7 @@ namespace plataformaOriginacion.Models
                         };
                         transaction.Update(solicitudAux, updates);
                     });
-                }
+                }*/
                 result = true;
             }
             catch (Exception ex)
