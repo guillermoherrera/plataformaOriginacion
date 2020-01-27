@@ -8,9 +8,10 @@
             columns.AddFor(m => m.solicitudID).Visible(false).HidingPriority(0);
             columns.AddFor(m => m.status).CellTemplate(new JS("dataGrid_change_cellTemplate2")).Alignment(HorizontalAlignment.Left).HidingPriority(6).AllowFiltering(false);
             columns.AddFor(m => m.fechaCaputra).Caption("Fecha Registro").SortOrder(SortOrder.Desc).CellTemplate(new JS("dataGrid_change_cellTemplate3")).HidingPriority(8);
-            columns.AddFor(m => m.tipoContrato).CellTemplate(new JS("dataGrid_change_cellTemplate5")).Alignment(HorizontalAlignment.Left).HidingPriority(3).AllowFiltering(false);
-            columns.AddFor(m => m.grupoNombre).Caption("Nombre").CellTemplate(new JS("dataGrid_change_cellTemplate6")).HidingPriority(1);
-            columns.AddFor(m => m.importe).CellTemplate(new JS("dataGrid_change_cellTemplate4")).Alignment(HorizontalAlignment.Right).HidingPriority(5);
+            //columns.AddFor(m => m.tipoContrato).CellTemplate(new JS("dataGrid_change_cellTemplate5")).Alignment(HorizontalAlignment.Left).HidingPriority(2).AllowFiltering(false);
+            columns.AddFor(m => m.grupoNombre).Caption("Nombre").CellTemplate(new JS("dataGrid_change_cellTemplate6")).HidingPriority(5);
+            columns.AddFor(m => m.importe).CellTemplate(new JS("dataGrid_change_cellTemplate4")).Alignment(HorizontalAlignment.Right).HidingPriority(4);
+            columns.AddFor(m => m.mesaControlUsuario).Caption("☑ Audita").CellTemplate(new JS("dataGrid_change_cellTemplate7")).Alignment(HorizontalAlignment.Center).HidingPriority(3);
             columns.AddFor(m => m.solicitudID).Caption("Detalle").CellTemplate(new JS("dataGrid_change_cellTemplate")).HidingPriority(7).AllowFiltering(false).Alignment(HorizontalAlignment.Center);
         })
         .Paging(p => p.PageSize(10))

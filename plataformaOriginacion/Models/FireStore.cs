@@ -160,6 +160,52 @@ namespace plataformaOriginacion.Models
             return grupoDetalle;
         }
 
+        public static async Task<bool> SetControlId(string _ID, string controlID, string controlUsuario, bool grupo){
+            bool result = false;
+            try
+            {
+                FirestoreDb db = conexionDB();
+                DocumentReference documentoRef;
+                documentoRef = grupo ? db.Collection("Grupos").Document(_ID) : db.Collection("Solicitudes").Document(_ID);
+                await db.RunTransactionAsync(async transaction =>
+                {
+                    DocumentSnapshot snapshot = await transaction.GetSnapshotAsync(documentoRef);
+                    Dictionary<string, object> updates = new Dictionary<string, object>{
+                        {"mesaControlID", controlID },
+                        {"mesaControlUsuario", controlUsuario },
+                    };
+                    transaction.Update(documentoRef, updates);
+
+                    if (grupo)
+                    {
+                        Query capitalQuery = db.Collection("Solicitudes").WhereEqualTo("grupoID", _ID);
+                        QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
+                        foreach (DocumentSnapshot document in capitalQuerySnapshot.Documents)
+                        {
+                            Solicitud solicitud = document.ConvertTo<Solicitud>();
+                            if (controlID == null && solicitud.documentos.Where(doc => doc.version != 1).Count() > 0) { throw new Exception("Solicitud validada"); }
+                            if (controlID == null && solicitud.status != 1) { throw new Exception("Grupo con integrantes validados"); }
+                            DocumentReference solicitudAux = db.Collection("Solicitudes").Document(document.Id);
+                            transaction.Update(solicitudAux, updates);
+                        }
+                    }
+                    else
+                    {
+                        Solicitud solicitudAux = snapshot.ConvertTo<Solicitud>();
+                        if (controlID == null && solicitudAux.documentos.Where(doc => doc.version != 1).Count() > 0) { throw new Exception("Solicitud validada"); }
+                        if (controlID == null && solicitudAux.status !=  1) { throw new Exception("Solicitud validada"); }
+                    }
+                });
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                Log.Information("*****Error Exception SetControlId: {0}", ex.Message);
+                result = false;
+            }
+            return result;
+        }
+
         public static async Task<List<catDocumento>> GetCatDocumentosFromFirestore() {
             List<catDocumento> catDocumentos = new List<catDocumento>();
             try{
@@ -186,6 +232,7 @@ namespace plataformaOriginacion.Models
                 DocumentReference solicitud = db.Collection("Solicitudes").Document(actualizaInformacion.idDocumento);
                 await db.RunTransactionAsync(async transaction => {
                     DocumentSnapshot snapshot = await transaction.GetSnapshotAsync(solicitud);
+                    if (snapshot.ConvertTo<Solicitud>().mesaControlID == null) { throw new Exception("Solicitud no Asignada"); }
                     Dictionary<string, object> updates = new Dictionary<string, object>();
                     Dictionary<string, object> datos = new Dictionary<string, object> {
                         {"nombre", actualizaInformacion.pNombre },
@@ -218,6 +265,7 @@ namespace plataformaOriginacion.Models
                 DocumentReference solicitud = db.Collection("Solicitudes").Document(actualizaUbicacion.idDocumento);
                 await db.RunTransactionAsync(async transaction =>{
                     DocumentSnapshot snapshot = await transaction.GetSnapshotAsync(solicitud);
+                    if (snapshot.ConvertTo<Solicitud>().mesaControlID == null) { throw new Exception("Solicitud no Asignada"); }
                     Dictionary<string, object> updates = new Dictionary<string, object>();
                     Dictionary<string, object> datos = new Dictionary<string, object>{
                         {"direccion1", actualizaUbicacion.calle},
@@ -264,6 +312,7 @@ namespace plataformaOriginacion.Models
                     if (status == 2 || status == 3){ updates.Add("importeSolicitado", snapshot.ConvertTo<Solicitud>().importe); }
                     //if (status == 2) { updates.Add("importe", monto); }
                     if (status == 3) { updates.Add("motivoRechazo", motivoRechazo); }
+                    if (snapshot.ConvertTo<Solicitud>().mesaControlID == null) { throw new Exception("Solicitud no Asignada"); }
 
                     if(status == 2 && snapshot.ConvertTo<Solicitud>().importe > monto)
                     {
@@ -306,6 +355,7 @@ namespace plataformaOriginacion.Models
                         {"dictamen", dictamen }
                     };
                     if (aut == 0) { updates.Add("motivoRechazo", motivo); }
+                    if (snapshot.ConvertTo<Grupo>().mesaControlID == null) { throw new Exception("Grupo no Asignado"); }
                     transaction.Update(grupo, updates);
 
                     Query capitalQuery = db.Collection("Solicitudes").WhereEqualTo("grupoID", _ID);
@@ -359,6 +409,7 @@ namespace plataformaOriginacion.Models
                 if (document.Exists)
                 {
                     solicitud = document.ConvertTo<Solicitud>();
+                    if (solicitud.mesaControlID == null) { throw new Exception("Solicitud no Asignada"); }
                     solicitud.solicitudID = cambioDoc.idDocumento;
                     var docEditar = solicitud.documentos.Where(doc => doc.tipo == int.Parse(cambioDoc.tipo) && doc.version == int.Parse(cambioDoc.version)).FirstOrDefault();
                     if (docEditar != null)

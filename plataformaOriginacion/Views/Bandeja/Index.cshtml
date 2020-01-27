@@ -53,11 +53,11 @@ else
                 label = 'REVISIÓN';
                 break;
             case 7:
-                clase = 'secondary';
+                clase = 'info';
                 label = 'EN ESPERA C. DE BURÓ';
                 break;
             case 8:
-                clase = 'secondary';
+                clase = 'info';
                 label = 'EN PROCESO C. DE BURÓ';
                 break;
             case 9:
@@ -85,7 +85,7 @@ else
                 label = 'GRUPO APROBADO';
                 break;
             default:
-                clase = 'info';
+                clase = 'secondary';
                 label = 'POR AUTORIZAR C. DE BURÓ';
                 break;
         }
@@ -135,7 +135,19 @@ else
         } else {
             label = data.grupoNombre
         }
-        
+        var label2 = data.tipoContrato == 1 ? "<span class='flaticon-man-user' style='position: relative; margin-left: -20px;color: black;'><i> " + label + "</i></span>" : data.tipoContrato == 2 ? "<span class='flaticon-users-group' style='position: relative; margin-left: -20px;color: black;'><i> " + label +"</i></span>" : "<span class='flaticon-pause-symbol' style='position: relative; margin-left: -20px;color: green;'><i> Sin especificar</i></span>";
+
+        element.html(label2);
+    }
+
+    function dataGrid_change_cellTemplate7(element, info) {
+        var data = info.data;
+        var label = data.mesaControlUsuario;
+        if (label != null) {
+            label = label.replace(/ .*/, '');
+        } else {
+            label = "";
+        }
         element.html("<span><i>" + label + "</i></span>");
     }
 </script>

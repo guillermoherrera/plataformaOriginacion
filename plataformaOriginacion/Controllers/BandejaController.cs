@@ -19,6 +19,7 @@ namespace plataformaOriginacion.Controllers
     public class BandejaController : Controller
     {
         public const string SessionKeyNombre = "_Nombre";
+        public const string SessionKeyId = "_Id";
         List<Solicitud> solicitudes = new List<Solicitud>();
         
         public ActionResult Index()
@@ -66,8 +67,20 @@ namespace plataformaOriginacion.Controllers
                 List<CatEstado> catEstados = new List<CatEstado>();
                 catEstados = CatEstado.fillEstados();
                 ViewBag.usuario = HttpContext.Session.GetString(SessionKeyNombre);
-                try{
+                string execeptionMsg;
+                try {
                     solicitud = await FireStore.GetSolicitudFromFireStore(_ID);
+                    if (solicitud.mesaControlID == null && solicitud.grupoID == null)
+                    {
+                        if (await FireStore.SetControlId(_ID, HttpContext.Session.GetString(SessionKeyId), HttpContext.Session.GetString(SessionKeyNombre), false)){
+                            solicitud.mesaControlID = HttpContext.Session.GetString(SessionKeyId);
+                        }
+                    }
+                    else if (solicitud.mesaControlID != HttpContext.Session.GetString(SessionKeyId) && solicitud.dictamen == null)
+                    {
+                        execeptionMsg = solicitud.mesaControlID == null ? "" : "Esta solicitud ya esta siendo atendida por " + solicitud.mesaControlUsuario + ".";
+                        throw new Exception(execeptionMsg);
+                    }
                     catDocumentos = await FireStore.GetCatDocumentosFromFirestore();
                     if (solicitud.documentos.Find(x => x.solicitudCambio == true) != null && solicitud.status != 6)
                     {
@@ -82,13 +95,14 @@ namespace plataformaOriginacion.Controllers
                         //mensaje notice
                         ViewBag.result = result;
                         ViewBag.mensaje = mensaje;
+                        ViewBag.liberable = solicitud.documentos.Where(doc => doc.version != 1).Count() > 0 ? false : true;
                     }
                     else {
                         ViewBag.error = solicitud.grupoNombre;//Auxiliar para mostrar un mensaje de error
                     }
                 }
                 catch (Exception ex) {
-                    ViewBag.error = "Error al obtener datos\n"+ex.ToString();
+                    ViewBag.error = "Error al obtener datos. \n"+ex.Message;
                     Log.Information("*****Error Exception Detalle: {0}", ex.Message);
                 }
                 return View();
@@ -108,24 +122,36 @@ namespace plataformaOriginacion.Controllers
                 try
                 {
                     grupoDetalle = await FireStore.GetGrupoFromFireStore(_ID);
+                    if (grupoDetalle.grupo.mesaControlID == null)
+                    {
+                        await FireStore.SetControlId(_ID, HttpContext.Session.GetString(SessionKeyId), HttpContext.Session.GetString(SessionKeyNombre), true);
+                    }
+                    else if (grupoDetalle.grupo.mesaControlID != HttpContext.Session.GetString(SessionKeyId) && grupoDetalle.grupo.status == 2)
+                    {
+                        throw new Exception("Este grupo ya esta siendo atendido por " + grupoDetalle.grupo.mesaControlUsuario + ".");
+                    }
                     if (grupoDetalle.solicitudes.Count > 0){
                         ViewBag.grupo = grupoDetalle.grupo;
                         ViewBag.solicitudes = grupoDetalle.solicitudes;
                         ViewBag.importeTotal = grupoDetalle.solicitudes.Sum(item => item.importe);
                         ViewBag.dictaminable = true;
+                        ViewBag.liberable = true;
                         ViewBag.dictamen = grupoDetalle.solicitudes[0].dictamen;
                         foreach (Solicitud solicitud in grupoDetalle.solicitudes)
                         {
                             if (solicitud.status != 2 && solicitud.status != 3){
                                 ViewBag.dictaminable = false;
                             }
+                            if(solicitud.documentos.Where(doc => doc.version != 1).Count() > 0) { ViewBag.liberable = false; }
                         }
+                        if (grupoDetalle.solicitudes.Where(sol => sol.status != 1).Count() > 0) { ViewBag.liberable = false; }
+                        if (grupoDetalle.solicitudes.Where(sol => sol.mesaControlID == null).Count() > 0) { await FireStore.SetControlId(_ID, HttpContext.Session.GetString(SessionKeyId), HttpContext.Session.GetString(SessionKeyNombre), true); }
                     }
                     else{
                         ViewBag.error = "Grupo sin Integrantes X_X";
                     }
                 }catch(Exception ex){
-                    ViewBag.error = ex.ToString();
+                    ViewBag.error = ex.Message;
                     Log.Information("*****Error Exception DetalleGrupo: {0}", ex.Message);
                 }
                 return View();
@@ -150,12 +176,17 @@ namespace plataformaOriginacion.Controllers
                         ViewBag.solicitudes = grupoDetalle.solicitudes;
                         ViewBag.importeTotal = grupoDetalle.solicitudes.Sum(item => item.importe);
                         ViewBag.dictaminable = true;
+                        ViewBag.liberable = true;
                         ViewBag.dictamen = grupoDetalle.solicitudes[0].dictamen;
                         foreach (Solicitud solicitud in grupoDetalle.solicitudes)
                         {
                             if (solicitud.status != 2 && solicitud.status != 3)
                             {
                                 ViewBag.dictaminable = false;
+                            }
+                            else
+                            {
+                                ViewBag.liberable = false;
                             }
                         }
                     }
@@ -263,6 +294,22 @@ namespace plataformaOriginacion.Controllers
                 return Json(new { Success = false });
             }
             
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> Liberar(Dictamen dictamen)
+        {
+            string id = dictamen.grupoID == null ? dictamen.idDocumento : dictamen.grupoID;
+            bool grupo = dictamen.grupoID == null ? false : true;
+            bool result = await FireStore.SetControlId(id, null, null, grupo);
+            if (result)
+            {
+                return Json(new { Success = true });
+            }
+            else
+            {
+                return Json(new { Success = false });
+            }
         }
 
         [HttpPost]

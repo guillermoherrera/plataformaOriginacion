@@ -21,5 +21,9 @@ namespace plataformaOriginacion.Models
         public int status { get; set; }
         [FirestoreProperty]
         public string userID { get; set; }
+        [FirestoreProperty]
+        public string mesaControlID { get; set; }
+        [FirestoreProperty]
+        public string mesaControlUsuario { get; set; }
     }
 }

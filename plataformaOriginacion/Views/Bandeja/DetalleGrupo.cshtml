@@ -35,130 +35,177 @@
                     <span id="time" style="font-size: .7em;">10:00</span>
                     <a href="#" onClick="return false;" id="btn_recargar" data-toggle="tooltip" title="RECARGAR DATOS"><span class="flaticon-update-arrow" style="position: relative;margin-left: -20px;"></span></a>
                 </div>
+                @if (@ViewBag.liberable)
+                {
+                    <div align="left" id="div_liberar">
+                        <a id="liberar" href="#" onClick="return false;" style="font-size:1em;opacity:.5;">LIBERAR</a>
+                    </div>
+                }
             </div>
             <div class="col-md-1"></div>
         </div>
     </div>
+
+    <!-- Modal RECHAZO-->
+    <div class="modal fade" id="ModalRechazoGpo" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-lg" style="border-radius: 25px;opacity:.9;">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: steelblue;">
+                    <label style="margin-left: auto; color:white;"><Strong>RECHAZAR SOLICITUD</Strong></label>
+                    <button type="button" class="close accionModal" data-dismiss="modal"><span class="flaticon-x-mark" style="position: relative;margin-left: -20px;color:white;"></span></button>
+                    <button type="button" class="close cargandoModal">-</button>
+                </div>
+                <div id="form_dictamen" class="modal-body">
+                    <div class="form-group">
+                        <label><strong>Motivo:</strong></label>
+                        <br />
+                        <div style="padding-left:2em;padding-right:2em;">
+                            <textarea id="text_rechazo" placeholder="Escribe aquí de forma breve y clara el motivo del rechazo." style="width:100%;text-transform:uppercase" rows="3" maxlength="99"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group" align="center">
+                        <button id="enviar_rechazo" type="button" class="btn btn-success accionModal"><span class="flaticon-x-mark" style="position: relative;margin-left: -20px;"></span> RECHAZAR GRUPO</button>
+                        <label class="cargandoModal"><strong>RECHAZANDO, POR FAVOR ESPERE ...</strong></label>
+                    </div>
+                </div>
+                <div class="modal-footer" style="background-color: steelblue;">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var timer = 60 * 10, minutes, seconds;
+            var display = document.querySelector('#time');
+            var rotate = function () {
+                minutes = parseInt(timer / 60, 10)
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    timer = 60 * 10;
+                    $("#div_grid").html("<label><strong>CARGANDO INTEGRANTES Y SU INFORMACIÓN, POR FAVOR ESPERE ...</strong></label>");
+                    $("#div_grid").load('/Bandeja/Integrantes?_ID=@ViewBag.solicitudes[0].grupoID');
+                }
+            };
+            intervalID = setInterval(rotate, 1000);
+
+            $("#btn_recargar").click(function (e) {
+                e.preventDefault();
+                $("#div_grid").html("<label><strong>CARGANDO LA INFORMACIÓN DEL GRUPO Y DE SUS INTEGRANTES, POR FAVOR ESPERE ...</strong></label>");
+                $("#div_grid").load('/Bandeja/Integrantes?_ID=@ViewBag.solicitudes[0].grupoID');
+            });
+        });
+
+        $("#enviar_rechazo").click(function (e){
+            $("#enviar_rechazo").attr("disabled", true);
+            var idDoc = null;
+            var motivo = $("#text_rechazo").val();
+            var idGrupo = "@ViewBag.solicitudes[0].grupoID";
+            var importe = 0;
+            if (motivo.length <= 0 || typeof motivo == "undefined") {
+                alert("Es necesario escribir el motivo del rechazo, por favor se breve y claro");
+                $("#enviar_rechazo").attr("disabled", false);
+            } else {
+                if (confirm("Esta a punto de rechazar este grupo.\n\n\n¿Desea continuar?")) {
+                    var dictamen = {
+                        idDocumento: idDoc,
+                        monto: importe,
+                        motivoRechazo: motivo.toUpperCase(),
+                        status: 3,
+                        grupoID: idGrupo
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Bandeja/RechazarGrupo",
+                        content: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: dictamen,
+                        beforeSend: function (xhr) {
+                            $("#botonera").hide();
+                            $(".accionModal").hide();
+                            $(".cargandoModal").show();
+                        },
+                        success: function (d) {
+                            if (d.Success) {
+                                $("#botonera").html("<strong>RECHAZANDO GRUPO, POR FAVOR ESPERE ...</strong>");
+                                $('#ModalRechazoGpo').modal('toggle');
+                                location.reload();
+                            } else {
+                                alert("Error en respuesta.");
+                                $("#botonera").show();
+                            }
+                            $("#enviar_rechazo").attr("disabled", false);
+                            $(".accionModal").show();
+                            $(".cargandoModal").hide();
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            alert('Error al realizar la acción!!');
+                            $("#botonera").show();
+                            $("#enviar_rechazo").attr("disabled", false);
+                            $(".accionModal").show();
+                            $(".cargandoModal").hide();
+                        }
+                    });
+
+                } else {
+                    $("#enviar_rechazo").attr("disabled", false);
+                }
+            }
+        });
+
+        $("#liberar").click(function (e) {
+            var idGrupo = "@ViewBag.solicitudes[0].grupoID";
+            if (confirm("Esta a punto de LIBERAR este Grupo para que otro usuario de mesa de control pueda auditarlo.\n\n\n¿Desea continuar?")) {
+                var dictamen = {
+                    idDocumento: null,
+                    monto: 0,
+                    motivoRechazo: null,
+                    status: 0,
+                    grupoID: idGrupo
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Bandeja/Liberar",
+                    content: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: dictamen,
+                    beforeSend: function (xhr) {
+                        $("#botonera").hide();
+                        $("#div_liberar").html("");
+                    },
+                    success: function (d) {
+                        if (d.Success) {
+                            $("#mensajeBotonera").html("LIBERANDO SOLICITUD, POR FAVOR ESPERE ...");
+                            window.close();
+                        } else {
+                            alert("Error en respueta al liberar.");
+                            $("#botonera").show();
+                        }
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        alert('Error al realizar la acción!!');
+                        $("#botonera").show();
+                    }
+                });
+            } else {
+            }
+        });
+    </script>
+
 }
 else
 {
     <div style="background-color: lightcoral;color:white; padding:1em;" align="center"><strong>Error: @ViewBag.error</strong></div>
 }
 
-<!-- Modal RECHAZO-->
-<div class="modal fade" id="ModalRechazoGpo" role="dialog" data-keyboard="false" data-backdrop="static">
-    <div class="modal-dialog modal-lg" style="border-radius: 25px;opacity:.9;">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header" style="background-color: steelblue;">
-                <label style="margin-left: auto; color:white;"><Strong>RECHAZAR SOLICITUD</Strong></label>
-                <button type="button" class="close accionModal" data-dismiss="modal"><span class="flaticon-x-mark" style="position: relative;margin-left: -20px;color:white;"></span></button>
-                <button type="button" class="close cargandoModal">-</button>
-            </div>
-            <div id="form_dictamen" class="modal-body">
-                <div class="form-group">
-                    <label><strong>Motivo:</strong></label>
-                    <br />
-                    <div style="padding-left:2em;padding-right:2em;">
-                        <textarea id="text_rechazo" placeholder="Escribe aquí de forma breve y clara el motivo del rechazo." style="width:100%;text-transform:uppercase" rows="3" maxlength="99"></textarea>
-                    </div>
-                </div>
-                <div class="form-group" align="center">
-                    <button id="enviar_rechazo" type="button" class="btn btn-success accionModal"><span class="flaticon-x-mark" style="position: relative;margin-left: -20px;"></span> RECHAZAR GRUPO</button>
-                    <label class="cargandoModal"><strong>RECHAZANDO, POR FAVOR ESPERE ...</strong></label>
-                </div>
-            </div>
-            <div class="modal-footer" style="background-color: steelblue;">
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<script>
-    $(document).ready(function () {
-        var timer = 60 * 10, minutes, seconds;
-        var display = document.querySelector('#time');
-        var rotate = function () {
-            minutes = parseInt(timer / 60, 10)
-            seconds = parseInt(timer % 60, 10);
-
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
-
-            display.textContent = minutes + ":" + seconds;
-
-            if (--timer < 0) {
-                timer = 60 * 10;
-                $("#div_grid").html("<label><strong>CARGANDO INTEGRANTES Y SU INFORMACIÓN, POR FAVOR ESPERE ...</strong></label>");
-                $("#div_grid").load('/Bandeja/Integrantes?_ID=@ViewBag.solicitudes[0].grupoID');
-            }
-        };
-        intervalID = setInterval(rotate, 1000);
-
-        $("#btn_recargar").click(function (e) {
-            e.preventDefault();
-            $("#div_grid").html("<label><strong>CARGANDO LA INFORMACIÓN DEL GRUPO Y DE SUS INTEGRANTES, POR FAVOR ESPERE ...</strong></label>");
-            $("#div_grid").load('/Bandeja/Integrantes?_ID=@ViewBag.solicitudes[0].grupoID');
-        });
-    });
-
-    $("#enviar_rechazo").click(function (e){
-        $("#enviar_rechazo").attr("disabled", true);
-        var idDoc = null;
-        var motivo = $("#text_rechazo").val();
-        var idGrupo = "@ViewBag.solicitudes[0].grupoID";
-        var importe = 0;
-        if (motivo.length <= 0 || typeof motivo == "undefined") {
-            alert("Es necesario escribir el motivo del rechazo, por favor se breve y claro");
-            $("#enviar_rechazo").attr("disabled", false);
-        } else {
-            if (confirm("Esta a punto de rechazar este grupo.\n\n\n¿Desea continuar?")) {
-                var dictamen = {
-                    idDocumento: idDoc,
-                    monto: importe,
-                    motivoRechazo: motivo.toUpperCase(),
-                    status: 3,
-                    grupoID: idGrupo
-                };
-
-                $.ajax({
-                    type: "POST",
-                    url: "/Bandeja/RechazarGrupo",
-                    content: "application/json; charset=utf-8",
-                    dataType: "json",
-                    data: dictamen,
-                    beforeSend: function (xhr) {
-                        $("#botonera").hide();
-                        $(".accionModal").hide();
-                        $(".cargandoModal").show();
-                    },
-                    success: function (d) {
-                        if (d.Success) {
-                            $("#botonera").html("<strong>RECHAZANDO GRUPO, POR FAVOR ESPERE ...</strong>");
-                            $('#ModalRechazoGpo').modal('toggle');
-                            location.reload();
-                        } else {
-                            alert("Error en respuesta.");
-                            $("#botonera").show();
-                        }
-                        $("#enviar_rechazo").attr("disabled", false);
-                        $(".accionModal").show();
-                        $(".cargandoModal").hide();
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                        alert('Error al realizar la acción!!');
-                        $("#botonera").show();
-                        $("#enviar_rechazo").attr("disabled", false);
-                        $(".accionModal").show();
-                        $(".cargandoModal").hide();
-                    }
-                });
-
-            } else {
-                $("#enviar_rechazo").attr("disabled", false);
-            }
-        }
-    });
-</script>

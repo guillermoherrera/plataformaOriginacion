@@ -22,7 +22,7 @@
     }
     else if (ViewBag.solicitud.status == 10)
     {
-        <div style="background-color: indianred;color: white; padding:1em;border-radius: 25px;" align="center"><strong>ATENCIÓN: A ocurrido un error al realizar la consulta de buró, por favor revisa detalladamente toda la información de esta solicitud para identificar que pudo podrucir dicho error y actualiza.</strong></div>
+        <div style="background-color: indianred;color: white; padding:1em;border-radius: 25px;" align="center"><strong>ATENCIÓN: A ocurrido un error al realizar la consulta de buró, por favor revisa detalladamente toda la información de esta solicitud para identificar que pudo podrucir dicho error y actualiza. No olvides volver a autorizar la consulta de buró.</strong></div>
     }
     <div class="container" style="margin:1em;">
         <div class="col-md-12 row" style="background-color: #e5e5e5;padding:1em;border-radius: 25px;border-radius: 25px;opacity:.9;">
@@ -42,11 +42,11 @@
             }
             else if (ViewBag.solicitud.status == 7)
             {
-                <label class="badge badge-secondary" style="height: 21px;">EN ESPERA DE CONSULTA DE BURÓ</label>
+                <label class="badge badge-info" style="height: 21px;">EN ESPERA DE CONSULTA DE BURÓ</label>
             }
             else if (ViewBag.solicitud.status == 8)
             {
-                <label class="badge badge-secondary" style="height: 21px;">EN PROCESO DE CONSULTA DE BURÓ</label>
+                <label class="badge badge-info" style="height: 21px;">EN PROCESO DE CONSULTA DE BURÓ</label>
             }
             else if (ViewBag.solicitud.status == 9)
             {
@@ -58,7 +58,7 @@
             }
             else
             {
-                <label id="_label" class="badge badge-info" style="height: 21px;">POR AUTORIZAR CONSULTA DE BURÓ</label>
+                <label id="_label" class="badge badge-secondary" style="height: 21px;">POR AUTORIZAR CONSULTA DE BURÓ</label>
             }
         </div>
     </div>
@@ -266,6 +266,12 @@
                         }
                     </tbody>
                 </table>
+                @if (@ViewBag.solicitud.grupoID == null && @ViewBag.solicitud.status == 1 && ViewBag.liberable)
+                {
+                    <div align="left" id="div_liberar">
+                        <a id="liberar" href="#" onClick="return false;" style="font-size:1em;opacity:.5;">LIBERAR</a>
+                    </div>
+                }
             </div>
             <div class="col-md-6">
                 <label><span class="flaticon-dollar-symbol" style="position: relative;margin-left: -20px;color: lightgray;"></span><strong>IMPORTE:</strong></label>
@@ -636,12 +642,18 @@
         $(".popup").click(function () {
             window.open("/Bandeja/Documento/?documentoUrlBase64=" + btoa($(this).attr('oid')), btoa($(this).attr('oid')), "width=800,height=600, top=85,left=50");
         });
+
+        var checkAudita = "@ViewBag.solicitud.mesaControlID";
+        if (checkAudita == "") {
+            window.close();
+        }
     });
 
     $(".btn_ACB").click(function (e) {
         var res = confirm("Antes de AUTORIZAR LA CONSULTA DE BURÓ confirme que ha validado todos los datos y documentos de esta solicitud.\n\n\nPara Confirmar de clic en 'ACEPTAR'");
         if (res) {
             $("#botonera").html("<strong>AUTORIZANDO CONSULTA DE BURÓ, POR FAVOR ESPERE ...</strong>");
+            $("#div_liberar").html("");
         }
         console.log(res);
         return res;
@@ -1063,6 +1075,44 @@
         }
     });
 
+    $("#liberar").click(function (e) {
+        var idDoc = "@ViewBag.solicitud.solicitudID";
+        if (confirm("Esta a punto de LIBERAR esta Solicitud para que otro usuario de mesa de control pueda auditarla.\n\n\n¿Desea continuar?")) {
+            var dictamen = {
+                idDocumento: idDoc,
+                monto: 0,
+                motivoRechazo: null,
+                status: 0,
+                grupoID: null
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/Bandeja/Liberar",
+                content: "application/json; charset=utf-8",
+                dataType: "json",
+                data: dictamen,
+                beforeSend: function (xhr) {
+                    $("#botonera").hide();
+                    $("#div_liberar").html("");
+                },
+                success: function (d) {
+                    if (d.Success) {
+                        $("#mensajeBotonera").html("LIBERANDO SOLICITUD, POR FAVOR ESPERE ...");
+                        window.close();
+                    } else {
+                        alert("Error en respueta al liberar.");
+                        $("#botonera").show();
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    alert('Error al realizar la acción!!');
+                    $("#botonera").show();
+                }
+            });
+        } else {
+        }
+    });
 
     $("#enviar_cambio").click(function (e) {
         $("#enviar_cambio").attr("disabled", true);

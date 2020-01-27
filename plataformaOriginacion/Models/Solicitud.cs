@@ -32,5 +32,9 @@ namespace plataformaOriginacion.Models
         public List<Documento> documentos { get; set; }
         [FirestoreProperty]
         public Direccion direccion { get; set; }
+        [FirestoreProperty]
+        public string mesaControlID { get; set; }
+        [FirestoreProperty]
+        public string mesaControlUsuario { get; set; }
     }
 }
