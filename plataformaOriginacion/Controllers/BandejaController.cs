@@ -21,7 +21,7 @@ namespace plataformaOriginacion.Controllers
         public const string SessionKeyNombre = "_Nombre";
         public const string SessionKeyId = "_Id";
         List<Solicitud> solicitudes = new List<Solicitud>();
-        
+
         public ActionResult Index()
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString(SessionKeyNombre)))
@@ -69,25 +69,28 @@ namespace plataformaOriginacion.Controllers
                 ViewBag.usuario = HttpContext.Session.GetString(SessionKeyNombre);
                 string execeptionMsg;
                 try {
-                    solicitud = await FireStore.GetSolicitudFromFireStore(_ID);
-                    if (solicitud.mesaControlID == null && solicitud.grupoID == null)
-                    {
-                        if (await FireStore.SetControlId(_ID, HttpContext.Session.GetString(SessionKeyId), HttpContext.Session.GetString(SessionKeyNombre), false)){
-                            solicitud.mesaControlID = HttpContext.Session.GetString(SessionKeyId);
+                    solicitud = await FireStore.GetSolicitudFromFireStore(_ID);            
+                    if (solicitud.solicitudID != null) {
+
+                        if (solicitud.mesaControlID == null && solicitud.grupoID == null)
+                        {
+                            if (await FireStore.SetControlId(_ID, HttpContext.Session.GetString(SessionKeyId), HttpContext.Session.GetString(SessionKeyNombre), false))
+                            {
+                                solicitud.mesaControlID = HttpContext.Session.GetString(SessionKeyId);
+                            }
                         }
-                    }
-                    else if (solicitud.mesaControlID != HttpContext.Session.GetString(SessionKeyId) && solicitud.dictamen == null)
-                    {
-                        execeptionMsg = solicitud.mesaControlID == null ? "" : "Esta solicitud ya esta siendo atendida por " + solicitud.mesaControlUsuario + ".";
-                        throw new Exception(execeptionMsg);
-                    }
-                    catDocumentos = await FireStore.GetCatDocumentosFromFirestore();
-                    if (solicitud.documentos.Find(x => x.solicitudCambio == true) != null && solicitud.status != 6)
-                    {
-                        await FireStore.CambioEstado(_ID, 6, null, 0, null);
-                        return RedirectToAction("Detalle", new { _ID = _ID });
-                    }
-                    if (solicitud.solicitudID != null){
+                        else if (solicitud.mesaControlID != HttpContext.Session.GetString(SessionKeyId) && solicitud.dictamen == null)
+                        {
+                            execeptionMsg = solicitud.mesaControlID == null ? "" : "Esta solicitud ya esta siendo atendida por " + solicitud.mesaControlUsuario + ".";
+                            throw new Exception(execeptionMsg);
+                        }
+                        catDocumentos = await FireStore.GetCatDocumentosFromFirestore();
+                        if (solicitud.documentos.Find(x => x.solicitudCambio == true) != null && solicitud.status != 6)
+                        {
+                            await FireStore.CambioEstado(_ID, 6, null, 0, null);
+                            return RedirectToAction("Detalle", new { _ID = _ID });
+                        }
+
                         ViewBag.solicitud = solicitud;
                         ViewBag.catDocumentos = catDocumentos;
                         ViewBag.catEstados = catEstados;
@@ -102,7 +105,36 @@ namespace plataformaOriginacion.Controllers
                     }
                 }
                 catch (Exception ex) {
-                    ViewBag.error = "Error al obtener datos. \n"+ex.Message;
+                    ViewBag.error = "Error al obtener datos. \n" + ex.Message;
+                    Log.Information("*****Error Exception Detalle: {0}", ex.Message);
+                }
+                return View();
+            }
+        }
+
+        public async Task<IActionResult> DetalleRenovacion(String _ID, bool result, String mensaje) {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(SessionKeyNombre)))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                Renovacion solicitud = new Renovacion();
+                ViewBag.usuario = HttpContext.Session.GetString(SessionKeyNombre);
+                try
+                {
+                    solicitud = await FireStore.GetRenovacionFromFireStore(_ID);
+                    if (solicitud.solicitudID != null) {
+                        ViewBag.solicitud = solicitud;
+                    }
+                    else
+                    {
+                        ViewBag.error = solicitud.grupoNombre;//Auxiliar para mostrar un mensaje de error
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.error = "Error al obtener datos. \n" + ex.Message;
                     Log.Information("*****Error Exception Detalle: {0}", ex.Message);
                 }
                 return View();
@@ -124,13 +156,15 @@ namespace plataformaOriginacion.Controllers
                     grupoDetalle = await FireStore.GetGrupoFromFireStore(_ID);
                     if (grupoDetalle.grupo.mesaControlID == null)
                     {
-                        await FireStore.SetControlId(_ID, HttpContext.Session.GetString(SessionKeyId), HttpContext.Session.GetString(SessionKeyNombre), true);
+                        if (!await FireStore.SetControlId(_ID, HttpContext.Session.GetString(SessionKeyId), HttpContext.Session.GetString(SessionKeyNombre), true)){
+                            throw new Exception("Error al Asignar " + grupoDetalle.grupo.mesaControlUsuario + ".");
+                        }
                     }
                     else if (grupoDetalle.grupo.mesaControlID != HttpContext.Session.GetString(SessionKeyId) && grupoDetalle.grupo.status == 2)
                     {
                         throw new Exception("Este grupo ya esta siendo atendido por " + grupoDetalle.grupo.mesaControlUsuario + ".");
                     }
-                    if (grupoDetalle.solicitudes.Count > 0){
+                    if (grupoDetalle.solicitudes.Count > 0) {
                         ViewBag.grupo = grupoDetalle.grupo;
                         ViewBag.solicitudes = grupoDetalle.solicitudes;
                         ViewBag.importeTotal = grupoDetalle.solicitudes.Sum(item => item.importe);
@@ -139,18 +173,77 @@ namespace plataformaOriginacion.Controllers
                         ViewBag.dictamen = grupoDetalle.solicitudes[0].dictamen;
                         foreach (Solicitud solicitud in grupoDetalle.solicitudes)
                         {
-                            if (solicitud.status != 2 && solicitud.status != 3){
+                            if (solicitud.status != 2 && solicitud.status != 3) {
                                 ViewBag.dictaminable = false;
                             }
-                            if(solicitud.documentos.Where(doc => doc.version != 1).Count() > 0) { ViewBag.liberable = false; }
+                            if (solicitud.documentos.Where(doc => doc.version != 1).Count() > 0) { ViewBag.liberable = false; }
                         }
                         if (grupoDetalle.solicitudes.Where(sol => sol.status != 1).Count() > 0) { ViewBag.liberable = false; }
                         if (grupoDetalle.solicitudes.Where(sol => sol.mesaControlID == null).Count() > 0) { await FireStore.SetControlId(_ID, HttpContext.Session.GetString(SessionKeyId), HttpContext.Session.GetString(SessionKeyNombre), true); }
                     }
-                    else{
+                    else {
                         ViewBag.error = "Grupo sin Integrantes X_X";
                     }
-                }catch(Exception ex){
+                } catch (Exception ex) {
+                    ViewBag.error = ex.Message;
+                    Log.Information("*****Error Exception DetalleGrupo: {0}", ex.Message);
+                }
+                return View();
+            }
+        }
+
+        public async Task<IActionResult> RenovacionDetalleGrupo(String _ID) {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(SessionKeyNombre)))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                GrupoDetalle grupoDetalle = new GrupoDetalle();
+                //List<Solicitud> solicitudes = new List<Solicitud>();
+                ViewBag.usuario = HttpContext.Session.GetString(SessionKeyNombre);
+                try
+                {
+                    grupoDetalle = await FireStore.GetRenovacionGrupoFromFireStore(_ID);
+                    if (grupoDetalle.grupo.mesaControlID == null)
+                    {
+                        if (!await FireStore.SetRenovacionControlId(_ID, HttpContext.Session.GetString(SessionKeyId), HttpContext.Session.GetString(SessionKeyNombre), true)) {
+                            throw new Exception("Error al Asignar " + grupoDetalle.grupo.mesaControlUsuario + ".");
+                        }
+                    }
+                    else if (grupoDetalle.grupo.mesaControlID != HttpContext.Session.GetString(SessionKeyId) && grupoDetalle.grupo.status == 2)
+                    {
+                        throw new Exception("Este grupo ya esta siendo atendido por " + grupoDetalle.grupo.mesaControlUsuario + ".");
+                    }
+                    if (grupoDetalle.solicitudes.Count > 0)
+                    {
+                        ViewBag.grupo = grupoDetalle.grupo;
+                        ViewBag.solicitudes = grupoDetalle.solicitudes;
+                        ViewBag.importeTotal = grupoDetalle.solicitudes.Sum(item => item.importe);
+                        ViewBag.dictaminable = true;
+                        ViewBag.liberable = true;
+                        ViewBag.dictamen = grupoDetalle.solicitudes[0].dictamen;
+                        foreach (Solicitud solicitud in grupoDetalle.solicitudes)
+                        {
+                            if (solicitud.status != 2 && solicitud.status != 3)
+                            {
+                                ViewBag.dictaminable = false;
+                            }
+                            if (solicitud.documentos != null)
+                            {
+                                if (solicitud.documentos.Where(doc => doc.version != 1).Count() > 0) { ViewBag.liberable = false; }
+                            }
+                        }
+                        if (grupoDetalle.solicitudes.Where(sol => sol.status != 1).Count() > 0) { ViewBag.liberable = false; }
+                        if (grupoDetalle.solicitudes.Where(sol => sol.mesaControlID == null).Count() > 0) { await FireStore.SetControlId(_ID, HttpContext.Session.GetString(SessionKeyId), HttpContext.Session.GetString(SessionKeyNombre), true); }
+                    }
+                    else
+                    {
+                        ViewBag.error = "Grupo sin Integrantes X.X";
+                    }
+                }
+                catch (Exception ex)
+                {
                     ViewBag.error = ex.Message;
                     Log.Information("*****Error Exception DetalleGrupo: {0}", ex.Message);
                 }
@@ -193,6 +286,66 @@ namespace plataformaOriginacion.Controllers
                     else
                     {
                         ViewBag.error = "Grupo sin Integrantes X_X";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.error = ex.ToString();
+                    Log.Information("*****Error Exception DetalleGrupo: {0}", ex.Message);
+                }
+                return PartialView("_Integrantes");
+            }
+        }
+
+        public async Task<IActionResult> RenovaionIntegrantes(String _ID)
+        {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(SessionKeyNombre)))
+            {
+                return PartialView("_Mensaje");
+            }
+            else
+            {
+                GrupoDetalle grupoDetalle = new GrupoDetalle();
+                //List<Solicitud> solicitudes = new List<Solicitud>();
+                try
+                {
+                    grupoDetalle = await FireStore.GetRenovacionGrupoFromFireStore(_ID);
+                    if (grupoDetalle.grupo.mesaControlID == null)
+                    {
+                        if (!await FireStore.SetRenovacionControlId(_ID, HttpContext.Session.GetString(SessionKeyId), HttpContext.Session.GetString(SessionKeyNombre), true))
+                        {
+                            throw new Exception("Error al Asignar " + grupoDetalle.grupo.mesaControlUsuario + ".");
+                        }
+                    }
+                    else if (grupoDetalle.grupo.mesaControlID != HttpContext.Session.GetString(SessionKeyId) && grupoDetalle.grupo.status == 2)
+                    {
+                        throw new Exception("Este grupo ya esta siendo atendido por " + grupoDetalle.grupo.mesaControlUsuario + ".");
+                    }
+                    if (grupoDetalle.solicitudes.Count > 0)
+                    {
+                        ViewBag.grupo = grupoDetalle.grupo;
+                        ViewBag.solicitudes = grupoDetalle.solicitudes;
+                        ViewBag.importeTotal = grupoDetalle.solicitudes.Sum(item => item.importe);
+                        ViewBag.dictaminable = true;
+                        ViewBag.liberable = true;
+                        ViewBag.dictamen = grupoDetalle.solicitudes[0].dictamen;
+                        foreach (Solicitud solicitud in grupoDetalle.solicitudes)
+                        {
+                            if (solicitud.status != 2 && solicitud.status != 3)
+                            {
+                                ViewBag.dictaminable = false;
+                            }
+                            if (solicitud.documentos != null)
+                            {
+                                if (solicitud.documentos.Where(doc => doc.version != 1).Count() > 0) { ViewBag.liberable = false; }
+                            }
+                        }
+                        if (grupoDetalle.solicitudes.Where(sol => sol.status != 1).Count() > 0) { ViewBag.liberable = false; }
+                        if (grupoDetalle.solicitudes.Where(sol => sol.mesaControlID == null).Count() > 0) { await FireStore.SetControlId(_ID, HttpContext.Session.GetString(SessionKeyId), HttpContext.Session.GetString(SessionKeyNombre), true); }
+                    }
+                    else
+                    {
+                        ViewBag.error = "Grupo sin Integrantes X.X";
                     }
                 }
                 catch (Exception ex)
@@ -263,7 +416,12 @@ namespace plataformaOriginacion.Controllers
                         break;
                 }
                 Log.Information("*****INFORMATION grupoDictamen: {0}", mensaje);
-                return RedirectToAction("DetalleGrupo", new { _ID = _ID });
+                if (!Request.Headers["Referer"][0].Contains("Renovacion")) {
+                    return RedirectToAction("DetalleGrupo", new { _ID = _ID });
+                } else{
+                    return RedirectToAction("RenovacionDetalleGrupo", new { _ID = _ID });
+                }
+                
             }
         }
 
@@ -294,6 +452,22 @@ namespace plataformaOriginacion.Controllers
                 return Json(new { Success = false });
             }
             
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> DictaminarRenovacion(Dictamen dictamen)
+        {
+            string resultado = "";
+            bool result = await FireStore.CambioEstado(dictamen.idDocumento, int.Parse(dictamen.status), dictamen.grupoID, double.Parse(dictamen.monto), dictamen.motivoRechazo);
+            if (result)
+            {
+                return Json(new { Success = true });
+            }
+            else
+            {
+                return Json(new { Success = false });
+            }
+
         }
 
         [HttpPost]

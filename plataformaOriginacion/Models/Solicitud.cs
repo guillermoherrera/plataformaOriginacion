@@ -10,6 +10,7 @@ namespace plataformaOriginacion.Models
     public class Solicitud
     {
         public string solicitudID { get; set; }
+        public bool? renovacion { get; set; }
         [FirestoreProperty]
         public bool? dictamen { get; set; }
         [FirestoreProperty]
@@ -36,5 +37,8 @@ namespace plataformaOriginacion.Models
         public string mesaControlID { get; set; }
         [FirestoreProperty]
         public string mesaControlUsuario { get; set; }
+
+        [FirestoreProperty]
+        public double importeHistorico { get; set; }
     }
 }

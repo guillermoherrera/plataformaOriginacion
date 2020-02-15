@@ -43,6 +43,48 @@ namespace plataformaOriginacion.Models
                     solicitudesAll.Add(solicitud);
                 }
 
+                //Renovaciones
+                CollectionReference collectionR = db.Collection("Renovaciones");
+
+                QuerySnapshot allSolicitudesR = await collectionR.GetSnapshotAsync();
+
+                foreach (DocumentSnapshot document in allSolicitudesR.Documents)
+                {
+                    if (document.ContainsField("clienteID"))
+                    {
+                        Solicitud solicitud = new Solicitud
+                        {
+                            renovacion = true,
+                            fechaCaputra = document.GetValue<DateTime>("fechaCaptura"),
+                            grupoID = document.GetValue<String>("grupoID"),
+                            grupoNombre = document.GetValue<String>("grupoNombre"),
+                            importe = document.GetValue<double>("importe"),
+                            status = document.GetValue<int>("status"),
+                            tipoContrato = document.GetValue<int>("tipoContrato"),
+                            userID = document.GetValue<String>("userID"),
+                        };
+
+                        try { solicitud.dictamen = document.GetValue<bool>("dictamen"); } catch (Exception e) { }
+                        try
+                        {
+                            solicitud.mesaControlID = document.GetValue<string>("mesaControlID");
+                            solicitud.mesaControlUsuario = document.GetValue<string>("mesaControlUsuario");
+                        }
+                        catch (Exception e) { }
+
+                        solicitud.solicitudID = document.Id;
+                        solicitudesAll.Add(solicitud);
+                    }
+                    else
+                    {
+                        Solicitud solicitud = document.ConvertTo<Solicitud>();
+                        solicitud.solicitudID = document.Id;
+                        solicitud.renovacion = true;
+                        solicitudesAll.Add(solicitud);
+                    }
+                }
+                //Renovaciones
+
                 foreach (Solicitud solicitud in solicitudesAll)
                 {
                     if (solicitud.grupoID == null)//INDIVIDUAL
@@ -97,6 +139,12 @@ namespace plataformaOriginacion.Models
                 CollectionReference collection = db.Collection("Solicitudes");
                 DocumentReference docRef = collection.Document(_ID);
                 DocumentSnapshot document = await docRef.GetSnapshotAsync();
+                if (!document.Exists)
+                {
+                    collection = db.Collection("Renovaciones");
+                    docRef = collection.Document(_ID);
+                    document = await docRef.GetSnapshotAsync();
+                }
                 if (document.Exists) {
                     solicitud = document.ConvertTo<Solicitud>();
                     solicitud.solicitudID = _ID;
@@ -129,6 +177,32 @@ namespace plataformaOriginacion.Models
             return solicitud;
         }
 
+        public static async Task<Renovacion> GetRenovacionFromFireStore(string _ID) {
+            Renovacion solicitud = new Renovacion();
+            try
+            {
+                FirestoreDb db = conexionDB();
+                CollectionReference collection = db.Collection("Renovaciones");
+                DocumentReference docRef = collection.Document(_ID);
+                DocumentSnapshot document = await docRef.GetSnapshotAsync();
+                if (document.Exists)
+                {
+                    solicitud = document.ConvertTo<Renovacion>();
+                    solicitud.solicitudID = _ID;
+                }
+                else
+                {
+                    solicitud.grupoNombre = "La solicitud con el id " + _ID + " no existe en la FSDB.\r\nVuelva a cargar la página desde la bandeja, si no se muestra información de la solicitud vuelva a cargar los datos de la bandeja";
+                }
+            }
+            catch(Exception ex)
+            {
+                solicitud.grupoNombre = ex.Message;//Auxiliar para mostrar un mensaje de error
+                Log.Information("*****Error Exception GetRenovacionFromFireStore: {0}", ex.Message);
+            }
+            return solicitud;
+        }
+
         //public static async Task<List<Solicitud>> GetGrupoFromFireStore(string grupoID){
         public static async Task<GrupoDetalle> GetGrupoFromFireStore(string grupoID)
         {
@@ -154,6 +228,73 @@ namespace plataformaOriginacion.Models
                 }
             }
             catch(Exception ex){
+                Log.Information("*****Error Exception GetGrupoFromFireStore: {0}", ex.Message);
+            }
+            grupoDetalle.solicitudes = solicitudes;
+            return grupoDetalle;
+        }
+
+        public static async Task<GrupoDetalle> GetRenovacionGrupoFromFireStore(string grupoID)
+        {
+            GrupoDetalle grupoDetalle = new GrupoDetalle();
+            List<Solicitud> solicitudes = new List<Solicitud>();
+            try
+            {
+                FirestoreDb db = conexionDB();
+
+                CollectionReference collection = db.Collection("GruposRenovacion");
+                DocumentReference docRef = collection.Document(grupoID);
+                DocumentSnapshot documentGpo = await docRef.GetSnapshotAsync();
+                if (documentGpo.Exists)
+                {
+                    grupoDetalle.grupo = documentGpo.ConvertTo<Grupo>();
+                }
+
+                Query capitalQuery = db.Collection("Renovaciones").WhereEqualTo("grupoID", grupoID);
+                QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
+                foreach (DocumentSnapshot document in capitalQuerySnapshot.Documents)
+                {
+                    if (document.ContainsField("clienteID"))
+                    {
+                        Solicitud solicitud = new Solicitud
+                        {
+                            renovacion = true,
+                            fechaCaputra = document.GetValue<DateTime>("fechaCaptura"),
+                            grupoID = document.GetValue<String>("grupoID"),
+                            grupoNombre = document.GetValue<String>("grupoNombre"),
+                            importe = document.GetValue<double>("importe"),
+                            status = document.GetValue<int>("status"),
+                            tipoContrato = document.GetValue<int>("tipoContrato"),
+                            userID = document.GetValue<String>("userID"),
+                            importeHistorico = document.GetValue<int>("importeHistorico")
+                        };
+                        solicitud.persona = new Persona {
+                            nombre = document.GetValue<string>("nombre"),
+                            nombreSegundo = "",
+                            apellido = "",
+                            apellidoSegundo = ""
+                        };
+                        try { solicitud.dictamen = document.GetValue<bool>("dictamen"); } catch (Exception e) { }
+                        try
+                        {
+                            solicitud.mesaControlID = document.GetValue<string>("mesaControlID");
+                            solicitud.mesaControlUsuario = document.GetValue<string>("mesaControlUsuario");
+                        }
+                        catch (Exception e) { }
+
+                        solicitud.solicitudID = document.Id;
+                        solicitudes.Add(solicitud);
+                    }
+                    else
+                    {
+                        Solicitud solicitud = document.ConvertTo<Solicitud>();
+                        solicitud.solicitudID = document.Id;
+                        solicitudes.Add(solicitud);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
                 Log.Information("*****Error Exception GetGrupoFromFireStore: {0}", ex.Message);
             }
             grupoDetalle.solicitudes = solicitudes;
@@ -206,6 +347,53 @@ namespace plataformaOriginacion.Models
             return result;
         }
 
+        public static async Task<bool> SetRenovacionControlId(string _ID, string controlID, string controlUsuario, bool grupo)
+        {
+            bool result = false;
+            try
+            {
+                FirestoreDb db = conexionDB();
+                DocumentReference documentoRef;
+                documentoRef = grupo ? db.Collection("GruposRenovacion").Document(_ID) : db.Collection("Renovaciones").Document(_ID);
+                await db.RunTransactionAsync(async transaction =>
+                {
+                    DocumentSnapshot snapshot = await transaction.GetSnapshotAsync(documentoRef);
+                    Dictionary<string, object> updates = new Dictionary<string, object>{
+                        {"mesaControlID", controlID },
+                        {"mesaControlUsuario", controlUsuario },
+                    };
+                    transaction.Update(documentoRef, updates);
+
+                    if (grupo)
+                    {
+                        Query capitalQuery = db.Collection("Renovaciones").WhereEqualTo("grupoID", _ID);
+                        QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
+                        foreach (DocumentSnapshot document in capitalQuerySnapshot.Documents)
+                        {
+                            Solicitud solicitud = document.ConvertTo<Solicitud>();
+                            if (controlID == null && solicitud.documentos.Where(doc => doc.version != 1).Count() > 0) { throw new Exception("Solicitud validada"); }
+                            if (controlID == null && solicitud.status != 1) { throw new Exception("Grupo con integrantes validados"); }
+                            DocumentReference solicitudAux = db.Collection("Renovaciones").Document(document.Id);
+                            transaction.Update(solicitudAux, updates);
+                        }
+                    }
+                    else
+                    {
+                        Solicitud solicitudAux = snapshot.ConvertTo<Solicitud>();
+                        if (controlID == null && solicitudAux.documentos.Where(doc => doc.version != 1).Count() > 0) { throw new Exception("Solicitud validada"); }
+                        if (controlID == null && solicitudAux.status != 1) { throw new Exception("Solicitud validada"); }
+                    }
+                });
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                Log.Information("*****Error Exception SetControlId: {0}", ex.Message);
+                result = false;
+            }
+            return result;
+        }
+
         public static async Task<List<catDocumento>> GetCatDocumentosFromFirestore() {
             List<catDocumento> catDocumentos = new List<catDocumento>();
             try{
@@ -232,17 +420,22 @@ namespace plataformaOriginacion.Models
                 DocumentReference solicitud = db.Collection("Solicitudes").Document(actualizaInformacion.idDocumento);
                 await db.RunTransactionAsync(async transaction => {
                     DocumentSnapshot snapshot = await transaction.GetSnapshotAsync(solicitud);
+                    if (!snapshot.Exists)
+                    {
+                        solicitud = db.Collection("Renovaciones").Document(actualizaInformacion.idDocumento);
+                        snapshot = await transaction.GetSnapshotAsync(solicitud);
+                    }
                     if (snapshot.ConvertTo<Solicitud>().mesaControlID == null) { throw new Exception("Solicitud no Asignada"); }
                     Dictionary<string, object> updates = new Dictionary<string, object>();
                     Dictionary<string, object> datos = new Dictionary<string, object> {
-                        {"nombre", actualizaInformacion.pNombre },
-                        {"nombreSegundo", actualizaInformacion.sNombre },
-                        {"apellido", actualizaInformacion.pApellido },
-                        {"apellidoSegundo", actualizaInformacion.sApellido },
-                        {"curp", actualizaInformacion.curp },
-                        {"rfc", actualizaInformacion.rfc },
+                        {"nombre", actualizaInformacion.pNombre == null ? "" : actualizaInformacion.pNombre},
+                        {"nombreSegundo", actualizaInformacion.sNombre == null ? "" : actualizaInformacion.sNombre },
+                        {"apellido", actualizaInformacion.pApellido == null ? "" : actualizaInformacion.pApellido },
+                        {"apellidoSegundo", actualizaInformacion.sApellido == null ? "" : actualizaInformacion.sApellido },
+                        {"curp", actualizaInformacion.curp == null ? "" : actualizaInformacion.curp },
+                        {"rfc", actualizaInformacion.rfc == null ? "" : actualizaInformacion.rfc },
                         {"fechaNacimiento", DateTime.SpecifyKind(actualizaInformacion.fNacimiento, DateTimeKind.Utc) },
-                        {"telefono", actualizaInformacion.telefono }
+                        {"telefono", actualizaInformacion.telefono == null ? "" : actualizaInformacion.telefono }
                     };
                     updates.Add("persona", datos);
                     transaction.Update(solicitud, updates);
@@ -265,16 +458,20 @@ namespace plataformaOriginacion.Models
                 DocumentReference solicitud = db.Collection("Solicitudes").Document(actualizaUbicacion.idDocumento);
                 await db.RunTransactionAsync(async transaction =>{
                     DocumentSnapshot snapshot = await transaction.GetSnapshotAsync(solicitud);
+                    if (!snapshot.Exists) {
+                        solicitud = db.Collection("Renovaciones").Document(actualizaUbicacion.idDocumento);
+                        snapshot = await transaction.GetSnapshotAsync(solicitud);
+                    }
                     if (snapshot.ConvertTo<Solicitud>().mesaControlID == null) { throw new Exception("Solicitud no Asignada"); }
                     Dictionary<string, object> updates = new Dictionary<string, object>();
                     Dictionary<string, object> datos = new Dictionary<string, object>{
-                        {"direccion1", actualizaUbicacion.calle},
-                        {"coloniaPoblacion", actualizaUbicacion.colonia},
-                        {"delegacionMunicipio", actualizaUbicacion.municipio},
-                        {"ciudad", actualizaUbicacion.ciudad},
-                        {"estado", actualizaUbicacion.estado},
+                        {"direccion1", actualizaUbicacion.calle == null ? "" : actualizaUbicacion.calle},
+                        {"coloniaPoblacion", actualizaUbicacion.colonia == null ? "" : actualizaUbicacion.colonia},
+                        {"delegacionMunicipio", actualizaUbicacion.municipio == null ? "" : actualizaUbicacion.municipio},
+                        {"ciudad", actualizaUbicacion.ciudad == null ? "" : actualizaUbicacion.ciudad},
+                        {"estado", actualizaUbicacion.estado == null ? "" : actualizaUbicacion.estado},
                         {"cp", int.Parse(actualizaUbicacion.cp)},
-                        {"pais", actualizaUbicacion.pais}
+                        {"pais", actualizaUbicacion.pais == null ? "" : actualizaUbicacion.pais}
                     };
                     updates.Add("direccion", datos);
                     transaction.Update(solicitud, updates);
@@ -299,8 +496,18 @@ namespace plataformaOriginacion.Models
                 DocumentReference grupoRef = grupo == null  ? null : db.Collection("Grupos").Document(grupo);
                 await db.RunTransactionAsync(async transaction => {
                     DocumentSnapshot snapshot = await transaction.GetSnapshotAsync(solicitud);
+                    if (!snapshot.Exists)
+                    {
+                        solicitud = db.Collection("Renovaciones").Document(_ID);
+                        snapshot = await transaction.GetSnapshotAsync(solicitud);
+                    }
                     DocumentSnapshot snapshotGpo = grupo == null ? null : await transaction.GetSnapshotAsync(grupoRef);
-
+                    if (snapshotGpo != null && !snapshotGpo.Exists)
+                    {
+                        grupoRef = db.Collection("GruposRenovacion").Document(grupo);
+                        snapshotGpo = await transaction.GetSnapshotAsync(grupoRef);
+                    }
+                    
                     int newStatus = status;
                     bool dictamen = false;
                     if (status == 2) { dictamen = true; } else { dictamen = false; }
@@ -309,7 +516,7 @@ namespace plataformaOriginacion.Models
                         //{"dictamen", dictamen }
                     };
                     if ((status == 2 || status == 3) && grupo == null){ updates.Add("dictamen", dictamen); }//agregar si es o no individual
-                    if (status == 2 || status == 3){ updates.Add("importeSolicitado", snapshot.ConvertTo<Solicitud>().importe); }
+                    if (status == 2 || status == 3){ updates.Add("importeSolicitado", snapshot.ConvertTo<Solicitud>().importe ); }
                     //if (status == 2) { updates.Add("importe", monto); }
                     if (status == 3) { updates.Add("motivoRechazo", motivoRechazo); }
                     if (snapshot.ConvertTo<Solicitud>().mesaControlID == null) { throw new Exception("Solicitud no Asignada"); }
@@ -341,13 +548,18 @@ namespace plataformaOriginacion.Models
         }
 
         public static async Task<bool> DictamenGrupo(string _ID, int aut, string motivo) {
-            bool result = false;
+            bool result = false, renov = false;
             try
             {
                 FirestoreDb db = conexionDB();
                 DocumentReference grupo = db.Collection("Grupos").Document(_ID);
                 await db.RunTransactionAsync(async transaction => {
                     DocumentSnapshot snapshot = await transaction.GetSnapshotAsync(grupo);
+                    if (!snapshot.Exists)
+                    {
+                        grupo = db.Collection("GruposRenovacion").Document(_ID);
+                        snapshot = await transaction.GetSnapshotAsync(grupo);
+                    }
                     int newStatus = 3;
                     bool dictamen = aut == 0 ? false : true;
                     Dictionary<string, object> updates = new Dictionary<string, object> {
@@ -360,11 +572,21 @@ namespace plataformaOriginacion.Models
 
                     Query capitalQuery = db.Collection("Solicitudes").WhereEqualTo("grupoID", _ID);
                     QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
+                    if(capitalQuerySnapshot.Documents.Count() == 0){
+                        capitalQuery = db.Collection("Renovaciones").WhereEqualTo("grupoID", _ID);
+                        capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
+                        renov = capitalQuerySnapshot.Documents.Count() == 0 ? false : true;
+                    }
                     foreach (DocumentSnapshot document in capitalQuerySnapshot.Documents)
                     {
                         //Solicitud solicitud = document.ConvertTo<Solicitud>();
                         //solicitud.solicitudID = document.Id;
-                        DocumentReference solicitudAux = db.Collection("Solicitudes").Document(document.Id);
+                        DocumentReference solicitudAux;
+                        if (!renov) {
+                            solicitudAux = db.Collection("Solicitudes").Document(document.Id);
+                        } else{
+                            solicitudAux = db.Collection("Renovaciones").Document(document.Id);
+                        }
                         Dictionary<string, object> updatesSol = new Dictionary<string, object> {
                             {"dictamen", dictamen }
                         };
@@ -406,6 +628,12 @@ namespace plataformaOriginacion.Models
                 CollectionReference collection = db.Collection("Solicitudes");
                 DocumentReference docRef = collection.Document(cambioDoc.idDocumento);
                 DocumentSnapshot document = await docRef.GetSnapshotAsync();
+                if (!document.Exists)
+                {
+                    collection = db.Collection("Renovaciones");
+                    docRef = collection.Document(cambioDoc.idDocumento);
+                    document = await docRef.GetSnapshotAsync();
+                }
                 if (document.Exists)
                 {
                     solicitud = document.ConvertTo<Solicitud>();

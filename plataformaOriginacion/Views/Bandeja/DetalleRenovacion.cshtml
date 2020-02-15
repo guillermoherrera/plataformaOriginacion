@@ -1,0 +1,305 @@
+﻿@{
+    ViewData["Title"] = "DetalleRenovacion";
+}
+@if (ViewBag.error == null)
+{
+    <div class="container" style="margin:1em;">
+        <div class="col-md-12 row" style="background-color: #e5e5e5;padding:1em;border-radius: 25px;border-radius: 25px;opacity:.9;">
+            <div class="col-md-4 col-md-offset-4"></div>
+            <h1><label><strong>Detalle Renovacion</strong></label></h1>
+            @if (ViewBag.solicitud.status == 2)
+            {
+                <label class="badge badge-success" style="height: 21px;">DICTAMINADO</label>
+            }
+            else if (ViewBag.solicitud.status == 3)
+            {
+                <label class="badge badge-danger" style="height: 21px;">RECHAZADO</label>
+            }
+            else if (ViewBag.solicitud.status == 9)
+            {
+                <label class="badge badge-primary" style="height: 21px;">POR DICTAMINAR</label>
+            }
+            else
+            {
+                <label id="_label" class="badge badge-secondary" style="height: 21px;">POR AUTORIZAR CONSULTA DE BURÓ</label>
+            }
+        </div>
+    </div>
+    <div class="container" style="margin-bottom:.5em;" align="center">
+        <div class="col-md-12 row" style="background-color: #f5f5f5;padding:1em;border-radius: 25px;opacity:.9;">
+            <div class="col-md-6">
+                <table class="table table-sm">
+                    <col width="40%">
+                    <col width="60%">
+                    <tbody>
+                        <tr>
+                            <td><span class="flaticon-man-user" style="position: relative;margin-left: -20px;color: lightgray;"></span><strong> NOMBRE:</strong></td>
+                            <td id="tdNombre">
+                                @ViewBag.solicitud.nombre
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="flaticon-to-do-list" style="position: relative;margin-left: -20px;color: lightgray;"></span><strong> CLIENTE ID:</strong></td>
+                            <td id="tdCurp">@ViewBag.solicitud.clienteID</td>
+                        </tr>
+                        <tr>
+                            <td><span class="flaticon-to-do-list" style="position: relative;margin-left: -20px;color: lightgray;"></span><strong> CREDITO ID:</strong></td>
+                            <td id="tdRfc">@ViewBag.solicitud.creditoID</td>
+                        </tr>
+                        <tr>
+                            <td><span class="flaticon-dollar-symbol" style="position: relative;margin-left: -20px;color: lightgray;"></span><strong> IMPORTE:</strong></td>
+                            <td id="tdRfc"><label class="badge badge-info" style="font-size:1em"><strong>@string.Format("{0:#,0.00}", ViewBag.solicitud.importeHistorico)</strong></label></td>
+                        </tr>
+                        <tr>
+                            <td><span class="flaticon-dollar-symbol" style="position: relative;margin-left: -20px;color: lightgray;"></span><strong> CAPITAL:</strong></td>
+                            <td id="tdCurp">@string.Format("{0:#,0.00}", ViewBag.solicitud.capital)</td>
+                        </tr>
+                        <tr>
+                            <td><span class="flaticon-calendar" style="position: relative;margin-left: -20px;color: lightgray;"></span><strong> DÍAS DE ATRASO:</strong></td>
+                            <td id="tdRfc">@ViewBag.solicitud.diasAtraso</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <table class="table table-sm">
+                    <col width="40%">
+                    <col width="60%">
+                    <tbody>
+                        <tr>
+                            <td><span class="flaticon-dollar-symbol" style="position: relative;margin-left: -20px;color: lightgray;"></span><strong> IMPORTE RENOVACIÓN:</strong></td>
+                            <td id="tdRfc"><label class="badge badge-success" style="font-size:1em"><strong>@string.Format("{0:#,0.00}", ViewBag.solicitud.importe)</strong></label></td>
+                        </tr>
+                        <tr>
+                            <td><span class="flaticon-to-do-list-1" style="position: relative;margin-left: -20px;color: lightgray;"></span><strong> TICKET CONFIASHOP:</strong></td>
+                            <td id="tdRfc">@(ViewBag.solicitud.ticket == "null" ? "Sin ticket" : ViewBag.solicitud.ticket)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="" style="margin-top: 3em;">
+                    <center id="botonera">
+                        @if (@ViewBag.solicitud.status == 9)
+                        {
+                            <a href="#" id="montoDictamen" class="form_cambio btn btn-success" onClick="return false;" data-toggle="modal" data-target="#ModalDictamen" style="margin-top:1em;"><span class="flaticon-correct-symbol" style="position: relative;margin-left: -20px;"></span> DICTAMINAR</a>
+
+                            <a href="#" id="razonRechazo" class="form_cambio btn btn-danger" onClick="return false;" data-toggle="modal" data-target="#ModalRechazo" style="margin-top:1em;"><span class="flaticon-x-mark" style="position: relative;margin-left: -20px;"></span> RECHAZAR</a>
+                        }
+                        else if (@ViewBag.solicitud.status == 2)
+                        {
+                            <label class="badge badge-success" style="font-size:1.1em"><span class="flaticon-correct-symbol" style="position: relative;margin-left: -20px;"></span> DICTAMINADO</label>
+                        }
+                        else if (ViewBag.solicitud.status == 3)
+                        {
+                            <label class="badge badge-danger" style="font-size:1.1em"><span class="flaticon-x-mark" style="position: relative;margin-left: -20px;"></span> RECHAZADO</label>
+                        }
+                    </center>
+                    <center id="mensajeBotonera"></center>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal DICTAMEN-->
+    <div class="modal fade" id="ModalDictamen" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog " style="border-radius: 25px;opacity:.9;">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: steelblue;">
+                    <label style="margin-left: auto; color:white;"><Strong>DICTAMINAR SOLICITUD</Strong></label>
+                    <button type="button" class="close accionModal" data-dismiss="modal"><span class="flaticon-x-mark" style="position: relative;margin-left: -20px;color:white;"></span></button>
+                    <button type="button" class="close cargandoModal">-</button>
+                </div>
+                <div id="form_dictamen" class="modal-body">
+                    <div class="form-group">
+                        <label><strong>Importe Dictaminado:</strong></label>
+                        <br />
+                        <div style="padding-left:3em;padding-right:3em;">
+                            <input id="text_monto" type="text" class="form-control" maxlength="10" onkeypress='validate(event)' value="@ViewBag.solicitud.importe" style="text-align:center;" />
+                        </div>
+                    </div>
+                    <div class="form-group" align="center">
+                        <button id="enviar_dictamen" type="button" class="btn btn-success accionModal"><span class="flaticon-correct-symbol" style="position: relative;margin-left: -20px;"></span> CONFIRMAR</button>
+                        <label class="cargandoModal"><strong>DICTAMINANDO, POR FAVOR ESPERE ...</strong></label>
+                    </div>
+                </div>
+                <div class="modal-footer" style="background-color: steelblue;">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal RECHAZO-->
+    <div class="modal fade" id="ModalRechazo" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-lg" style="border-radius: 25px;opacity:.9;">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: steelblue;">
+                    <label style="margin-left: auto; color:white;"><Strong>RECHAZAR SOLICITUD</Strong></label>
+                    <button type="button" class="close accionModal" data-dismiss="modal"><span class="flaticon-x-mark" style="position: relative;margin-left: -20px;color:white;"></span></button>
+                    <button type="button" class="close cargandoModal">-</button>
+                </div>
+                <div id="form_dictamen" class="modal-body">
+                    <div class="form-group">
+                        <label><strong>Motivo:</strong></label>
+                        <br />
+                        <div style="padding-left:2em;padding-right:2em;">
+                            <textarea id="text_rechazo" placeholder="Escribe aquí de forma breve y clara el motivo del rechazo." style="width:100%;text-transform:uppercase" rows="3" maxlength="99"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group" align="center">
+                        <button id="enviar_rechazo" type="button" class="btn btn-success accionModal"><span class="flaticon-x-mark" style="position: relative;margin-left: -20px;"></span> RECHAZAR</button>
+                        <label class="cargandoModal"><strong>RECHAZANDO, POR FAVOR ESPERE ...</strong></label>
+                    </div>
+                </div>
+                <div class="modal-footer" style="background-color: steelblue;">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        $(".form_cambio").click(function () {
+            $("#label_doc").html("<i>" + $("#tipoDoc_" + $(this).attr('tipo')).text() + "</i >");
+            $("#enviar_cambio").attr("oid", $(this).attr("id"));
+            $("#enviar_cambio").attr("tipo", $(this).attr("tipo"));
+            $("#enviar_cambio").attr("version", $(this).attr("version"));
+            //console.log($(this).attr("id"))
+            $("#text_cambio").attr("disabled", false);
+            $("#enviar_cambio").show();
+            $(".accionModal").show();
+            $(".cargandoModal").hide();
+            $("#text_cambio").val("");
+            if ($(this).text() == "PENDIENTE") {
+                $("#text_cambio").val($(this).attr("text"));
+                $("#text_cambio").attr("disabled", true);
+                $("#enviar_cambio").hide();
+            }
+        });
+
+    $("#enviar_dictamen").click(function (e){
+        $("#enviar_dictamen").attr("disabled", true);
+        var idDoc = "@ViewBag.solicitud.solicitudID";
+        var idGrupo = "@ViewBag.solicitud.grupoID";
+        var importe = @ViewBag.solicitud.importe;
+        var monto = parseFloat($("#text_monto").val());
+        console.log(importe);
+        console.log(monto);
+        if (Number.isNaN(monto) || monto <= 0 || monto % 500 > 0 || monto > importe || typeof monto == "undefined") {
+            alert("El importe dictaminado debe ser:\n\n- mayor a 0 (cero)\n- menor o igual al monto inicial solicitado ($" + importe + " MXN)\n- multiplo de 500 (ej. 500, 1000, 1500, ..., etc.)");
+            $("#enviar_dictamen").attr("disabled", false);
+        } else {
+            if (confirm("Esta a punto de dictaminar esta solicitud con el importe de $"+monto+" MXN.\n\n\n¿Desea continuar?")) {
+                var dictamen = {
+                    idDocumento: idDoc,
+                    monto: monto,
+                    motivoRechazo: null,
+                    status: 2,
+                    grupoID: idGrupo
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Bandeja/DictaminarRenovacion",
+                    content: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: dictamen,
+                    beforeSend: function (xhr) {
+                        $("#botonera").hide();
+                        $(".accionModal").hide();
+                        $(".cargandoModal").show();
+                    },
+                    success: function (d) {
+                        if (d.Success) {
+                            $("#mensajeBotonera").html("DICTAMINANDO SOLICITUD, POR FAVOR ESPERE ...")
+                            $('#ModalDictamen').modal('toggle');
+                            location.reload();
+                        } else {
+                            alert("Error en respuesta.");
+                            $("#botonera").show();
+                        }
+                        $("#enviar_dictamen").attr("disabled", false);
+                        $(".accionModal").show();
+                        $(".cargandoModal").hide();
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        alert('Error al realizar la acción!!');
+                        $("#botonera").show();
+                        $("#enviar_dictamen").attr("disabled", false);
+                        $(".accionModal").show();
+                        $(".cargandoModal").hide();
+                    }
+                });
+
+            } else {
+                $("#enviar_dictamen").attr("disabled", false);
+            }
+        }
+    });
+
+    $("#enviar_rechazo").click(function (e){
+        $("#enviar_rechazo").attr("disabled", true);
+        var idDoc = "@ViewBag.solicitud.solicitudID";
+        var motivo = $("#text_rechazo").val();
+        var idGrupo = "@ViewBag.solicitud.grupoID";
+        var importe = @ViewBag.solicitud.importe;
+        if (motivo.length <= 0 || typeof motivo == "undefined") {
+            alert("Es necesario escribir el motivo del rechazo, por favor se breve y claro");
+            $("#enviar_rechazo").attr("disabled", false);
+        } else {
+            if (confirm("Esta a punto de rechazar esta solicitud.\n\n\n¿Desea continuar?")) {
+                var dictamen = {
+                    idDocumento: idDoc,
+                    monto: importe,
+                    motivoRechazo: motivo.toUpperCase(),
+                    status: 3,
+                    grupoID: idGrupo
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Bandeja/DictaminarRenovacion",
+                    content: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: dictamen,
+                    beforeSend: function (xhr) {
+                        $("#botonera").hide();
+                        $(".accionModal").hide();
+                        $(".cargandoModal").show();
+                    },
+                    success: function (d) {
+                        if (d.Success) {
+                            $("#mensajeBotonera").html("RECHAZANDO SOLICITUD, POR FAVOR ESPERE ...")
+                            $('#ModalRechazo').modal('toggle');
+                            location.reload();
+                        } else {
+                            alert("Error en respuesta.");
+                            $("#botonera").show();
+                        }
+                        $("#enviar_rechazo").attr("disabled", false);
+                        $(".accionModal").show();
+                        $(".cargandoModal").hide();
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        alert('Error al realizar la acción!!');
+                        $("#botonera").show();
+                        $("#enviar_rechazo").attr("disabled", false);
+                        $(".accionModal").show();
+                        $(".cargandoModal").hide();
+                    }
+                });
+
+            } else {
+                $("#enviar_rechazo").attr("disabled", false);
+            }
+        }
+    });
+    </script>
+}
+else
+{
+    <div style="background-color: lightcoral;color:white; padding:1em;" align="center"><strong>Error: @ViewBag.error</strong></div>
+}

@@ -64,7 +64,15 @@
                 </td>
                 <td><span class="flaticon-man-user" style="position: relative;margin-left: -20px;"></span> @(solicitud.persona.nombre + " " + solicitud.persona.nombreSegundo + " " + solicitud.persona.apellido + " " + solicitud.persona.apellidoSegundo)</td>
                 <td align="right" style="padding-right: 4em;">@string.Format("{0:#,0.00}", solicitud.importe)</td>
-                <td><center><a href='/Bandeja/Detalle/?_ID=@solicitud.solicitudID' target='_blank'>VER</a></center></td>
+                
+                @if (solicitud.renovacion != true)
+                {
+                    <td><center><a href='/Bandeja/Detalle/?_ID=@solicitud.solicitudID' target='_blank'>VER</a></center></td>
+                }
+                else
+                {
+                    <td><center><a href='/Bandeja/DetalleRenovacion/?_ID=@solicitud.solicitudID' target='_blank'>VER</a></center></td>
+                }
             </tr>
         }
     </tbody>

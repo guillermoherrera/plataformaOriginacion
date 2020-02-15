@@ -20,6 +20,9 @@
                 Para actualizar los datos manualmente da clic aquí
                 <a href="#" onClick="return false;" id="btn_cargar" data-toggle="tooltip" title="RECARGAR DATOS"><span class="flaticon-update-arrow" style="position: relative;margin-left: -20px;"></span></a>.
             </div>
+            <div style="font-size:.8em;">
+                *<strong><i style="color:brown;">(R)</i></strong><i> Renovacón.</i>
+            </div>
         </div>
     </div>
 }
@@ -35,7 +38,11 @@ else
     function dataGrid_change_cellTemplate(element, info) {
         var data = info.data;
         var ext = data.tipoContrato == 1 ? "Detalle/?_ID=" + data.solicitudID : "DetalleGrupo/?_ID=" + data.grupoID;
-        element.html("<center><a href='/Bandeja/" + ext + "' target='_blank'>VER</a></center>");
+        if (data.renovacion) {
+            element.html("<center><a href='/Bandeja/Renovacion" + ext + "' target='_blank'>VER</a></center>");
+        } else {
+            element.html("<center><a href='/Bandeja/" + ext + "' target='_blank'>VER</a></center>");
+        }
     }
     function dataGrid_change_cellTemplate2(element, info) {
         var data = info.data;
@@ -131,11 +138,11 @@ else
         var data = info.data;
         var label;
         if (data.grupoID == null) {
-            label = data.persona.nombre + " " + data.persona.nombreSegundo + " " + data.persona.apellido + " " + data.persona.apellidoSegundo
+            label = (data.renovacion ? "<strong> (R)  </strong>" : "") + data.persona.nombre + " " + data.persona.nombreSegundo + " " + data.persona.apellido + " " + data.persona.apellidoSegundo
         } else {
-            label = data.grupoNombre
+            label = (data.renovacion ? "<strong> (R)  </strong>" : "") + data.grupoNombre
         }
-        var label2 = data.tipoContrato == 1 ? "<span class='flaticon-man-user' style='position: relative; margin-left: -20px;color: black;'><i> " + label + "</i></span>" : data.tipoContrato == 2 ? "<span class='flaticon-users-group' style='position: relative; margin-left: -20px;color: black;'><i> " + label +"</i></span>" : "<span class='flaticon-pause-symbol' style='position: relative; margin-left: -20px;color: green;'><i> Sin especificar</i></span>";
+        var label2 = data.tipoContrato == 1 ? "<span class='flaticon-man-user' style='position: relative; margin-left: -20px;color: black;'><i> " + label + "</i></span>" : data.tipoContrato == 2 ? "<span class='flaticon-users-group' style='position: relative; margin-left: -20px;color: " + (data.renovacion ? "brown" : "black") + ";'><i> " + label +"</i></span>" : "<span class='flaticon-pause-symbol' style='position: relative; margin-left: -20px;color: green;'><i> Sin especificar</i></span>";
 
         element.html(label2);
     }
