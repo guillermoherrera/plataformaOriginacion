@@ -314,6 +314,7 @@ namespace plataformaOriginacion.Models
                     Dictionary<string, object> updates = new Dictionary<string, object>{
                         {"mesaControlID", controlID },
                         {"mesaControlUsuario", controlUsuario },
+                        {"fechaAsignacion", DateTime.UtcNow}
                     };
                     transaction.Update(documentoRef, updates);
 
@@ -361,6 +362,7 @@ namespace plataformaOriginacion.Models
                     Dictionary<string, object> updates = new Dictionary<string, object>{
                         {"mesaControlID", controlID },
                         {"mesaControlUsuario", controlUsuario },
+                        {"fechaAsignacion", DateTime.UtcNow}
                     };
                     transaction.Update(documentoRef, updates);
 
@@ -507,7 +509,9 @@ namespace plataformaOriginacion.Models
                         grupoRef = db.Collection("GruposRenovacion").Document(grupo);
                         snapshotGpo = await transaction.GetSnapshotAsync(grupoRef);
                     }
-                    
+                    if (status == 7 && (snapshot.ConvertTo<Solicitud>().status != 1 && snapshot.ConvertTo<Solicitud>().status != 10)) { throw new Exception("cambio de Status no permitido"); }
+                    if (status == 2 && snapshot.ConvertTo<Solicitud>().status != 9) { throw new Exception("cambio de Status no permitido"); }
+                    if (status == 3 && snapshot.ConvertTo<Solicitud>().status != 9) { throw new Exception("cambio de Status no permitido"); }
                     int newStatus = status;
                     bool dictamen = false;
                     if (status == 2) { dictamen = true; } else { dictamen = false; }
@@ -517,6 +521,7 @@ namespace plataformaOriginacion.Models
                     };
                     if ((status == 2 || status == 3) && grupo == null){ updates.Add("dictamen", dictamen); }//agregar si es o no individual
                     if (status == 2 || status == 3){ updates.Add("importeSolicitado", snapshot.ConvertTo<Solicitud>().importe ); }
+                    if (status == 2 || status == 3) { updates.Add("fechaDictamen", DateTime.UtcNow); }
                     //if (status == 2) { updates.Add("importe", monto); }
                     if (status == 3) { updates.Add("motivoRechazo", motivoRechazo); }
                     if (snapshot.ConvertTo<Solicitud>().mesaControlID == null) { throw new Exception("Solicitud no Asignada"); }
@@ -564,10 +569,12 @@ namespace plataformaOriginacion.Models
                     bool dictamen = aut == 0 ? false : true;
                     Dictionary<string, object> updates = new Dictionary<string, object> {
                         {"status", newStatus },
-                        {"dictamen", dictamen }
+                        {"dictamen", dictamen },
+                        {"fechaDictamen", DateTime.UtcNow }
                     };
                     if (aut == 0) { updates.Add("motivoRechazo", motivo); }
                     if (snapshot.ConvertTo<Grupo>().mesaControlID == null) { throw new Exception("Grupo no Asignado"); }
+                    if (snapshot.ConvertTo<Grupo>().status == 3) { throw new Exception("cambio de Status no permitido"); }
                     transaction.Update(grupo, updates);
 
                     Query capitalQuery = db.Collection("Solicitudes").WhereEqualTo("grupoID", _ID);
@@ -638,10 +645,12 @@ namespace plataformaOriginacion.Models
                 {
                     solicitud = document.ConvertTo<Solicitud>();
                     if (solicitud.mesaControlID == null) { throw new Exception("Solicitud no Asignada"); }
+                    if (solicitud.status != 1 && solicitud.status != 6 && solicitud.status != 10) { throw new Exception("cambio de Status no permitido"); }
                     solicitud.solicitudID = cambioDoc.idDocumento;
                     var docEditar = solicitud.documentos.Where(doc => doc.tipo == int.Parse(cambioDoc.tipo) && doc.version == int.Parse(cambioDoc.version)).FirstOrDefault();
                     if (docEditar != null)
                     {
+                        if (docEditar.solicitudCambio == true) { throw new Exception("Solicitud de cambio ya realizado previamente."); }
                         docEditar.observacion = cambioDoc.observacion;
                         docEditar.solicitudCambio = true;
                         Dictionary<string, object> updates = new Dictionary<string, object>();

@@ -79,6 +79,20 @@ namespace plataformaOriginacion.Controllers
                                 solicitud.mesaControlID = HttpContext.Session.GetString(SessionKeyId);
                             }
                         }
+                        else if (solicitud.mesaControlID == null && solicitud.grupoID != null)
+                        {
+                            if (await FireStore.SetControlId(_ID, HttpContext.Session.GetString(SessionKeyId), HttpContext.Session.GetString(SessionKeyNombre), false))
+                            {
+                                solicitud.mesaControlID = HttpContext.Session.GetString(SessionKeyId);
+                            }
+                            else 
+                            {
+                                if (await FireStore.SetRenovacionControlId(_ID, HttpContext.Session.GetString(SessionKeyId), HttpContext.Session.GetString(SessionKeyNombre), false))
+                                {
+                                    solicitud.mesaControlID = HttpContext.Session.GetString(SessionKeyId);
+                                }
+                            }
+                        }
                         else if (solicitud.mesaControlID != HttpContext.Session.GetString(SessionKeyId) && solicitud.dictamen == null)
                         {
                             execeptionMsg = solicitud.mesaControlID == null ? "" : "Esta solicitud ya esta siendo atendida por " + solicitud.mesaControlUsuario + ".";
@@ -121,10 +135,23 @@ namespace plataformaOriginacion.Controllers
             {
                 Renovacion solicitud = new Renovacion();
                 ViewBag.usuario = HttpContext.Session.GetString(SessionKeyNombre);
+                string execeptionMsg;
                 try
                 {
                     solicitud = await FireStore.GetRenovacionFromFireStore(_ID);
                     if (solicitud.solicitudID != null) {
+                        if (solicitud.mesaControlID == null && solicitud.grupoID == null)
+                        {
+                            if (await FireStore.SetControlId(_ID, HttpContext.Session.GetString(SessionKeyId), HttpContext.Session.GetString(SessionKeyNombre), false))
+                            {
+                                solicitud.mesaControlID = HttpContext.Session.GetString(SessionKeyId);
+                            }
+                        }
+                        else if (solicitud.mesaControlID != HttpContext.Session.GetString(SessionKeyId) && solicitud.dictamen == null)
+                        {
+                            execeptionMsg = solicitud.mesaControlID == null ? "" : "Esta solicitud ya esta siendo atendida por " + solicitud.mesaControlUsuario + ".";
+                            throw new Exception(execeptionMsg);
+                        }
                         ViewBag.solicitud = solicitud;
                     }
                     else

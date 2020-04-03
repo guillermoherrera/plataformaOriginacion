@@ -1,0 +1,1162 @@
+-[08:14:34 INF] User profile is available. Using 'C:\Users\gherr\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest. [IP ] <1> 
+
+-[08:14:36 WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead. [IP ] <1> 
+
+-[08:14:51 INF] Request starting HTTP/1.1 GET https://localhost:8087/   [IP ] <15> 
+
+-[08:14:52 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <15> 
+
+-[08:14:52 INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <15> 
+
+-[08:14:52 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <15> 
+
+-[08:14:52 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 446.8582ms. [IP ::1] <15> 
+
+-[08:14:52 INF] Executing ViewResult, running view Index. [IP ::1] <15> 
+
+-[08:14:53 INF] Executed ViewResult - view Index executed in 1001.5459000000001ms. [IP ::1] <15> 
+
+-[08:14:53 INF] Executed action plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) in 1572.3997000000002ms [IP ::1] <15> 
+
+-[08:14:53 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <15> 
+
+-[08:14:53 INF] Request finished in 2416.5724ms 200 text/html; charset=utf-8 [IP ] <15> 
+
+-[08:15:12 INF] Request starting HTTP/1.1 POST https://localhost:8087/ application/x-www-form-urlencoded 216 [IP ] <16> 
+
+-[08:15:12 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <16> 
+
+-[08:15:12 INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(plataformaOriginacion.Models.LoginViewModel) on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <16> 
+
+-[08:15:12 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <16> 
+
+-[08:15:13 INF] usuario logueado: Johana Sarai Reza Reyes [IP ::1] <16> 
+
+-[08:15:13 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.RedirectToActionResult in 485.44190000000003ms. [IP ::1] <16> 
+
+-[08:15:13 INF] Executing RedirectResult, redirecting to /Bandeja. [IP ::1] <16> 
+
+-[08:15:13 INF] Executed action plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) in 609.6862ms [IP ::1] <16> 
+
+-[08:15:13 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <16> 
+
+-[08:15:13 INF] Session started; Key:dc61f458-527f-275f-dd3c-67dce4fef8ee, Id:2c4ebf79-90b3-f4ab-1ab4-9570f3585ca5 [IP ] <16> 
+
+-[08:15:13 INF] Request finished in 678.6662ms 302  [IP ] <16> 
+
+-[08:15:13 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja   [IP ] <9> 
+
+-[08:15:13 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Index (plataformaOriginacion)' [IP ::1] <9> 
+
+-[08:15:13 INF] Route matched with {action = "Index", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <9> 
+
+-[08:15:13 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <9> 
+
+-[08:15:13 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 3.5305ms. [IP ::1] <9> 
+
+-[08:15:13 INF] Executing ViewResult, running view Index. [IP ::1] <9> 
+
+-[08:15:13 INF] Executed ViewResult - view Index executed in 471.0498ms. [IP ::1] <9> 
+
+-[08:15:13 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Index (plataformaOriginacion) in 475.60970000000003ms [IP ::1] <9> 
+
+-[08:15:13 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Index (plataformaOriginacion)' [IP ::1] <9> 
+
+-[08:15:13 INF] Request finished in 506.7623ms 200 text/html; charset=utf-8 [IP ] <9> 
+
+-[08:15:14 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582208113785   [IP ] <15> 
+
+-[08:15:14 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <15> 
+
+-[08:15:14 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <15> 
+
+-[08:15:14 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <15> 
+
+-[08:15:19 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 4763.3618000000006ms. [IP ::1] <9> 
+
+-[08:15:19 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <9> 
+
+-[08:15:19 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 4994.6363ms [IP ::1] <9> 
+
+-[08:15:19 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <9> 
+
+-[08:15:19 INF] Request finished in 5035.8315ms 200 application/json; charset=utf-8 [IP ] <9> 
+
+-[08:25:16 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <34> 
+
+-[08:25:16 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <34> 
+
+-[08:25:16 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <34> 
+
+-[08:25:16 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <34> 
+
+-[08:25:16 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.4267ms. [IP ::1] <34> 
+
+-[08:25:16 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <34> 
+
+-[08:25:16 INF] Executed PartialViewResult - view _Solicitudes executed in 2.1713ms. [IP ::1] <34> 
+
+-[08:25:16 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 5.2757000000000005ms [IP ::1] <34> 
+
+-[08:25:16 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <34> 
+
+-[08:25:16 INF] Request finished in 14.9933ms 200 text/html; charset=utf-8 [IP ] <34> 
+
+-[08:25:17 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582208113786   [IP ] <34> 
+
+-[08:25:17 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <34> 
+
+-[08:25:17 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <34> 
+
+-[08:25:17 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <34> 
+
+-[08:25:17 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 475.8288ms. [IP ::1] <39> 
+
+-[08:25:17 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <39> 
+
+-[08:25:17 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 481.1236ms [IP ::1] <39> 
+
+-[08:25:17 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <39> 
+
+-[08:25:17 INF] Request finished in 482.2042ms 200 application/json; charset=utf-8 [IP ] <39> 
+
+-[08:35:20 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <51> 
+
+-[08:35:20 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <51> 
+
+-[08:35:20 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <51> 
+
+-[08:35:20 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <51> 
+
+-[08:35:20 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.20600000000000002ms. [IP ::1] <51> 
+
+-[08:35:20 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <51> 
+
+-[08:35:20 INF] Executed PartialViewResult - view _Solicitudes executed in 2.9755000000000003ms. [IP ::1] <51> 
+
+-[08:35:20 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 4.2159ms [IP ::1] <51> 
+
+-[08:35:20 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <51> 
+
+-[08:35:20 INF] Request finished in 6.1333ms 200 text/html; charset=utf-8 [IP ] <51> 
+
+-[08:35:21 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582208113787   [IP ] <48> 
+
+-[08:35:21 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <48> 
+
+-[08:35:21 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <48> 
+
+-[08:35:21 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <48> 
+
+-[08:35:21 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 526.1674ms. [IP ::1] <53> 
+
+-[08:35:21 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <53> 
+
+-[08:35:21 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 531.33530000000007ms [IP ::1] <53> 
+
+-[08:35:21 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <53> 
+
+-[08:35:21 INF] Request finished in 532.9066ms 200 application/json; charset=utf-8 [IP ] <53> 
+
+-[08:45:21 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <68> 
+
+-[08:45:21 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <68> 
+
+-[08:45:21 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <68> 
+
+-[08:45:21 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <68> 
+
+-[08:45:21 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.0663ms. [IP ::1] <68> 
+
+-[08:45:21 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <68> 
+
+-[08:45:21 INF] Executed PartialViewResult - view _Solicitudes executed in 1.6197000000000001ms. [IP ::1] <68> 
+
+-[08:45:21 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 2.0885000000000002ms [IP ::1] <68> 
+
+-[08:45:21 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <68> 
+
+-[08:45:21 INF] Request finished in 3.1731ms 200 text/html; charset=utf-8 [IP ] <68> 
+
+-[08:45:22 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582208113788   [IP ] <66> 
+
+-[08:45:22 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <66> 
+
+-[08:45:22 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <66> 
+
+-[08:45:22 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <66> 
+
+-[08:45:24 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 2585.3684000000003ms. [IP ::1] <70> 
+
+-[08:45:24 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <70> 
+
+-[08:45:24 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 2587.4712ms [IP ::1] <70> 
+
+-[08:45:24 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <70> 
+
+-[08:45:24 INF] Request finished in 2588.3994ms 200 application/json; charset=utf-8 [IP ] <70> 
+
+-[08:55:22 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <78> 
+
+-[08:55:22 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <78> 
+
+-[08:55:22 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <78> 
+
+-[08:55:22 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <78> 
+
+-[08:55:22 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.1315ms. [IP ::1] <78> 
+
+-[08:55:22 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <78> 
+
+-[08:55:22 INF] Executed PartialViewResult - view _Solicitudes executed in 3.2658ms. [IP ::1] <78> 
+
+-[08:55:22 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 3.9714ms [IP ::1] <78> 
+
+-[08:55:22 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <78> 
+
+-[08:55:22 INF] Request finished in 6.0404ms 200 text/html; charset=utf-8 [IP ] <78> 
+
+-[08:55:23 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582208113789   [IP ] <80> 
+
+-[08:55:23 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <80> 
+
+-[08:55:23 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <80> 
+
+-[08:55:23 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <80> 
+
+-[08:55:25 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 2517.7995ms. [IP ::1] <78> 
+
+-[08:55:25 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <78> 
+
+-[08:55:25 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 2522.8025000000002ms [IP ::1] <78> 
+
+-[08:55:25 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <78> 
+
+-[08:55:25 INF] Request finished in 2524.2698ms 200 application/json; charset=utf-8 [IP ] <78> 
+
+-[09:05:23 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <82> 
+
+-[09:05:23 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <82> 
+
+-[09:05:23 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <82> 
+
+-[09:05:23 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <82> 
+
+-[09:05:23 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.1095ms. [IP ::1] <82> 
+
+-[09:05:23 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <82> 
+
+-[09:05:23 INF] Executed PartialViewResult - view _Solicitudes executed in 4.9563000000000006ms. [IP ::1] <82> 
+
+-[09:05:23 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 5.8497ms [IP ::1] <82> 
+
+-[09:05:23 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <82> 
+
+-[09:05:23 INF] Request finished in 27.616ms 200 text/html; charset=utf-8 [IP ] <82> 
+
+-[09:05:24 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582208113790   [IP ] <81> 
+
+-[09:05:24 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <81> 
+
+-[09:05:24 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <81> 
+
+-[09:05:24 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <81> 
+
+-[09:05:24 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 473.68440000000004ms. [IP ::1] <78> 
+
+-[09:05:24 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <78> 
+
+-[09:05:24 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 479.3757ms [IP ::1] <78> 
+
+-[09:05:24 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <78> 
+
+-[09:05:24 INF] Request finished in 480.706ms 200 application/json; charset=utf-8 [IP ] <78> 
+
+-[09:15:24 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <68> 
+
+-[09:15:24 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <68> 
+
+-[09:15:24 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <68> 
+
+-[09:15:24 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <68> 
+
+-[09:15:24 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.12660000000000002ms. [IP ::1] <68> 
+
+-[09:15:24 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <68> 
+
+-[09:15:24 INF] Executed PartialViewResult - view _Solicitudes executed in 5.1114000000000006ms. [IP ::1] <68> 
+
+-[09:15:24 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 6.1522000000000006ms [IP ::1] <68> 
+
+-[09:15:24 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <68> 
+
+-[09:15:24 INF] Request finished in 8.593ms 200 text/html; charset=utf-8 [IP ] <68> 
+
+-[09:15:25 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582208113791   [IP ] <65> 
+
+-[09:15:25 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <65> 
+
+-[09:15:25 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <65> 
+
+-[09:15:25 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <65> 
+
+-[09:15:27 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 2495.9156000000003ms. [IP ::1] <63> 
+
+-[09:15:27 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <63> 
+
+-[09:15:27 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 2506.0821ms [IP ::1] <63> 
+
+-[09:15:27 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <63> 
+
+-[09:15:27 INF] Request finished in 2507.5394ms 200 application/json; charset=utf-8 [IP ] <63> 
+
+-[09:25:27 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <53> 
+
+-[09:25:27 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <53> 
+
+-[09:25:27 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <53> 
+
+-[09:25:27 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <53> 
+
+-[09:25:27 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.12440000000000001ms. [IP ::1] <53> 
+
+-[09:25:27 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <53> 
+
+-[09:25:27 INF] Executed PartialViewResult - view _Solicitudes executed in 3.6849000000000003ms. [IP ::1] <53> 
+
+-[09:25:27 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 4.51ms [IP ::1] <53> 
+
+-[09:25:27 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <53> 
+
+-[09:25:27 INF] Request finished in 7.2052ms 200 text/html; charset=utf-8 [IP ] <53> 
+
+-[09:25:27 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582208113792   [IP ] <48> 
+
+-[09:25:27 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <48> 
+
+-[09:25:27 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <48> 
+
+-[09:25:27 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <48> 
+
+-[09:25:28 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 528.9089ms. [IP ::1] <53> 
+
+-[09:25:28 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <53> 
+
+-[09:25:28 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 536.0239ms [IP ::1] <53> 
+
+-[09:25:28 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <53> 
+
+-[09:25:28 INF] Request finished in 537.7309ms 200 application/json; charset=utf-8 [IP ] <53> 
+
+-[09:35:28 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <39> 
+
+-[09:35:28 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <39> 
+
+-[09:35:28 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <39> 
+
+-[09:35:28 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <39> 
+
+-[09:35:28 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.14400000000000002ms. [IP ::1] <39> 
+
+-[09:35:28 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <39> 
+
+-[09:35:28 INF] Executed PartialViewResult - view _Solicitudes executed in 6.1172ms. [IP ::1] <39> 
+
+-[09:35:28 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 7.1274000000000006ms [IP ::1] <39> 
+
+-[09:35:28 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <39> 
+
+-[09:35:28 INF] Request finished in 8.9153ms 200 text/html; charset=utf-8 [IP ] <39> 
+
+-[09:35:28 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582208113793   [IP ] <33> 
+
+-[09:35:28 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <33> 
+
+-[09:35:28 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <33> 
+
+-[09:35:28 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <33> 
+
+-[09:35:29 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 469.401ms. [IP ::1] <39> 
+
+-[09:35:29 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <39> 
+
+-[09:35:29 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 479.42870000000005ms [IP ::1] <39> 
+
+-[09:35:29 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <39> 
+
+-[09:35:29 INF] Request finished in 480.3795ms 200 application/json; charset=utf-8 [IP ] <39> 
+
+-[09:45:29 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <5> 
+
+-[09:45:29 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <5> 
+
+-[09:45:29 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <5> 
+
+-[09:45:29 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <5> 
+
+-[09:45:29 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.0385ms. [IP ::1] <5> 
+
+-[09:45:29 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <5> 
+
+-[09:45:29 INF] Executed PartialViewResult - view _Solicitudes executed in 1.1862000000000001ms. [IP ::1] <5> 
+
+-[09:45:29 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 1.3549ms [IP ::1] <5> 
+
+-[09:45:29 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <5> 
+
+-[09:45:29 INF] Request finished in 1.8288ms 200 text/html; charset=utf-8 [IP ] <5> 
+
+-[09:45:29 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582208113794   [IP ] <5> 
+
+-[09:45:29 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <5> 
+
+-[09:45:29 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <5> 
+
+-[09:45:29 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <5> 
+
+-[09:45:30 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 839.07080000000008ms. [IP ::1] <16> 
+
+-[09:45:30 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <16> 
+
+-[09:45:30 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 841.4048ms [IP ::1] <16> 
+
+-[09:45:30 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <16> 
+
+-[09:45:30 INF] Request finished in 841.972ms 200 application/json; charset=utf-8 [IP ] <16> 
+
+-[09:55:30 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <14> 
+
+-[09:55:30 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <14> 
+
+-[09:55:30 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <14> 
+
+-[09:55:30 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <14> 
+
+-[09:55:30 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.036500000000000005ms. [IP ::1] <14> 
+
+-[09:55:30 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <14> 
+
+-[09:55:30 INF] Executed PartialViewResult - view _Solicitudes executed in 1.1671ms. [IP ::1] <14> 
+
+-[09:55:30 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 1.3889ms [IP ::1] <14> 
+
+-[09:55:30 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <14> 
+
+-[09:55:30 INF] Request finished in 2.3552ms 200 text/html; charset=utf-8 [IP ] <14> 
+
+-[09:55:30 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582208113795   [IP ] <14> 
+
+-[09:55:30 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <14> 
+
+-[09:55:30 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <14> 
+
+-[09:55:30 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <14> 
+
+-[09:55:32 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 2458.6676ms. [IP ::1] <11> 
+
+-[09:55:32 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <11> 
+
+-[09:55:32 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 2460.2315000000003ms [IP ::1] <11> 
+
+-[09:55:32 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <11> 
+
+-[09:55:32 INF] Request finished in 2460.6551ms 200 application/json; charset=utf-8 [IP ] <11> 
+
+-[10:05:32 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <38> 
+
+-[10:05:32 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <38> 
+
+-[10:05:32 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <38> 
+
+-[10:05:32 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <38> 
+
+-[10:05:32 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.07060000000000001ms. [IP ::1] <38> 
+
+-[10:05:32 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <38> 
+
+-[10:05:32 INF] Executed PartialViewResult - view _Solicitudes executed in 1.4789ms. [IP ::1] <38> 
+
+-[10:05:32 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 1.7969000000000002ms [IP ::1] <38> 
+
+-[10:05:32 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <38> 
+
+-[10:05:32 INF] Request finished in 2.3408ms 200 text/html; charset=utf-8 [IP ] <38> 
+
+-[10:05:33 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582208113796   [IP ] <44> 
+
+-[10:05:33 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <44> 
+
+-[10:05:33 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <44> 
+
+-[10:05:33 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <44> 
+
+-[10:05:33 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 432.5178ms. [IP ::1] <41> 
+
+-[10:05:33 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <41> 
+
+-[10:05:33 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 434.27070000000003ms [IP ::1] <41> 
+
+-[10:05:33 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <41> 
+
+-[10:05:33 INF] Request finished in 434.8259ms 200 application/json; charset=utf-8 [IP ] <41> 
+
+-[10:33:05 INF] User profile is available. Using 'C:\Users\gherr\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest. [IP ] <1> 
+
+-[10:33:07 WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead. [IP ] <1> 
+
+-[10:33:19 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja   [IP ] <9> 
+
+-[10:33:19 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Index (plataformaOriginacion)' [IP ::1] <9> 
+
+-[10:33:19 INF] Route matched with {action = "Index", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <9> 
+
+-[10:33:19 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <9> 
+
+-[10:33:19 INF] Accessing expired session, Key:dc61f458-527f-275f-dd3c-67dce4fef8ee [IP ::1] <9> 
+
+-[10:33:19 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.RedirectToActionResult in 150.2585ms. [IP ::1] <9> 
+
+-[10:33:20 INF] Executing RedirectResult, redirecting to /. [IP ::1] <9> 
+
+-[10:33:20 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Index (plataformaOriginacion) in 218.6458ms [IP ::1] <9> 
+
+-[10:33:20 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Index (plataformaOriginacion)' [IP ::1] <9> 
+
+-[10:33:20 INF] Request finished in 406.3281ms 302  [IP ] <9> 
+
+-[10:33:20 INF] Request starting HTTP/1.1 GET https://localhost:8087/   [IP ] <7> 
+
+-[10:33:20 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <7> 
+
+-[10:33:20 INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <7> 
+
+-[10:33:20 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <7> 
+
+-[10:33:20 INF] Accessing expired session, Key:dc61f458-527f-275f-dd3c-67dce4fef8ee [IP ::1] <7> 
+
+-[10:33:20 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 86.9693ms. [IP ::1] <7> 
+
+-[10:33:20 INF] Executing ViewResult, running view Index. [IP ::1] <7> 
+
+-[10:33:20 INF] Executed ViewResult - view Index executed in 203.65200000000002ms. [IP ::1] <7> 
+
+-[10:33:20 INF] Executed action plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) in 294.1098ms [IP ::1] <7> 
+
+-[10:33:20 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <7> 
+
+-[10:33:20 INF] Request finished in 301.7025ms 200 text/html; charset=utf-8 [IP ] <7> 
+
+-[10:57:23 INF] Request starting HTTP/1.1 POST https://localhost:8087/ application/x-www-form-urlencoded 216 [IP ] <39> 
+
+-[10:57:23 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <39> 
+
+-[10:57:23 INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(plataformaOriginacion.Models.LoginViewModel) on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <39> 
+
+-[10:57:23 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <39> 
+
+-[10:57:24 INF] Accessing expired session, Key:dc61f458-527f-275f-dd3c-67dce4fef8ee [IP ::1] <39> 
+
+-[10:57:24 INF] usuario logueado: Johana Sarai Reza Reyes [IP ::1] <39> 
+
+-[10:57:24 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.RedirectToActionResult in 550.9077ms. [IP ::1] <39> 
+
+-[10:57:24 INF] Executing RedirectResult, redirecting to /Bandeja. [IP ::1] <39> 
+
+-[10:57:24 INF] Executed action plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) in 611.2285ms [IP ::1] <39> 
+
+-[10:57:24 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <39> 
+
+-[10:57:24 INF] Session started; Key:dc61f458-527f-275f-dd3c-67dce4fef8ee, Id:50da83de-a623-6d66-ff64-3355e99890ca [IP ] <39> 
+
+-[10:57:24 INF] Request finished in 700.6807ms 302  [IP ] <39> 
+
+-[10:57:24 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja   [IP ] <32> 
+
+-[10:57:24 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Index (plataformaOriginacion)' [IP ::1] <32> 
+
+-[10:57:24 INF] Route matched with {action = "Index", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <32> 
+
+-[10:57:24 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <32> 
+
+-[10:57:24 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 1.5181ms. [IP ::1] <32> 
+
+-[10:57:24 INF] Executing ViewResult, running view Index. [IP ::1] <32> 
+
+-[10:57:24 INF] Executed ViewResult - view Index executed in 281.9123ms. [IP ::1] <32> 
+
+-[10:57:24 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Index (plataformaOriginacion) in 283.77340000000004ms [IP ::1] <32> 
+
+-[10:57:24 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Index (plataformaOriginacion)' [IP ::1] <32> 
+
+-[10:57:24 INF] Request finished in 285.5421ms 200 text/html; charset=utf-8 [IP ] <32> 
+
+-[10:57:25 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582217844929   [IP ] <38> 
+
+-[10:57:25 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <38> 
+
+-[10:57:25 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <38> 
+
+-[10:57:25 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <38> 
+
+-[10:57:27 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 1544.3851ms. [IP ::1] <32> 
+
+-[10:57:27 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <32> 
+
+-[10:57:27 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 1614.8986ms [IP ::1] <32> 
+
+-[10:57:27 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <32> 
+
+-[10:57:27 INF] Request finished in 1639.1001ms 200 application/json; charset=utf-8 [IP ] <32> 
+
+-[10:57:33 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/RenovacionDetalleGrupo/?_ID=zfnfFgMp210t4C4kZvkE   [IP ] <38> 
+
+-[10:57:33 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.RenovacionDetalleGrupo (plataformaOriginacion)' [IP ::1] <38> 
+
+-[10:57:33 INF] Route matched with {action = "RenovacionDetalleGrupo", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RenovacionDetalleGrupo(System.String) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <38> 
+
+-[10:57:33 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.RenovacionDetalleGrupo (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <38> 
+
+-[10:57:33 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.RenovacionDetalleGrupo (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 376.9193ms. [IP ::1] <34> 
+
+-[10:57:33 INF] Executing ViewResult, running view RenovacionDetalleGrupo. [IP ::1] <34> 
+
+-[10:57:34 INF] Executed ViewResult - view RenovacionDetalleGrupo executed in 1217.2382ms. [IP ::1] <34> 
+
+-[10:57:34 INF] Executed action plataformaOriginacion.Controllers.BandejaController.RenovacionDetalleGrupo (plataformaOriginacion) in 1594.6472ms [IP ::1] <34> 
+
+-[10:57:34 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.RenovacionDetalleGrupo (plataformaOriginacion)' [IP ::1] <34> 
+
+-[10:57:34 INF] Request finished in 1607.4493ms 200 text/html; charset=utf-8 [IP ] <34> 
+
+-[11:07:27 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <63> 
+
+-[11:07:27 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <63> 
+
+-[11:07:27 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <63> 
+
+-[11:07:27 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <63> 
+
+-[11:07:27 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.2691ms. [IP ::1] <63> 
+
+-[11:07:27 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <63> 
+
+-[11:07:27 INF] Executed PartialViewResult - view _Solicitudes executed in 1.2109ms. [IP ::1] <63> 
+
+-[11:07:27 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 3.0319000000000003ms [IP ::1] <63> 
+
+-[11:07:27 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <63> 
+
+-[11:07:27 INF] Request finished in 4.5182ms 200 text/html; charset=utf-8 [IP ] <63> 
+
+-[11:07:28 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582217844930   [IP ] <61> 
+
+-[11:07:28 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <61> 
+
+-[11:07:28 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <61> 
+
+-[11:07:28 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <61> 
+
+-[11:07:28 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 388.7835ms. [IP ::1] <58> 
+
+-[11:07:28 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <58> 
+
+-[11:07:28 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 390.6046ms [IP ::1] <58> 
+
+-[11:07:28 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <58> 
+
+-[11:07:28 INF] Request finished in 391.0756ms 200 application/json; charset=utf-8 [IP ] <58> 
+
+-[11:17:29 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <76> 
+
+-[11:17:29 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <76> 
+
+-[11:17:29 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <76> 
+
+-[11:17:29 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <76> 
+
+-[11:17:29 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.038700000000000005ms. [IP ::1] <76> 
+
+-[11:17:29 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <76> 
+
+-[11:17:29 INF] Executed PartialViewResult - view _Solicitudes executed in 0.7467ms. [IP ::1] <76> 
+
+-[11:17:29 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 0.9828ms [IP ::1] <76> 
+
+-[11:17:29 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <76> 
+
+-[11:17:29 INF] Request finished in 1.4509ms 200 text/html; charset=utf-8 [IP ] <76> 
+
+-[11:17:30 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582217844931   [IP ] <74> 
+
+-[11:17:30 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <74> 
+
+-[11:17:30 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <74> 
+
+-[11:17:30 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <74> 
+
+-[11:17:32 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 2424.4385ms. [IP ::1] <74> 
+
+-[11:17:32 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <74> 
+
+-[11:17:32 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 2425.9189ms [IP ::1] <74> 
+
+-[11:17:32 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <74> 
+
+-[11:17:32 INF] Request finished in 2426.362ms 200 application/json; charset=utf-8 [IP ] <74> 
+
+-[11:27:30 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <88> 
+
+-[11:27:30 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <88> 
+
+-[11:27:30 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <88> 
+
+-[11:27:30 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <88> 
+
+-[11:27:30 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.049300000000000004ms. [IP ::1] <88> 
+
+-[11:27:30 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <88> 
+
+-[11:27:30 INF] Executed PartialViewResult - view _Solicitudes executed in 0.7155ms. [IP ::1] <88> 
+
+-[11:27:30 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 0.9192ms [IP ::1] <88> 
+
+-[11:27:30 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <88> 
+
+-[11:27:30 INF] Request finished in 1.4675ms 200 text/html; charset=utf-8 [IP ] <88> 
+
+-[11:27:31 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582217844932   [IP ] <89> 
+
+-[11:27:31 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <89> 
+
+-[11:27:31 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <89> 
+
+-[11:27:31 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <89> 
+
+-[11:27:33 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 2616.9695ms. [IP ::1] <89> 
+
+-[11:27:33 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <89> 
+
+-[11:27:33 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 2618.3845ms [IP ::1] <89> 
+
+-[11:27:33 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <89> 
+
+-[11:27:33 INF] Request finished in 2618.7962ms 200 application/json; charset=utf-8 [IP ] <89> 
+
+-[11:37:31 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <69> 
+
+-[11:37:31 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <69> 
+
+-[11:37:31 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <69> 
+
+-[11:37:31 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <69> 
+
+-[11:37:31 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.0198ms. [IP ::1] <69> 
+
+-[11:37:31 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <69> 
+
+-[11:37:31 INF] Executed PartialViewResult - view _Solicitudes executed in 0.47440000000000004ms. [IP ::1] <69> 
+
+-[11:37:31 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 0.6289ms [IP ::1] <69> 
+
+-[11:37:31 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <69> 
+
+-[11:37:31 INF] Request finished in 0.9871ms 200 text/html; charset=utf-8 [IP ] <69> 
+
+-[11:37:32 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582217844933   [IP ] <72> 
+
+-[11:37:32 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <72> 
+
+-[11:37:32 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <72> 
+
+-[11:37:32 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <72> 
+
+-[11:37:36 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 4268.8676000000005ms. [IP ::1] <72> 
+
+-[11:37:36 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <72> 
+
+-[11:37:36 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 4270.0905ms [IP ::1] <72> 
+
+-[11:37:36 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <72> 
+
+-[11:37:36 INF] Request finished in 4270.4747ms 200 application/json; charset=utf-8 [IP ] <72> 
+
+-[11:47:32 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <62> 
+
+-[11:47:32 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <62> 
+
+-[11:47:32 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <62> 
+
+-[11:47:32 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <62> 
+
+-[11:47:32 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.020300000000000002ms. [IP ::1] <62> 
+
+-[11:47:32 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <62> 
+
+-[11:47:32 INF] Executed PartialViewResult - view _Solicitudes executed in 0.5544ms. [IP ::1] <62> 
+
+-[11:47:32 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 0.7027ms [IP ::1] <62> 
+
+-[11:47:32 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <62> 
+
+-[11:47:32 INF] Request finished in 1.0474ms 200 text/html; charset=utf-8 [IP ] <62> 
+
+-[11:47:33 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582217844934   [IP ] <45> 
+
+-[11:47:33 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <45> 
+
+-[11:47:33 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <45> 
+
+-[11:47:33 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <45> 
+
+-[11:47:35 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 2554.0467000000003ms. [IP ::1] <62> 
+
+-[11:47:35 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <62> 
+
+-[11:47:35 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 2558.8615ms [IP ::1] <62> 
+
+-[11:47:35 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <62> 
+
+-[11:47:35 INF] Request finished in 2559.4078ms 200 application/json; charset=utf-8 [IP ] <62> 
+
+-[11:57:33 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <38> 
+
+-[11:57:33 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <38> 
+
+-[11:57:33 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <38> 
+
+-[11:57:33 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <38> 
+
+-[11:57:33 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.021400000000000002ms. [IP ::1] <38> 
+
+-[11:57:33 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <38> 
+
+-[11:57:33 INF] Executed PartialViewResult - view _Solicitudes executed in 0.7169ms. [IP ::1] <38> 
+
+-[11:57:33 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 0.8507ms [IP ::1] <38> 
+
+-[11:57:33 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <38> 
+
+-[11:57:33 INF] Request finished in 1.3359ms 200 text/html; charset=utf-8 [IP ] <38> 
+
+-[11:57:34 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582217844935   [IP ] <31> 
+
+-[11:57:34 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <31> 
+
+-[11:57:34 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <31> 
+
+-[11:57:34 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <31> 
+
+-[11:57:34 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 571.3124ms. [IP ::1] <38> 
+
+-[11:57:34 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <38> 
+
+-[11:57:34 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 572.51740000000007ms [IP ::1] <38> 
+
+-[11:57:34 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <38> 
+
+-[11:57:34 INF] Request finished in 572.9295ms 200 application/json; charset=utf-8 [IP ] <38> 
+
+-[12:07:34 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <20> 
+
+-[12:07:34 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <20> 
+
+-[12:07:34 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <20> 
+
+-[12:07:34 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <20> 
+
+-[12:07:34 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.031ms. [IP ::1] <20> 
+
+-[12:07:34 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <20> 
+
+-[12:07:34 INF] Executed PartialViewResult - view _Solicitudes executed in 0.62630000000000008ms. [IP ::1] <20> 
+
+-[12:07:34 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 0.79280000000000006ms [IP ::1] <20> 
+
+-[12:07:34 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <20> 
+
+-[12:07:34 INF] Request finished in 1.2736ms 200 text/html; charset=utf-8 [IP ] <20> 
+
+-[12:07:35 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582217844936   [IP ] <16> 
+
+-[12:07:35 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <16> 
+
+-[12:07:35 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <16> 
+
+-[12:07:35 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <16> 
+
+-[12:07:37 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 2544.8360000000002ms. [IP ::1] <15> 
+
+-[12:07:37 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <15> 
+
+-[12:07:37 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 2546.3395ms [IP ::1] <15> 
+
+-[12:07:37 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <15> 
+
+-[12:07:37 INF] Request finished in 2546.6716ms 200 application/json; charset=utf-8 [IP ] <15> 
+
+-[12:17:36 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <8> 
+
+-[12:17:36 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <8> 
+
+-[12:17:36 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <8> 
+
+-[12:17:36 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <8> 
+
+-[12:17:36 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.040600000000000004ms. [IP ::1] <8> 
+
+-[12:17:36 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <8> 
+
+-[12:17:36 INF] Executed PartialViewResult - view _Solicitudes executed in 0.6095ms. [IP ::1] <8> 
+
+-[12:17:36 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 0.8164ms [IP ::1] <8> 
+
+-[12:17:36 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <8> 
+
+-[12:17:36 INF] Request finished in 1.2598ms 200 text/html; charset=utf-8 [IP ] <8> 
+
+-[12:17:37 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582217844937   [IP ] <16> 
+
+-[12:17:37 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <16> 
+
+-[12:17:37 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <16> 
+
+-[12:17:37 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <16> 
+
+-[12:17:37 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 449.49870000000004ms. [IP ::1] <17> 
+
+-[12:17:37 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <17> 
+
+-[12:17:37 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 451.0726ms [IP ::1] <17> 
+
+-[12:17:37 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <17> 
+
+-[12:17:37 INF] Request finished in 451.4878ms 200 application/json; charset=utf-8 [IP ] <17> 
+
+-[12:28:23 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <25> 
+
+-[12:28:23 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <25> 
+
+-[12:28:23 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <25> 
+
+-[12:28:23 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <25> 
+
+-[12:28:23 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.1282ms. [IP ::1] <25> 
+
+-[12:28:23 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <25> 
+
+-[12:28:23 INF] Executed PartialViewResult - view _Solicitudes executed in 4.9411000000000005ms. [IP ::1] <25> 
+
+-[12:28:23 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 6.0458000000000007ms [IP ::1] <25> 
+
+-[12:28:23 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <25> 
+
+-[12:28:23 INF] Request finished in 8.3746ms 200 text/html; charset=utf-8 [IP ] <25> 
+
+-[12:28:24 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582217844938   [IP ] <25> 
+
+-[12:28:24 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <25> 
+
+-[12:28:24 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <25> 
+
+-[12:28:24 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <25> 
+
+-[12:28:24 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 558.6391ms. [IP ::1] <32> 
+
+-[12:28:24 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <32> 
+
+-[12:28:24 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 564.2109ms [IP ::1] <32> 
+
+-[12:28:24 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <32> 
+
+-[12:28:24 INF] Request finished in 565.8642ms 200 application/json; charset=utf-8 [IP ] <32> 
+
+-[12:38:24 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <44> 
+
+-[12:38:24 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <44> 
+
+-[12:38:24 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <44> 
+
+-[12:38:24 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <44> 
+
+-[12:38:24 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.1188ms. [IP ::1] <44> 
+
+-[12:38:24 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <44> 
+
+-[12:38:24 INF] Executed PartialViewResult - view _Solicitudes executed in 2.4295ms. [IP ::1] <44> 
+
+-[12:38:24 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 3.0263ms [IP ::1] <44> 
+
+-[12:38:24 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <44> 
+
+-[12:38:24 INF] Request finished in 4.6169ms 200 text/html; charset=utf-8 [IP ] <44> 
+
+-[12:38:25 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582217844939   [IP ] <52> 
+
+-[12:38:25 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <52> 
+
+-[12:38:25 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <52> 
+
+-[12:38:25 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <52> 
+
+-[12:38:25 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 452.39660000000003ms. [IP ::1] <52> 
+
+-[12:38:25 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <52> 
+
+-[12:38:25 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 456.14430000000004ms [IP ::1] <52> 
+
+-[12:38:25 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <52> 
+
+-[12:38:25 INF] Request finished in 457.2447ms 200 application/json; charset=utf-8 [IP ] <52> 
+
+-[12:48:25 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <67> 
+
+-[12:48:25 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <67> 
+
+-[12:48:25 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <67> 
+
+-[12:48:25 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <67> 
+
+-[12:48:25 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.036000000000000004ms. [IP ::1] <67> 
+
+-[12:48:25 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <67> 
+
+-[12:48:25 INF] Executed PartialViewResult - view _Solicitudes executed in 1.0764ms. [IP ::1] <67> 
+
+-[12:48:25 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 1.2817ms [IP ::1] <67> 
+
+-[12:48:25 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <67> 
+
+-[12:48:25 INF] Request finished in 107.5839ms 200 text/html; charset=utf-8 [IP ] <67> 
+
+-[12:48:26 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582217844940   [IP ] <66> 
+
+-[12:48:26 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <66> 
+
+-[12:48:26 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <66> 
+
+-[12:48:26 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <66> 
+
+-[12:48:26 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 425.4819ms. [IP ::1] <59> 
+
+-[12:48:26 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <59> 
+
+-[12:48:26 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 427.49830000000003ms [IP ::1] <59> 
+
+-[12:48:26 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <59> 
+
+-[12:48:26 INF] Request finished in 428.2796ms 200 application/json; charset=utf-8 [IP ] <59> 
+
+-[12:58:26 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <82> 
+
+-[12:58:26 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <82> 
+
+-[12:58:26 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <82> 
+
+-[12:58:26 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <82> 
+
+-[12:58:26 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.0328ms. [IP ::1] <82> 
+
+-[12:58:26 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <82> 
+
+-[12:58:26 INF] Executed PartialViewResult - view _Solicitudes executed in 0.9061ms. [IP ::1] <82> 
+
+-[12:58:26 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 1.0948ms [IP ::1] <82> 
+
+-[12:58:26 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <82> 
+
+-[12:58:26 INF] Request finished in 1.6401ms 200 text/html; charset=utf-8 [IP ] <82> 
+
+-[12:58:27 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582217844941   [IP ] <83> 
+
+-[12:58:27 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <83> 
+
+-[12:58:27 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <83> 
+
+-[12:58:27 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <83> 
+
+-[12:58:27 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 418.57550000000003ms. [IP ::1] <87> 
+
+-[12:58:27 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <87> 
+
+-[12:58:27 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 519.4138ms [IP ::1] <87> 
+
+-[12:58:27 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <87> 
+
+-[12:58:27 INF] Request finished in 519.8055ms 200 application/json; charset=utf-8 [IP ] <87> 
+
+-[13:08:27 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <88> 
+
+-[13:08:27 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <88> 
+
+-[13:08:27 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <88> 
+
+-[13:08:27 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <88> 
+
+-[13:08:27 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.0483ms. [IP ::1] <88> 
+
+-[13:08:27 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <88> 
+
+-[13:08:27 INF] Executed PartialViewResult - view _Solicitudes executed in 1.3565ms. [IP ::1] <88> 
+
+-[13:08:27 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 1.7193ms [IP ::1] <88> 
+
+-[13:08:27 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <88> 
+
+-[13:08:27 INF] Request finished in 6.2507ms 200 text/html; charset=utf-8 [IP ] <88> 
+
+-[13:08:28 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582217844942   [IP ] <83> 
+
+-[13:08:28 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <83> 
+
+-[13:08:28 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <83> 
+
+-[13:08:28 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <83> 
+
+-[13:08:28 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 537.4265ms. [IP ::1] <88> 
+
+-[13:08:28 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <88> 
+
+-[13:08:28 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 538.7965ms [IP ::1] <88> 
+
+-[13:08:28 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <88> 
+
+-[13:08:28 INF] Request finished in 539.2973ms 200 application/json; charset=utf-8 [IP ] <88> 
+
+-[13:18:38 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/PartialViews   [IP ] <67> 
+
+-[13:18:38 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <67> 
+
+-[13:18:38 INF] Route matched with {action = "PartialViews", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult PartialViews() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <67> 
+
+-[13:18:38 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <67> 
+
+-[13:18:38 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.PartialViewResult in 0.0415ms. [IP ::1] <67> 
+
+-[13:18:38 INF] Executing PartialViewResult, running view _Solicitudes. [IP ::1] <67> 
+
+-[13:18:38 INF] Executed PartialViewResult - view _Solicitudes executed in 0.8941ms. [IP ::1] <67> 
+
+-[13:18:38 INF] Executed action plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion) in 1.1451ms [IP ::1] <67> 
+
+-[13:18:38 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.PartialViews (plataformaOriginacion)' [IP ::1] <67> 
+
+-[13:18:38 INF] Request finished in 4.746ms 200 text/html; charset=utf-8 [IP ] <67> 
+
+-[13:18:39 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1582217844943   [IP ] <71> 
+
+-[13:18:39 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <71> 
+
+-[13:18:39 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <71> 
+
+-[13:18:39 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <71> 
+
+-[13:18:39 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 399.2268ms. [IP ::1] <70> 
+
+-[13:18:39 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <70> 
+
+-[13:18:39 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 400.619ms [IP ::1] <70> 
+
+-[13:18:39 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <70> 
+
+-[13:18:39 INF] Request finished in 401.0206ms 200 application/json; charset=utf-8 [IP ] <70> 
+

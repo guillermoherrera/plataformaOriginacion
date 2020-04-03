@@ -877,7 +877,7 @@
     });
 
     $("#formRfc").on("change paste keyup", function () {
-        if ($(this).val().length < 10) {
+        if ($(this).val().length != 10 && $(this).val().length != 13) {
             $("#countRfc").css("color", "red");
         } else {
             $("#countRfc").css("color", "black");
@@ -898,7 +898,7 @@
         var idDoc = "@ViewBag.solicitud.solicitudID";
 
         var valCurp = curp.length == 18 ? 1 : 0;
-        var valRfc = rfc.length < 10 ? 0 : 1;
+        var valRfc = rfc.length != 10 && rfc.length != 13 ? 0 : 1;
         var valTel = telefono.length == 10 ? 1 : 0;
 
         if ((pNombre.length * pApellido.length * curp.length * rfc.length * fNacimiento.length * telefono.length * valCurp * valRfc * valTel) > 0) {
@@ -1155,6 +1155,7 @@
                             $('#' + idElem).attr('text', observ);
                         } else {
                             alert("Error");
+                            location.reload();
                         }
                         $("#enviar_cambio").attr("disabled", false);
                     },

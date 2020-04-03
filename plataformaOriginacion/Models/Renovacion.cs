@@ -17,7 +17,7 @@ namespace plataformaOriginacion.Models
         [FirestoreProperty]
         public double capital { get; set; }
         [FirestoreProperty]
-        public int clienteID { get; set; }
+        public String clienteID { get; set; }
         [FirestoreProperty]
         public int creditoID { get; set; }
         [FirestoreProperty]

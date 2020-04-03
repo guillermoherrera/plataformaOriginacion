@@ -142,7 +142,7 @@ else
         } else {
             label = (data.renovacion ? "<strong> (R)  </strong>" : "") + data.grupoNombre
         }
-        var label2 = data.tipoContrato == 1 ? "<span class='flaticon-man-user' style='position: relative; margin-left: -20px;color: black;'><i> " + label + "</i></span>" : data.tipoContrato == 2 ? "<span class='flaticon-users-group' style='position: relative; margin-left: -20px;color: " + (data.renovacion ? "brown" : "black") + ";'><i> " + label +"</i></span>" : "<span class='flaticon-pause-symbol' style='position: relative; margin-left: -20px;color: green;'><i> Sin especificar</i></span>";
+        var label2 = data.tipoContrato == 1 ? "<span class='flaticon-man-user' style='position: relative; margin-left: -20px;color: black;'><i> " + label + "</i></span>" : data.tipoContrato == 2 ? "<span class='flaticon-users-group' style='position: relative; margin-left: -20px;color: " + (data.renovacion ? "darkslategray" : "black") + ";'><i> " + label +"</i></span>" : "<span class='flaticon-pause-symbol' style='position: relative; margin-left: -20px;color: green;'><i> Sin especificar</i></span>";
 
         element.html(label2);
     }

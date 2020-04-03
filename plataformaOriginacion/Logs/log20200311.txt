@@ -1,0 +1,84 @@
+-[11:01:29 INF] User profile is available. Using 'C:\Users\gherr\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest. [IP ] <1> 
+
+-[11:01:33 WRN] Overriding address(es) 'https://localhost:5001, http://localhost:5000'. Binding to endpoints defined in UseKestrel() instead. [IP ] <1> 
+
+-[11:01:34 INF] Request starting HTTP/1.1 GET https://localhost:8087/   [IP ] <11> 
+
+-[11:01:34 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <11> 
+
+-[11:01:34 INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <11> 
+
+-[11:01:34 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <11> 
+
+-[11:01:34 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 139.68200000000002ms. [IP ::1] <11> 
+
+-[11:01:34 INF] Executing ViewResult, running view Index. [IP ::1] <11> 
+
+-[11:01:34 INF] Executed ViewResult - view Index executed in 341.50210000000004ms. [IP ::1] <11> 
+
+-[11:01:34 INF] Executed action plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) in 519.831ms [IP ::1] <11> 
+
+-[11:01:34 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <11> 
+
+-[11:01:34 INF] Request finished in 650.642ms 200 text/html; charset=utf-8 [IP ] <11> 
+
+-[11:02:15 INF] Request starting HTTP/1.1 POST https://localhost:8087/ application/x-www-form-urlencoded 216 [IP ] <14> 
+
+-[11:02:15 INF] Executing endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <14> 
+
+-[11:02:15 INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(plataformaOriginacion.Models.LoginViewModel) on controller plataformaOriginacion.Controllers.HomeController (plataformaOriginacion). [IP ::1] <14> 
+
+-[11:02:15 INF] Executing action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <14> 
+
+-[11:02:17 INF] usuario logueado: Johana Sarai Reza Reyes [IP ::1] <14> 
+
+-[11:02:17 INF] Executed action method plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.RedirectToActionResult in 1436.3833ms. [IP ::1] <14> 
+
+-[11:02:17 INF] Executing RedirectResult, redirecting to /Bandeja. [IP ::1] <14> 
+
+-[11:02:17 INF] Executed action plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion) in 1577.7074ms [IP ::1] <14> 
+
+-[11:02:17 INF] Executed endpoint 'plataformaOriginacion.Controllers.HomeController.Index (plataformaOriginacion)' [IP ::1] <14> 
+
+-[11:02:17 INF] Session started; Key:02447669-39bf-0932-913e-a746f7f8ceff, Id:6b53dac2-6828-87a8-5a08-ba2c14e80204 [IP ] <14> 
+
+-[11:02:17 INF] Request finished in 1625.6637ms 302  [IP ] <14> 
+
+-[11:02:17 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja   [IP ] <14> 
+
+-[11:02:17 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Index (plataformaOriginacion)' [IP ::1] <14> 
+
+-[11:02:17 INF] Route matched with {action = "Index", controller = "Bandeja"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult Index() on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <14> 
+
+-[11:02:17 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Index (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <14> 
+
+-[11:02:17 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Index (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ViewResult in 2.5721000000000003ms. [IP ::1] <14> 
+
+-[11:02:17 INF] Executing ViewResult, running view Index. [IP ::1] <14> 
+
+-[11:02:17 INF] Executed ViewResult - view Index executed in 313.35810000000004ms. [IP ::1] <14> 
+
+-[11:02:17 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Index (plataformaOriginacion) in 316.5237ms [IP ::1] <14> 
+
+-[11:02:17 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Index (plataformaOriginacion)' [IP ::1] <14> 
+
+-[11:02:17 INF] Request finished in 322.2507ms 200 text/html; charset=utf-8 [IP ] <14> 
+
+-[11:02:17 INF] Request starting HTTP/1.1 GET https://localhost:8087/Bandeja/Get?skip=0&take=10&requireTotalCount=true&sort=%5B%7B%22selector%22%3A%22fechaCaputra%22%2C%22desc%22%3Atrue%7D%5D&totalSummary=%5B%7B%22selector%22%3A%22importe%22%2C%22summaryType%22%3A%22count%22%7D%5D&opc=&_=1583946137529   [IP ] <7> 
+
+-[11:02:17 INF] Executing endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <7> 
+
+-[11:02:17 INF] Route matched with {action = "Get", controller = "Bandeja"}. Executing controller action with signature System.Threading.Tasks.Task`1[System.Object] Get(DevExtreme.AspNet.Mvc.DataSourceLoadOptions) on controller plataformaOriginacion.Controllers.BandejaController (plataformaOriginacion). [IP ::1] <7> 
+
+-[11:02:17 INF] Executing action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) - Validation state: "Valid" [IP ::1] <7> 
+
+-[11:02:22 INF] Executed action method plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion), returned result Microsoft.AspNetCore.Mvc.ObjectResult in 4283.3718ms. [IP ::1] <19> 
+
+-[11:02:22 INF] Executing ObjectResult, writing value of type 'DevExtreme.AspNet.Data.ResponseModel.LoadResult'. [IP ::1] <19> 
+
+-[11:02:22 INF] Executed action plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion) in 4338.7994ms [IP ::1] <19> 
+
+-[11:02:22 INF] Executed endpoint 'plataformaOriginacion.Controllers.BandejaController.Get (plataformaOriginacion)' [IP ::1] <19> 
+
+-[11:02:22 INF] Request finished in 4365.2666ms 200 application/json; charset=utf-8 [IP ] <19> 
+
