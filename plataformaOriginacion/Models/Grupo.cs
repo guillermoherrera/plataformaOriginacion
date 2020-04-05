@@ -25,5 +25,7 @@ namespace plataformaOriginacion.Models
         public string mesaControlID { get; set; }
         [FirestoreProperty]
         public string mesaControlUsuario { get; set; }
+        [FirestoreProperty]
+        public int sistema { get; set; }
     }
 }

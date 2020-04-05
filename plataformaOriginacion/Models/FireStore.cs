@@ -3,17 +3,24 @@ using Google.Cloud.Firestore;
 using Google.Cloud.Firestore.V1;
 using Grpc.Auth;
 using Grpc.Core;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Serilog;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace plataformaOriginacion.Models
 {
     public class FireStore
     {
+        public static string claveCli;
+        public static int id_xrb;
 
         public static FirestoreDb conexionDB() {
             var credential = GoogleCredential.FromFile("C:\\Users\\gherr\\Downloads\\SGCC-d42386a165af.json");
@@ -488,8 +495,39 @@ namespace plataformaOriginacion.Models
             return result;
         }
 
-        public static async Task<bool> CambioEstado(string _ID, int status, string grupo, double monto, string motivoRechazo) {
-            bool result = false;
+        /*public static async Task<RequestResult> ConsultaBuro(string _ID, string CveCli, int idXRB)
+        {
+            RequestResult result = new RequestResult { error = 1 };
+            try
+            {
+                FirestoreDb db = conexionDB();
+                DocumentReference solicitud = db.Collection("Solicitudes").Document(_ID);
+                await db.RunTransactionAsync(async transaction => {
+                    DocumentSnapshot snapshot = await transaction.GetSnapshotAsync(solicitud);
+                    if (!snapshot.Exists)
+                    {
+                        solicitud = db.Collection("Renovaciones").Document(_ID);
+                        snapshot = await transaction.GetSnapshotAsync(solicitud);
+                    }
+                    Dictionary<string, object> updates = new Dictionary<string, object> {
+                        {"CveCli", CveCli },
+                        {"idXRB", idXRB }
+                    };
+                    transaction.Update(solicitud, updates);
+                });
+                result.error = 0;
+            }
+            catch (Exception ex)
+            {
+                Log.Information("*****Error Exception CambioEstado: {0}", ex.Message);
+                result.error = 1;
+                result.result = ex.Message;
+            }
+            return result;
+        }*/
+
+        public static async Task<RequestResult> CambioEstado(string _ID, int status, string grupo, double monto, string motivoRechazo) {
+            RequestResult result = new RequestResult { error = 1};
             try
             {
                 if (!(status == 7 || status == 2 || status == 3 || status == 6)) { throw new Exception("Status no válido"); }
@@ -509,16 +547,27 @@ namespace plataformaOriginacion.Models
                         grupoRef = db.Collection("GruposRenovacion").Document(grupo);
                         snapshotGpo = await transaction.GetSnapshotAsync(grupoRef);
                     }
+                    Dictionary<string, object> updates = new Dictionary<string, object>();
                     if (status == 7 && (snapshot.ConvertTo<Solicitud>().status != 1 && snapshot.ConvertTo<Solicitud>().status != 10)) { throw new Exception("cambio de Status no permitido"); }
+                    if(status == 7)
+                    {
+                        Solicitud solicitud1 = snapshot.ConvertTo<Solicitud>();
+                        solicitud1.solicitudID = _ID;
+                        RequestResult result1 = await RegistroSolicitudConsultaBuro(solicitud1);
+                        if (result1.error == 1) { throw new Exception(result1.result);  }
+                        updates.Add("CB_CveCli", claveCli);
+                        updates.Add("CB_idXRB", id_xrb);
+                    }
                     if (status == 2 && snapshot.ConvertTo<Solicitud>().status != 9) { throw new Exception("cambio de Status no permitido"); }
                     if (status == 3 && snapshot.ConvertTo<Solicitud>().status != 9) { throw new Exception("cambio de Status no permitido"); }
                     int newStatus = status;
                     bool dictamen = false;
                     if (status == 2) { dictamen = true; } else { dictamen = false; }
-                    Dictionary<string, object> updates = new Dictionary<string, object> {
+                    updates.Add("status", newStatus);
+                    /*Dictionary<string, object> updates = new Dictionary<string, object> {
                         {"status", newStatus },
                         //{"dictamen", dictamen }
-                    };
+                    };*/
                     if ((status == 2 || status == 3) && grupo == null){ updates.Add("dictamen", dictamen); }//agregar si es o no individual
                     if (status == 2 || status == 3){ updates.Add("importeSolicitado", snapshot.ConvertTo<Solicitud>().importe ); }
                     if (status == 2 || status == 3) { updates.Add("fechaDictamen", DateTime.UtcNow); }
@@ -542,12 +591,13 @@ namespace plataformaOriginacion.Models
                     }
                     transaction.Update(solicitud, updates);
                 });
-                result = true;
+                result.error = 0;
             }
             catch (Exception ex)
             {
                 Log.Information("*****Error Exception CambioEstado: {0}", ex.Message);
-                result = false;
+                result.error = 1;
+                result.result = ex.Message;
             }
             return result;
         }
@@ -696,6 +746,71 @@ namespace plataformaOriginacion.Models
                 Log.Information("*****Error Exception GetSolicitudFromFireStore: {0}", ex.Message);
             }
             return result;
+        }
+
+        //
+        static HttpClient client = new HttpClient();
+        
+        public static async Task<RequestResult> RegistroSolicitudConsultaBuro(Solicitud solicitud) {
+            RequestResult result1 = new RequestResult();
+            result1.error = 1;
+            string url = "http://192.168.0.33:4000/registro/cliente_buro";
+            Cliente cliente = new Cliente {
+                sistema = solicitud.sistema,
+                usuarioRegistra = int.Parse(solicitud.mesaControlID),
+                userID = solicitud.userID,
+                solicitudID = solicitud.solicitudID,
+                nombre = solicitud.persona.nombre,
+                apellidoPat = solicitud.persona.apellido,
+                apellidoMat = solicitud.persona.apellidoSegundo,
+                TelCel = solicitud.persona.telefono,
+                rfc = solicitud.persona.rfc,
+                fechaNac = solicitud.persona.fechaNacimiento.ToString("dd/MM/yy"),
+                nombreVialidad = solicitud.direccion.direccion1,
+                curp = solicitud.persona.curp,
+                cp = solicitud.direccion.cp.ToString(),
+                nombreAdicional = solicitud.persona.nombreSegundo,
+                estado = solicitud.direccion.estado,
+                municipio = solicitud.direccion.delegacionMunicipio,
+                colonia = solicitud.direccion.coloniaPoblacion,
+                ciudad = solicitud.direccion.ciudad
+            };
+            try 
+            {
+                //client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Add("x-api-key", "doCLjcd9FIABAzXhF49AMDTPJqo608M5Wau");
+                using (var content = new StringContent(JsonConvert.SerializeObject(cliente), System.Text.Encoding.UTF8, "application/json"))
+                {
+                    var result = await client.PostAsync($"{url}", content);
+                    if (result.StatusCode == HttpStatusCode.OK)
+                    {
+                        result1.error = 0;
+                        string resultContent = await result.Content.ReadAsStringAsync();
+                        JObject json = JObject.Parse(resultContent);
+                        claveCli = json["CveCli"].ToString();
+                        id_xrb = int.Parse(json["idXRB"].ToString());
+                        /*RequestResult result2 = await ConsultaBuro(solicitud.solicitudID, json["CveCli"].ToString(), int.Parse(json["idXRB"].ToString()));
+                        if(result2.error == 1)
+                        {
+                            throw new Exception(result2.result);
+                        }*/
+                    }
+                    else
+                    {
+                        string resultContent = await result.Content.ReadAsStringAsync();
+                        JObject json = JObject.Parse(resultContent);
+                        result1.result = "ws --> "+json["resultDesc"].ToString();
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Log.Information("*****Error Exception CambioEstado: {0}", ex.Message);
+                result1.result = ex.Message;
+            }
+            
+            return result1;
         }
     }
 }

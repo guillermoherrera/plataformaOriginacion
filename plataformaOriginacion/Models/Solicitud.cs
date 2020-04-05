@@ -40,5 +40,8 @@ namespace plataformaOriginacion.Models
 
         [FirestoreProperty]
         public double importeHistorico { get; set; }
+
+        [FirestoreProperty]
+        public int sistema { get; set; }
     }
 }

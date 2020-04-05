@@ -108,17 +108,18 @@ else
 
         var clase = data.status == "DICTAMINADO" ? 'success' : data.status == "RECHAZADO" ? 'danger' : data.status == "REVISION" || data.status == "REVISIÓN" ? 'warning' : 'primary';
 
-        var options = { weekday: 'short', year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        //var options = { weekday: 'short', year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        var options = { month: 'short', day: 'numeric' };
         var fecha = new Date(data.fechaCaputra).toLocaleDateString("es-MX", options);
         var x = window.matchMedia("(max-width: 700px)");
         if (x.matches) {
             element.html("<span class='badge badge-" + clase + "'>*</span>");// + " <span><i>" + fecha.toString() + "</i></span>");
-            element.append(" <span><i>" + fecha.toString() + "</i></span>");
+            element.append(" <span><strong><i>" + fecha.toString() + "</i></strong></span>");
             if (data.cambios > 0) {
                 element.append(" <span class='badge badge-warning' title='Solicitudes de cambio de Documentos Pendientes.'>" + data.cambios + "</span>");
             }
         } else {
-            element.html("<span><i>" + fecha.toString() + "</i></span>");
+            element.html("<span><strong><i>" + fecha.toString() + "</i></strong></span>");
         }
     }
     function dataGrid_change_cellTemplate4(element, info) {
@@ -155,6 +156,31 @@ else
         } else {
             label = "";
         }
+        element.html("<span><i>" + label + "</i></span>");
+    }
+
+    function dataGrid_change_cellTemplate8(element, info) {
+        var data = info.data;
+        var sistema = data.sistema;
+        var label;
+
+        switch (sistema) {
+            case 1:
+                label = "VR"
+                break;
+            case 2:
+                label = "OPOR"
+                break;
+            case 3:
+                label = "CRECE"
+                break;
+            case 4:
+                label = "GYT"
+                break;
+            default:
+                label = "N/D"
+        }
+
         element.html("<span><i>" + label + "</i></span>");
     }
 </script>

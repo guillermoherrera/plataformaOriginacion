@@ -399,9 +399,9 @@ namespace plataformaOriginacion.Controllers
         }
 
         public async Task<IActionResult> cambioEstado(String _ID, int status, String grupo) {
-            bool result = await FireStore.CambioEstado(_ID, status, grupo, 0, null);
+            RequestResult result = await FireStore.CambioEstado(_ID, status, grupo, 0, null);
             String mensaje;
-            mensaje = result ? "" : "NO ";
+            mensaje = result.error == 0 ? "" : result.result + ". NO ";
             switch (status) {
                 case 7:
                     mensaje += "SE HA AUTORIZADO LA CONSULTA DE BURÓ PARA ESTA SOLICITUD.";
@@ -416,7 +416,7 @@ namespace plataformaOriginacion.Controllers
                     mensaje += "SE REALIZO ALGUNA ACCIÓN.";
                     break;
             }
-            return RedirectToAction("Detalle", new { _ID = _ID, result = result, mensaje = mensaje });
+            return RedirectToAction("Detalle", new { _ID = _ID, result = (result.error == 0 ? true : false), mensaje = mensaje });
         }
 
         public async Task<IActionResult> grupoDictamen(string _ID, int aut) {
@@ -469,8 +469,8 @@ namespace plataformaOriginacion.Controllers
         public async Task<JsonResult> Dictaminar(Dictamen dictamen)
         {
             string resultado = "";
-            bool result = await FireStore.CambioEstado(dictamen.idDocumento, int.Parse(dictamen.status), dictamen.grupoID, double.Parse(dictamen.monto), dictamen.motivoRechazo);
-            if (result)
+            RequestResult result = await FireStore.CambioEstado(dictamen.idDocumento, int.Parse(dictamen.status), dictamen.grupoID, double.Parse(dictamen.monto), dictamen.motivoRechazo);
+            if (result.error == 0)
             {
                 return Json(new { Success = true });
             }
@@ -485,8 +485,8 @@ namespace plataformaOriginacion.Controllers
         public async Task<JsonResult> DictaminarRenovacion(Dictamen dictamen)
         {
             string resultado = "";
-            bool result = await FireStore.CambioEstado(dictamen.idDocumento, int.Parse(dictamen.status), dictamen.grupoID, double.Parse(dictamen.monto), dictamen.motivoRechazo);
-            if (result)
+            RequestResult result = await FireStore.CambioEstado(dictamen.idDocumento, int.Parse(dictamen.status), dictamen.grupoID, double.Parse(dictamen.monto), dictamen.motivoRechazo);
+            if (result.error == 0)
             {
                 return Json(new { Success = true });
             }
