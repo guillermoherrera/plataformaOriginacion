@@ -22,7 +22,7 @@
     }
     else if (ViewBag.solicitud.status == 10)
     {
-        <div style="background-color: indianred;color: white; padding:1em;border-radius: 25px;" align="center"><strong>ATENCIÓN: A ocurrido un error al realizar la consulta de buró, por favor revisa detalladamente toda la información de esta solicitud para identificar que pudo podrucir dicho error y actualiza. No olvides volver a autorizar la consulta de buró.</strong></div>
+        <div style="background-color: indianred;color: white; padding:1em;border-radius: 25px;text-align:justify;"><strong>ATENCIÓN: A ocurrido un error al realizar la consulta de buró, por favor revisa detalladamente toda la información de esta solicitud para identificar que pudo podrucir dicho error y actualiza. No olvides volver a autorizar la consulta de buró.</strong><br/><i>Codigo de Error: @ViewBag.solicitud.mensajeErrorConsultaBuro</i></div>
     }
     <div class="container" style="margin:1em;">
         <div class="col-md-12 row" style="background-color: #e5e5e5;padding:1em;border-radius: 25px;border-radius: 25px;opacity:.9;">
@@ -230,6 +230,18 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if (ViewBag.solicitud.documentoBuroPdf != null)
+                        {
+                            <tr>
+                                <td style="color:steelblue"><strong>CONSULTA DE BURO</strong></td>
+                                <td>1</td>
+                                <td>
+                                    <a href="#" class="popup" onclick="return false;" oid="@ViewBag.solicitud.documentoBuroPdf">VER</a>
+                                    |
+                                    <span class="flaticon-correct-symbol" style="position: relative;margin-left: -20px;color: green;"></span>
+                                </td>
+                            </tr>
+                        }
                         @foreach (Documento doc in ViewBag.solicitud.documentos)
                         {
                             <tr>

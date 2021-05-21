@@ -45,6 +45,7 @@ namespace plataformaOriginacion.Models
 
                 foreach (DocumentSnapshot document in allSolicitudes.Documents)
                 {
+                    Log.Information("{0}", document.Id);
                     Solicitud solicitud = document.ConvertTo<Solicitud>();
                     solicitud.solicitudID = document.Id;
                     solicitudesAll.Add(solicitud);
@@ -131,7 +132,7 @@ namespace plataformaOriginacion.Models
             }
             catch (Exception ex)
             {
-                Log.Information("*****Error Exception GetSolicitudesFromFireStore: {0}", ex.Message);
+                Log.Error("*****Error Exception GetSolicitudesFromFireStore: {0}", ex.Message);
                 //ViewBag.errores = "Error en conexión a FSBD";
             }
             return solicitudes;

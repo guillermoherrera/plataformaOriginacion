@@ -43,5 +43,13 @@ namespace plataformaOriginacion.Models
 
         [FirestoreProperty]
         public int sistema { get; set; }
+        [FirestoreProperty]
+        public String CB_CveCli { get; set; }
+        [FirestoreProperty]
+        public int CB_idXRB { get; set; }
+        [FirestoreProperty]
+        public String documentoBuroPdf { get; set; }
+        [FirestoreProperty]
+        public String mensajeErrorConsultaBuro { get; set; }
     }
 }
